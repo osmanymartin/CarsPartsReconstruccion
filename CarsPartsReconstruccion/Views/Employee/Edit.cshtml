@@ -1,0 +1,63 @@
+﻿@model CarsPartsReconstruccion.Models.Employee
+
+@{
+    ViewBag.Title = "Edit an Employee";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Employee</legend>
+
+        @Html.HiddenFor(model => model.employeeId)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.employeeName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.employeeName)
+            @Html.ValidationMessageFor(model => model.employeeName)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.eMail)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.eMail)
+            @Html.ValidationMessageFor(model => model.eMail)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.positionId)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("positionId", String.Empty)
+            @Html.ValidationMessageFor(model => model.positionId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.userLogin)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("userLogin", String.Empty)
+            @Html.ValidationMessageFor(model => model.userLogin)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

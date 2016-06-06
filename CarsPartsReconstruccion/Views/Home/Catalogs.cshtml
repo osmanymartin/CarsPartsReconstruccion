@@ -1,0 +1,89 @@
+﻿@{
+    ViewBag.Title = "Catalogs";
+}
+
+<style>
+    .catalogLeft {
+        float: left;
+        margin-right: 200px;
+    }
+
+    .catalogRight {
+        /*margin-left: 20px;*/
+    }
+
+    .catalogLeft img {
+        width: 100px;
+        height: 100px;
+        margin: 5px;
+    }
+
+    .catalogRight img {
+        width: 100px;
+        height: 100px;
+        margin: 5px;
+    }
+
+    .catalogLeft h3 {
+        margin-left: 10px;
+    }
+
+    .catalogRight h3 {
+        margin-left: 10px;
+    }
+</style>
+
+
+<hgroup class="title">
+    <h1>@ViewBag.Title.</h1>
+    <h2>@ViewBag.Message</h2>
+</hgroup>
+
+<article>
+    <div class="catalogLeft">
+
+        <h3>Catalogs</h3>
+        <a href='@Url.Action("Index", "Catalog", null)'>
+            <img src='@Url.Content("~/Images/catalogs.jpg")' />
+        </a>
+        <h3>Pieces</h3>
+        <a href='@Url.Action("Index", "Piece", null)'>
+            <img src='@Url.Content("~/Images/pieces.jpg")' />
+        </a>
+        <h3>Parts</h3>
+        <a href='@Url.Action("Index", "Part", null)'>
+            <img src='@Url.Content("~/Images/parts.jpg")' />
+        </a>
+
+    </div>
+
+    <div class="catalogRight">
+        <h3>Suppliers</h3>
+        <a href='@Url.Action("Index", "Supplier", null)'>
+            <img src='@Url.Content("~/Images/supplier.jpg")' />
+        </a>
+        <h3>Customers</h3>
+        <a href='@Url.Action("Index", "Customer", null)'>
+            <img src='@Url.Content("~/Images/customer.jpg")' />
+        </a>
+        <h3>Employees</h3>
+        <a href='@Url.Action("Index", "Employee", null)'>
+            <img src='@Url.Content("~/Images/worker.jpg")' />
+        </a>
+
+    </div>
+</article>
+
+<aside>
+    <h3>QUICK ACCESS</h3>
+    <div>
+        <ul class="borderMenu">
+            <li>@Html.ActionLink("Catalogs", "Index", "Catalog")</li>
+            <li>@Html.ActionLink("Pieces", "Index", "Piece")</li>
+            <li>@Html.ActionLink("Parts", "Index", "Part")</li>
+            <li>@Html.ActionLink("Suppliers", "Index", "Supplier")</li>
+            <li>@Html.ActionLink("Customers", "Index", "Customer")</li>
+            <li>@Html.ActionLink("Employees", "Index", "Employee")</li>
+        </ul>
+    </div>
+</aside>

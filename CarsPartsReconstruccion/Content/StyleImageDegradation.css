@@ -1,0 +1,26 @@
+﻿#imageWrapper {
+    display: inline-block;
+    width: 200px;
+    height: 136px;
+    box-shadow: 2px 2px 5px 0px gray;
+    position: relative;
+    margin: 5px;
+}
+
+    #imageWrapper img {
+        width: 200px;
+        height: 136px;
+        position: absolute;
+        margin: 5px;
+        transition-property: opacity;
+        transition-duration: 2s;
+        transition-timing-function: linear;
+    }
+
+    #imageWrapper #frontImage, #imageWrapper:hover #backImage {
+        opacity: 1;
+    }
+
+    #imageWrapper:hover #frontImage, #imageWrapper #backImage {
+        opacity: 0;
+    }

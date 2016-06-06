@@ -1,0 +1,54 @@
+﻿@model CarsPartsReconstruccion.Models.Piece
+
+@{
+    ViewBag.Title = "Edit a Piece";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Piece</legend>
+
+        @Html.HiddenFor(model => model.pieceId)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.pieceName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.pieceName)
+            @Html.ValidationMessageFor(model => model.pieceName)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.pieceDescription)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.pieceDescription)
+            @Html.ValidationMessageFor(model => model.pieceDescription)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.piecePrice)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.piecePrice)
+            @Html.ValidationMessageFor(model => model.piecePrice)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,37 @@
+﻿@model CarsPartsReconstruccion.Models.Part
+
+@{
+    ViewBag.Title = "Part Details";
+}
+
+<h2>@ViewBag.Title</h2>
+<p></p>
+
+<fieldset class="fieldsetTable">
+    <legend>Part</legend>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.partName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.partName)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.partDescription)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.partDescription)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.partPrice)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.partPrice)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.partId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="823ac44e88ea4f83a0d88c39709b337d" Name="Diagram1" ZoomLevel="55">
+        <EntityTypeShape EntityType="db_cars_parts_reconstructionModel.Customer" Width="1.5" PointX="3" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_cars_parts_reconstructionModel.Employee" Width="1.5" PointX="3" PointY="13.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_cars_parts_reconstructionModel.Piece" Width="1.5" PointX="8.25" PointY="22.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_cars_parts_reconstructionModel.ReplacedPart" Width="1.5" PointX="12.75" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_cars_parts_reconstructionModel.ReplacedPartTrack" Width="1.5" PointX="18" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_cars_parts_reconstructionModel.ReplacedPiece" Width="1.5" PointX="15.75" PointY="13.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_cars_parts_reconstructionModel.ReplacedPieceTrack" Width="1.5" PointX="21" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_cars_parts_reconstructionModel.ServiceCar" Width="1.5" PointX="7.5" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_cars_parts_reconstructionModel.ServiceCarMiscellaneousCost" Width="1.5" PointX="15.75" PointY="17.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_cars_parts_reconstructionModel.ServiceCarTrack" Width="1.5" PointX="12.75" PointY="17.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_cars_parts_reconstructionModel.ServiceMiscellaneousCost" Width="1.5" PointX="10.5" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_cars_parts_reconstructionModel.ServicePart" Width="1.5" PointX="10.5" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_cars_parts_reconstructionModel.ServicePartMiscellaneousCost" Width="1.5" PointX="15.75" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_cars_parts_reconstructionModel.ServicePartTrack" Width="1.5" PointX="12.75" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_cars_parts_reconstructionModel.ServiceTrack" Width="1.5" PointX="7.5" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_cars_parts_reconstructionModel.Supplier" Width="1.5" PointX="5.25" PointY="18.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_cars_parts_reconstructionModel.SupplierPart" Width="1.5" PointX="7.5" PointY="18.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_cars_parts_reconstructionModel.SupplierPiece" Width="1.5" PointX="10.5" PointY="18.5" IsExpanded="true" />
+        <AssociationConnector Association="db_cars_parts_reconstructionModel.FK_supplier_employee" ManuallyRouted="false" />
+        <AssociationConnector Association="db_cars_parts_reconstructionModel.FK_supplier_piece_piece" ManuallyRouted="false" />
+        <AssociationConnector Association="db_cars_parts_reconstructionModel.FK_replaced_part_Service_Car" ManuallyRouted="false" />
+        <AssociationConnector Association="db_cars_parts_reconstructionModel.FK_replaced_part_service_part" ManuallyRouted="false" />
+        <AssociationConnector Association="db_cars_parts_reconstructionModel.FK_replaced_part_supplier_part" ManuallyRouted="false" />
+        <AssociationConnector Association="db_cars_parts_reconstructionModel.FK_replaced_part_track_replaced_part" ManuallyRouted="false" />
+        <AssociationConnector Association="db_cars_parts_reconstructionModel.FK_replaced_piece_service_part" ManuallyRouted="false" />
+        <AssociationConnector Association="db_cars_parts_reconstructionModel.FK_replaced_piece_supplier_piece" ManuallyRouted="false" />
+        <AssociationConnector Association="db_cars_parts_reconstructionModel.FK_replaced_piece_track_replaced_piece" ManuallyRouted="false" />
+        <AssociationConnector Association="db_cars_parts_reconstructionModel.FK_service_car_miscellaneous_costs_Service_Car" ManuallyRouted="false" />
+        <AssociationConnector Association="db_cars_parts_reconstructionModel.FK_service_car_track_Service_Car" ManuallyRouted="false" />
+        <AssociationConnector Association="db_cars_parts_reconstructionModel.FK_service_part_miscellaneous_costs_service_part" ManuallyRouted="false" />
+        <AssociationConnector Association="db_cars_parts_reconstructionModel.FK_service_part_track_service_part" ManuallyRouted="false" />
+        <AssociationConnector Association="db_cars_parts_reconstructionModel.FK_supplier_part_supplier" ManuallyRouted="false" />
+        <AssociationConnector Association="db_cars_parts_reconstructionModel.FK_supplier_piece_supplier" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="db_cars_parts_reconstructionModel.Part" Width="1.5" PointX="8.25" PointY="5.875" />
+        <AssociationConnector Association="db_cars_parts_reconstructionModel.FK_service_part_part" />
+        <AssociationConnector Association="db_cars_parts_reconstructionModel.FK_supplier_part_part" />
+        <EntityTypeShape EntityType="db_cars_parts_reconstructionModel.Catalog" Width="1.5" PointX="0.75" PointY="12.25" />
+        <AssociationConnector Association="db_cars_parts_reconstructionModel.FK_Catalog_Catalog" />
+        <AssociationConnector Association="db_cars_parts_reconstructionModel.FK_employee_position" />
+        <AssociationConnector Association="db_cars_parts_reconstructionModel.FK_replaced_part_status_type" />
+        <AssociationConnector Association="db_cars_parts_reconstructionModel.FK_replaced_part_track_status_type" />
+        <AssociationConnector Association="db_cars_parts_reconstructionModel.FK_replaced_piece_status_type" />
+        <AssociationConnector Association="db_cars_parts_reconstructionModel.FK_replaced_piece_track_status_type" />
+        <AssociationConnector Association="db_cars_parts_reconstructionModel.FK_Service_Car_brand_type" />
+        <AssociationConnector Association="db_cars_parts_reconstructionModel.FK_service_car_miscellaneous_costs_type" />
+        <AssociationConnector Association="db_cars_parts_reconstructionModel.FK_Service_Car_model_type" />
+        <AssociationConnector Association="db_cars_parts_reconstructionModel.FK_Service_Car_status_type" />
+        <AssociationConnector Association="db_cars_parts_reconstructionModel.FK_service_car_track_status_type" />
+        <AssociationConnector Association="db_cars_parts_reconstructionModel.FK_service_miscellaneous_costs_type" />
+        <AssociationConnector Association="db_cars_parts_reconstructionModel.FK_service_part_miscellaneous_costs_type" />
+        <AssociationConnector Association="db_cars_parts_reconstructionModel.FK_service_part_status_type" />
+        <AssociationConnector Association="db_cars_parts_reconstructionModel.FK_service_part_track_status_type" />
+        <AssociationConnector Association="db_cars_parts_reconstructionModel.FK_service_track_status_type" />
+        <EntityTypeShape EntityType="db_cars_parts_reconstructionModel.webpages_Membership" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="db_cars_parts_reconstructionModel.webpages_OAuthMembership" Width="1.5" PointX="2.75" PointY="3.75" />
+        <EntityTypeShape EntityType="db_cars_parts_reconstructionModel.Service" Width="1.5" PointX="5.25" PointY="12.875" />
+        <AssociationConnector Association="db_cars_parts_reconstructionModel.FK_service_status_type" />
+        <AssociationConnector Association="db_cars_parts_reconstructionModel.FK_service_customer" />
+        <AssociationConnector Association="db_cars_parts_reconstructionModel.FK_service_employee" />
+        <AssociationConnector Association="db_cars_parts_reconstructionModel.FK_Service_Car_service" />
+        <AssociationConnector Association="db_cars_parts_reconstructionModel.FK_service_miscellaneous_costs_service" />
+        <AssociationConnector Association="db_cars_parts_reconstructionModel.FK_service_part_service" />
+        <AssociationConnector Association="db_cars_parts_reconstructionModel.FK_service_track_service" />
+        <EntityTypeShape EntityType="db_cars_parts_reconstructionModel.UserProfile" Width="1.5" PointX="3" PointY="0.875" />
+        <EntityTypeShape EntityType="db_cars_parts_reconstructionModel.webpages_Roles" Width="1.5" PointX="0.75" PointY="0.875" />
+        <AssociationConnector Association="db_cars_parts_reconstructionModel.webpages_UsersInRoles" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

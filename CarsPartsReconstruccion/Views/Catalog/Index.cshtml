@@ -1,0 +1,82 @@
+﻿@model IEnumerable<CarsPartsReconstruccion.Models.Catalog>
+
+@{
+    ViewBag.Title = "Catalog List";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p>
+    @if (Model != null && Model.Count() > 0)
+    {
+        @Html.ActionLink("Create New", "Create", new { catalogName = Model.First().catalogName })
+    }
+    else
+    {
+        @Html.ActionLink("Create New", "Create")
+    }
+</p>
+
+<p>
+    @using (Html.BeginForm("Index", "Catalog"))
+    {
+        <h3>
+            Catalog
+
+            @if (Model != null && Model.Count() > 0)
+            {
+                @Html.DropDownList("catalogName", new SelectList(ViewBag.CatalogNameList, ViewBag.selectedCatalogName), new { onchange = "this.form.submit();" })
+            }
+            else
+            {
+                @Html.DropDownList("catalogName", new SelectList(new List<String>()))
+            }
+        </h3>
+    }
+</p>
+
+<table class="ItemsListTable">
+    <tr>
+        @*<th>
+                @Html.DisplayNameFor(model => model.catalogName)
+            </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.catalogValue)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.parentCatalog)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.catalogName)
+                </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.catalogValue)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Catalog2.catalogValue)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.catalogId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.catalogId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.catalogId })
+            </td>
+        </tr>
+    }
+
+</table>
+
+<p>
+    @Html.ActionLink("Back to Catalogs", "Catalogs", "Home")
+</p>

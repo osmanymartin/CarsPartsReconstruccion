@@ -1,0 +1,2324 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="db_cars_parts_reconstructionModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Catalog">
+          <Key>
+            <PropertyRef Name="catalogId" />
+          </Key>
+          <Property Name="catalogId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="catalogValue" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="250" />
+          <Property Name="catalogName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="parentCatalog" Type="int" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="customerId" />
+          </Key>
+          <Property Name="customerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="customerName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="eMail" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="userLogin" Type="nvarchar" MaxLength="20" />
+          <Property Name="address" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="employeeId" />
+          </Key>
+          <Property Name="employeeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="employeeName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="eMail" Type="nvarchar" MaxLength="50" />
+          <Property Name="positionId" Type="int" Nullable="false" />
+          <Property Name="userLogin" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Part">
+          <Key>
+            <PropertyRef Name="partId" />
+          </Key>
+          <Property Name="partId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="partName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="partDescription" Type="nvarchar" MaxLength="250" />
+          <Property Name="partPrice" Type="numeric" Precision="8" Scale="2" />
+        </EntityType>
+        <EntityType Name="Piece">
+          <Key>
+            <PropertyRef Name="pieceId" />
+          </Key>
+          <Property Name="pieceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="pieceName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="pieceDescription" Type="nvarchar" MaxLength="250" />
+          <Property Name="piecePrice" Type="numeric" Precision="8" Scale="2" />
+        </EntityType>
+        <EntityType Name="ReplacedPart">
+          <Key>
+            <PropertyRef Name="replacedPartId" />
+          </Key>
+          <Property Name="replacedPartId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="serviceCarId" Type="int" Nullable="false" />
+          <Property Name="supplierPartId" Type="int" />
+          <Property Name="servicePartId" Type="int" />
+          <Property Name="replacedPartPrice" Type="numeric" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="statusId" Type="int" Nullable="false" />
+          <Property Name="observations" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="ReplacedPartTrack">
+          <Key>
+            <PropertyRef Name="replacedPartTrackId" />
+          </Key>
+          <Property Name="replacedPartTrackId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="date" Type="date" Nullable="false" />
+          <Property Name="replacedPartId" Type="int" Nullable="false" />
+          <Property Name="statusId" Type="int" Nullable="false" />
+          <Property Name="observations" Type="nvarchar" MaxLength="250" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ReplacedPiece">
+          <Key>
+            <PropertyRef Name="replacedPieceId" />
+          </Key>
+          <Property Name="replacedPieceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="servicePartId" Type="int" Nullable="false" />
+          <Property Name="supplierPieceId" Type="int" Nullable="false" />
+          <Property Name="replacedPiecePrice" Type="numeric" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="statusId" Type="int" Nullable="false" />
+          <Property Name="observations" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="ReplacedPieceTrack">
+          <Key>
+            <PropertyRef Name="replacedPieceTrackId" />
+          </Key>
+          <Property Name="replacedPieceTrackId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="date" Type="date" Nullable="false" />
+          <Property Name="replacedPieceId" Type="int" Nullable="false" />
+          <Property Name="statusId" Type="int" Nullable="false" />
+          <Property Name="observations" Type="nvarchar" MaxLength="250" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Service">
+          <Key>
+            <PropertyRef Name="serviceId" />
+          </Key>
+          <Property Name="serviceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="customerId" Type="int" Nullable="false" />
+          <Property Name="serviceDate" Type="date" Nullable="false" />
+          <Property Name="employeeId" Type="int" />
+          <Property Name="estimatedPrice" Type="numeric" Precision="8" Scale="2" />
+          <Property Name="realPrice" Type="numeric" Precision="8" Scale="2" />
+          <Property Name="serviceDescription" Type="nvarchar" MaxLength="250" />
+          <Property Name="statusId" Type="int" Nullable="false" />
+          <Property Name="statusObservations" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="ServiceCar">
+          <Key>
+            <PropertyRef Name="serviceCarId" />
+          </Key>
+          <Property Name="serviceCarId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="serviceId" Type="int" Nullable="false" />
+          <Property Name="carBrandId" Type="int" Nullable="false" />
+          <Property Name="carModelId" Type="int" Nullable="false" />
+          <Property Name="estimatedPrice" Type="numeric" Precision="8" Scale="2" />
+          <Property Name="realPrice" Type="numeric" Precision="8" Scale="2" />
+          <Property Name="serviceCarDescription" Type="nvarchar" MaxLength="250" />
+          <Property Name="statusId" Type="int" Nullable="false" />
+          <Property Name="observations" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="ServiceCarMiscellaneousCosts">
+          <Key>
+            <PropertyRef Name="serviceCarMiscellaneousCostsId" />
+          </Key>
+          <Property Name="serviceCarMiscellaneousCostsId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="serviceCarId" Type="int" Nullable="false" />
+          <Property Name="cost" Type="numeric" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="costTypeId" Type="int" Nullable="false" />
+          <Property Name="description" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="ServiceCarTrack">
+          <Key>
+            <PropertyRef Name="serviceCarTrackId" />
+          </Key>
+          <Property Name="serviceCarTrackId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="date" Type="date" Nullable="false" />
+          <Property Name="serviceCarId" Type="int" Nullable="false" />
+          <Property Name="statusId" Type="int" Nullable="false" />
+          <Property Name="observations" Type="nvarchar" MaxLength="250" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ServiceMiscellaneousCosts">
+          <Key>
+            <PropertyRef Name="service_miscellaneous_costs_id" />
+          </Key>
+          <Property Name="service_miscellaneous_costs_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="service_id" Type="int" Nullable="false" />
+          <Property Name="cost" Type="numeric" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="cost_type_id" Type="int" Nullable="false" />
+          <Property Name="description" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="ServicePart">
+          <Key>
+            <PropertyRef Name="servicePartId" />
+          </Key>
+          <Property Name="servicePartId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="serviceId" Type="int" Nullable="false" />
+          <Property Name="partId" Type="int" Nullable="false" />
+          <Property Name="estimatedPrice" Type="numeric" Precision="8" Scale="2" />
+          <Property Name="realPrice" Type="numeric" Precision="8" Scale="2" />
+          <Property Name="servicePartDescription" Type="nvarchar" MaxLength="250" />
+          <Property Name="statusId" Type="int" Nullable="false" />
+          <Property Name="observations" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="ServicePartMiscellaneousCosts">
+          <Key>
+            <PropertyRef Name="service_part_miscellaneous_costs_id" />
+          </Key>
+          <Property Name="service_part_miscellaneous_costs_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="service_part_id" Type="int" Nullable="false" />
+          <Property Name="cost" Type="numeric" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="cost_type_id" Type="int" Nullable="false" />
+          <Property Name="description" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="ServicePartTrack">
+          <Key>
+            <PropertyRef Name="servicePartTrackId" />
+          </Key>
+          <Property Name="servicePartTrackId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="date" Type="date" Nullable="false" />
+          <Property Name="servicePartId" Type="int" Nullable="false" />
+          <Property Name="statusId" Type="int" Nullable="false" />
+          <Property Name="observations" Type="nvarchar" MaxLength="250" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ServiceTrack">
+          <Key>
+            <PropertyRef Name="serviceTrackId" />
+          </Key>
+          <Property Name="serviceTrackId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="date" Type="date" Nullable="false" />
+          <Property Name="serviceId" Type="int" Nullable="false" />
+          <Property Name="statusId" Type="int" Nullable="false" />
+          <Property Name="observations" Type="nvarchar" MaxLength="250" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Supplier">
+          <Key>
+            <PropertyRef Name="supplierId" />
+          </Key>
+          <Property Name="supplierId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="supplierName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="description" Type="nvarchar" MaxLength="250" />
+          <Property Name="supplierEmail" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="address" Type="nvarchar" MaxLength="250" />
+          <Property Name="idRepresentative" Type="int" />
+        </EntityType>
+        <EntityType Name="SupplierPart">
+          <Key>
+            <PropertyRef Name="supplierPartId" />
+          </Key>
+          <Property Name="supplierPartId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="supplierId" Type="int" Nullable="false" />
+          <Property Name="partId" Type="int" Nullable="false" />
+          <Property Name="price" Type="numeric" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="existence" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SupplierPiece">
+          <Key>
+            <PropertyRef Name="supplierPieceId" />
+          </Key>
+          <Property Name="supplierPieceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="supplierId" Type="int" Nullable="false" />
+          <Property Name="pieceId" Type="int" Nullable="false" />
+          <Property Name="price" Type="numeric" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="existence" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserProfile">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="webpages_Membership">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="ConfirmationToken" Type="nvarchar" MaxLength="128" />
+          <Property Name="IsConfirmed" Type="bit" />
+          <Property Name="LastPasswordFailureDate" Type="datetime" />
+          <Property Name="PasswordFailuresSinceLastSuccess" Type="int" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="PasswordChangedDate" Type="datetime" />
+          <Property Name="PasswordSalt" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="PasswordVerificationToken" Type="nvarchar" MaxLength="128" />
+          <Property Name="PasswordVerificationTokenExpirationDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="webpages_OAuthMembership">
+          <Key>
+            <PropertyRef Name="Provider" />
+            <PropertyRef Name="ProviderUserId" />
+          </Key>
+          <Property Name="Provider" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="ProviderUserId" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="webpages_Roles">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleName" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="webpages_UsersInRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Catalog_Catalog">
+          <End Role="Catalog" Type="Self.Catalog" Multiplicity="0..1" />
+          <End Role="Catalog1" Type="Self.Catalog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Catalog">
+              <PropertyRef Name="catalogId" />
+            </Principal>
+            <Dependent Role="Catalog1">
+              <PropertyRef Name="parentCatalog" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_employee_position">
+          <End Role="Catalog" Type="Self.Catalog" Multiplicity="1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Catalog">
+              <PropertyRef Name="catalogId" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="positionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_replaced_part_Service_Car">
+          <End Role="ServiceCar" Type="Self.ServiceCar" Multiplicity="1" />
+          <End Role="ReplacedPart" Type="Self.ReplacedPart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceCar">
+              <PropertyRef Name="serviceCarId" />
+            </Principal>
+            <Dependent Role="ReplacedPart">
+              <PropertyRef Name="serviceCarId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_replaced_part_service_part">
+          <End Role="ServicePart" Type="Self.ServicePart" Multiplicity="0..1" />
+          <End Role="ReplacedPart" Type="Self.ReplacedPart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServicePart">
+              <PropertyRef Name="servicePartId" />
+            </Principal>
+            <Dependent Role="ReplacedPart">
+              <PropertyRef Name="servicePartId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_replaced_part_status_type">
+          <End Role="Catalog" Type="Self.Catalog" Multiplicity="1" />
+          <End Role="ReplacedPart" Type="Self.ReplacedPart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Catalog">
+              <PropertyRef Name="catalogId" />
+            </Principal>
+            <Dependent Role="ReplacedPart">
+              <PropertyRef Name="statusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_replaced_part_supplier_part">
+          <End Role="SupplierPart" Type="Self.SupplierPart" Multiplicity="0..1" />
+          <End Role="ReplacedPart" Type="Self.ReplacedPart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SupplierPart">
+              <PropertyRef Name="supplierPartId" />
+            </Principal>
+            <Dependent Role="ReplacedPart">
+              <PropertyRef Name="supplierPartId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_replaced_part_track_replaced_part">
+          <End Role="ReplacedPart" Type="Self.ReplacedPart" Multiplicity="1" />
+          <End Role="ReplacedPartTrack" Type="Self.ReplacedPartTrack" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ReplacedPart">
+              <PropertyRef Name="replacedPartId" />
+            </Principal>
+            <Dependent Role="ReplacedPartTrack">
+              <PropertyRef Name="replacedPartId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_replaced_part_track_status_type">
+          <End Role="Catalog" Type="Self.Catalog" Multiplicity="1" />
+          <End Role="ReplacedPartTrack" Type="Self.ReplacedPartTrack" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Catalog">
+              <PropertyRef Name="catalogId" />
+            </Principal>
+            <Dependent Role="ReplacedPartTrack">
+              <PropertyRef Name="statusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_replaced_piece_service_part">
+          <End Role="ServicePart" Type="Self.ServicePart" Multiplicity="1" />
+          <End Role="ReplacedPiece" Type="Self.ReplacedPiece" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServicePart">
+              <PropertyRef Name="servicePartId" />
+            </Principal>
+            <Dependent Role="ReplacedPiece">
+              <PropertyRef Name="servicePartId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_replaced_piece_status_type">
+          <End Role="Catalog" Type="Self.Catalog" Multiplicity="1" />
+          <End Role="ReplacedPiece" Type="Self.ReplacedPiece" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Catalog">
+              <PropertyRef Name="catalogId" />
+            </Principal>
+            <Dependent Role="ReplacedPiece">
+              <PropertyRef Name="statusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_replaced_piece_supplier_piece">
+          <End Role="SupplierPiece" Type="Self.SupplierPiece" Multiplicity="1" />
+          <End Role="ReplacedPiece" Type="Self.ReplacedPiece" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SupplierPiece">
+              <PropertyRef Name="supplierPieceId" />
+            </Principal>
+            <Dependent Role="ReplacedPiece">
+              <PropertyRef Name="supplierPieceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_replaced_piece_track_replaced_piece">
+          <End Role="ReplacedPiece" Type="Self.ReplacedPiece" Multiplicity="1" />
+          <End Role="ReplacedPieceTrack" Type="Self.ReplacedPieceTrack" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ReplacedPiece">
+              <PropertyRef Name="replacedPieceId" />
+            </Principal>
+            <Dependent Role="ReplacedPieceTrack">
+              <PropertyRef Name="replacedPieceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_replaced_piece_track_status_type">
+          <End Role="Catalog" Type="Self.Catalog" Multiplicity="1" />
+          <End Role="ReplacedPieceTrack" Type="Self.ReplacedPieceTrack" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Catalog">
+              <PropertyRef Name="catalogId" />
+            </Principal>
+            <Dependent Role="ReplacedPieceTrack">
+              <PropertyRef Name="statusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_RoleId">
+          <End Role="webpages_Roles" Type="Self.webpages_Roles" Multiplicity="1" />
+          <End Role="webpages_UsersInRoles" Type="Self.webpages_UsersInRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="webpages_Roles">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="webpages_UsersInRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Service_Car_brand_type">
+          <End Role="Catalog" Type="Self.Catalog" Multiplicity="1" />
+          <End Role="ServiceCar" Type="Self.ServiceCar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Catalog">
+              <PropertyRef Name="catalogId" />
+            </Principal>
+            <Dependent Role="ServiceCar">
+              <PropertyRef Name="carBrandId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_service_car_miscellaneous_costs_Service_Car">
+          <End Role="ServiceCar" Type="Self.ServiceCar" Multiplicity="1" />
+          <End Role="ServiceCarMiscellaneousCosts" Type="Self.ServiceCarMiscellaneousCosts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceCar">
+              <PropertyRef Name="serviceCarId" />
+            </Principal>
+            <Dependent Role="ServiceCarMiscellaneousCosts">
+              <PropertyRef Name="serviceCarId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_service_car_miscellaneous_costs_type">
+          <End Role="Catalog" Type="Self.Catalog" Multiplicity="1" />
+          <End Role="ServiceCarMiscellaneousCosts" Type="Self.ServiceCarMiscellaneousCosts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Catalog">
+              <PropertyRef Name="catalogId" />
+            </Principal>
+            <Dependent Role="ServiceCarMiscellaneousCosts">
+              <PropertyRef Name="costTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Service_Car_model_type">
+          <End Role="Catalog" Type="Self.Catalog" Multiplicity="1" />
+          <End Role="ServiceCar" Type="Self.ServiceCar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Catalog">
+              <PropertyRef Name="catalogId" />
+            </Principal>
+            <Dependent Role="ServiceCar">
+              <PropertyRef Name="carModelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Service_Car_service">
+          <End Role="Service" Type="Self.Service" Multiplicity="1" />
+          <End Role="ServiceCar" Type="Self.ServiceCar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="serviceId" />
+            </Principal>
+            <Dependent Role="ServiceCar">
+              <PropertyRef Name="serviceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Service_Car_status_type">
+          <End Role="Catalog" Type="Self.Catalog" Multiplicity="1" />
+          <End Role="ServiceCar" Type="Self.ServiceCar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Catalog">
+              <PropertyRef Name="catalogId" />
+            </Principal>
+            <Dependent Role="ServiceCar">
+              <PropertyRef Name="statusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_service_car_track_Service_Car">
+          <End Role="ServiceCar" Type="Self.ServiceCar" Multiplicity="1" />
+          <End Role="ServiceCarTrack" Type="Self.ServiceCarTrack" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceCar">
+              <PropertyRef Name="serviceCarId" />
+            </Principal>
+            <Dependent Role="ServiceCarTrack">
+              <PropertyRef Name="serviceCarId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_service_car_track_status_type">
+          <End Role="Catalog" Type="Self.Catalog" Multiplicity="1" />
+          <End Role="ServiceCarTrack" Type="Self.ServiceCarTrack" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Catalog">
+              <PropertyRef Name="catalogId" />
+            </Principal>
+            <Dependent Role="ServiceCarTrack">
+              <PropertyRef Name="statusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_service_customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Service" Type="Self.Service" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="customerId" />
+            </Principal>
+            <Dependent Role="Service">
+              <PropertyRef Name="customerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_service_employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="Service" Type="Self.Service" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="employeeId" />
+            </Principal>
+            <Dependent Role="Service">
+              <PropertyRef Name="employeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_service_miscellaneous_costs_service">
+          <End Role="Service" Type="Self.Service" Multiplicity="1" />
+          <End Role="ServiceMiscellaneousCosts" Type="Self.ServiceMiscellaneousCosts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="serviceId" />
+            </Principal>
+            <Dependent Role="ServiceMiscellaneousCosts">
+              <PropertyRef Name="service_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_service_miscellaneous_costs_type">
+          <End Role="Catalog" Type="Self.Catalog" Multiplicity="1" />
+          <End Role="ServiceMiscellaneousCosts" Type="Self.ServiceMiscellaneousCosts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Catalog">
+              <PropertyRef Name="catalogId" />
+            </Principal>
+            <Dependent Role="ServiceMiscellaneousCosts">
+              <PropertyRef Name="cost_type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_service_part_miscellaneous_costs_service_part">
+          <End Role="ServicePart" Type="Self.ServicePart" Multiplicity="1" />
+          <End Role="ServicePartMiscellaneousCosts" Type="Self.ServicePartMiscellaneousCosts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServicePart">
+              <PropertyRef Name="servicePartId" />
+            </Principal>
+            <Dependent Role="ServicePartMiscellaneousCosts">
+              <PropertyRef Name="service_part_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_service_part_miscellaneous_costs_type">
+          <End Role="Catalog" Type="Self.Catalog" Multiplicity="1" />
+          <End Role="ServicePartMiscellaneousCosts" Type="Self.ServicePartMiscellaneousCosts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Catalog">
+              <PropertyRef Name="catalogId" />
+            </Principal>
+            <Dependent Role="ServicePartMiscellaneousCosts">
+              <PropertyRef Name="cost_type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_service_part_part">
+          <End Role="Part" Type="Self.Part" Multiplicity="1" />
+          <End Role="ServicePart" Type="Self.ServicePart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Part">
+              <PropertyRef Name="partId" />
+            </Principal>
+            <Dependent Role="ServicePart">
+              <PropertyRef Name="partId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_service_part_service">
+          <End Role="Service" Type="Self.Service" Multiplicity="1" />
+          <End Role="ServicePart" Type="Self.ServicePart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="serviceId" />
+            </Principal>
+            <Dependent Role="ServicePart">
+              <PropertyRef Name="serviceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_service_part_status_type">
+          <End Role="Catalog" Type="Self.Catalog" Multiplicity="1" />
+          <End Role="ServicePart" Type="Self.ServicePart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Catalog">
+              <PropertyRef Name="catalogId" />
+            </Principal>
+            <Dependent Role="ServicePart">
+              <PropertyRef Name="statusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_service_part_track_service_part">
+          <End Role="ServicePart" Type="Self.ServicePart" Multiplicity="1" />
+          <End Role="ServicePartTrack" Type="Self.ServicePartTrack" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServicePart">
+              <PropertyRef Name="servicePartId" />
+            </Principal>
+            <Dependent Role="ServicePartTrack">
+              <PropertyRef Name="servicePartId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_service_part_track_status_type">
+          <End Role="Catalog" Type="Self.Catalog" Multiplicity="1" />
+          <End Role="ServicePartTrack" Type="Self.ServicePartTrack" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Catalog">
+              <PropertyRef Name="catalogId" />
+            </Principal>
+            <Dependent Role="ServicePartTrack">
+              <PropertyRef Name="statusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_service_status_type">
+          <End Role="Catalog" Type="Self.Catalog" Multiplicity="1" />
+          <End Role="Service" Type="Self.Service" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Catalog">
+              <PropertyRef Name="catalogId" />
+            </Principal>
+            <Dependent Role="Service">
+              <PropertyRef Name="statusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_service_track_service">
+          <End Role="Service" Type="Self.Service" Multiplicity="1" />
+          <End Role="ServiceTrack" Type="Self.ServiceTrack" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="serviceId" />
+            </Principal>
+            <Dependent Role="ServiceTrack">
+              <PropertyRef Name="serviceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_service_track_status_type">
+          <End Role="Catalog" Type="Self.Catalog" Multiplicity="1" />
+          <End Role="ServiceTrack" Type="Self.ServiceTrack" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Catalog">
+              <PropertyRef Name="catalogId" />
+            </Principal>
+            <Dependent Role="ServiceTrack">
+              <PropertyRef Name="statusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_supplier_employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="Supplier" Type="Self.Supplier" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="employeeId" />
+            </Principal>
+            <Dependent Role="Supplier">
+              <PropertyRef Name="idRepresentative" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_supplier_part_part">
+          <End Role="Part" Type="Self.Part" Multiplicity="1" />
+          <End Role="SupplierPart" Type="Self.SupplierPart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Part">
+              <PropertyRef Name="partId" />
+            </Principal>
+            <Dependent Role="SupplierPart">
+              <PropertyRef Name="partId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_supplier_part_supplier">
+          <End Role="Supplier" Type="Self.Supplier" Multiplicity="1" />
+          <End Role="SupplierPart" Type="Self.SupplierPart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="supplierId" />
+            </Principal>
+            <Dependent Role="SupplierPart">
+              <PropertyRef Name="supplierId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_supplier_piece_piece">
+          <End Role="Piece" Type="Self.Piece" Multiplicity="1" />
+          <End Role="SupplierPiece" Type="Self.SupplierPiece" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Piece">
+              <PropertyRef Name="pieceId" />
+            </Principal>
+            <Dependent Role="SupplierPiece">
+              <PropertyRef Name="pieceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_supplier_piece_supplier">
+          <End Role="Supplier" Type="Self.Supplier" Multiplicity="1" />
+          <End Role="SupplierPiece" Type="Self.SupplierPiece" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="supplierId" />
+            </Principal>
+            <Dependent Role="SupplierPiece">
+              <PropertyRef Name="supplierId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_UserId">
+          <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="1" />
+          <End Role="webpages_UsersInRoles" Type="Self.webpages_UsersInRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="webpages_UsersInRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="db_cars_parts_reconstructionModelStoreContainer">
+          <EntitySet Name="Catalog" EntityType="Self.Catalog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Part" EntityType="Self.Part" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Piece" EntityType="Self.Piece" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReplacedPart" EntityType="Self.ReplacedPart" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReplacedPartTrack" EntityType="Self.ReplacedPartTrack" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReplacedPiece" EntityType="Self.ReplacedPiece" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReplacedPieceTrack" EntityType="Self.ReplacedPieceTrack" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Service" EntityType="Self.Service" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ServiceCar" EntityType="Self.ServiceCar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ServiceCarMiscellaneousCosts" EntityType="Self.ServiceCarMiscellaneousCosts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ServiceCarTrack" EntityType="Self.ServiceCarTrack" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ServiceMiscellaneousCosts" EntityType="Self.ServiceMiscellaneousCosts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ServicePart" EntityType="Self.ServicePart" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ServicePartMiscellaneousCosts" EntityType="Self.ServicePartMiscellaneousCosts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ServicePartTrack" EntityType="Self.ServicePartTrack" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ServiceTrack" EntityType="Self.ServiceTrack" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Supplier" EntityType="Self.Supplier" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SupplierPart" EntityType="Self.SupplierPart" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SupplierPiece" EntityType="Self.SupplierPiece" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserProfile" EntityType="Self.UserProfile" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="webpages_Membership" EntityType="Self.webpages_Membership" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="webpages_OAuthMembership" EntityType="Self.webpages_OAuthMembership" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="webpages_Roles" EntityType="Self.webpages_Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="webpages_UsersInRoles" EntityType="Self.webpages_UsersInRoles" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Catalog_Catalog" Association="Self.FK_Catalog_Catalog">
+            <End Role="Catalog" EntitySet="Catalog" />
+            <End Role="Catalog1" EntitySet="Catalog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_employee_position" Association="Self.FK_employee_position">
+            <End Role="Catalog" EntitySet="Catalog" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_replaced_part_Service_Car" Association="Self.FK_replaced_part_Service_Car">
+            <End Role="ServiceCar" EntitySet="ServiceCar" />
+            <End Role="ReplacedPart" EntitySet="ReplacedPart" />
+          </AssociationSet>
+          <AssociationSet Name="FK_replaced_part_service_part" Association="Self.FK_replaced_part_service_part">
+            <End Role="ServicePart" EntitySet="ServicePart" />
+            <End Role="ReplacedPart" EntitySet="ReplacedPart" />
+          </AssociationSet>
+          <AssociationSet Name="FK_replaced_part_status_type" Association="Self.FK_replaced_part_status_type">
+            <End Role="Catalog" EntitySet="Catalog" />
+            <End Role="ReplacedPart" EntitySet="ReplacedPart" />
+          </AssociationSet>
+          <AssociationSet Name="FK_replaced_part_supplier_part" Association="Self.FK_replaced_part_supplier_part">
+            <End Role="SupplierPart" EntitySet="SupplierPart" />
+            <End Role="ReplacedPart" EntitySet="ReplacedPart" />
+          </AssociationSet>
+          <AssociationSet Name="FK_replaced_part_track_replaced_part" Association="Self.FK_replaced_part_track_replaced_part">
+            <End Role="ReplacedPart" EntitySet="ReplacedPart" />
+            <End Role="ReplacedPartTrack" EntitySet="ReplacedPartTrack" />
+          </AssociationSet>
+          <AssociationSet Name="FK_replaced_part_track_status_type" Association="Self.FK_replaced_part_track_status_type">
+            <End Role="Catalog" EntitySet="Catalog" />
+            <End Role="ReplacedPartTrack" EntitySet="ReplacedPartTrack" />
+          </AssociationSet>
+          <AssociationSet Name="FK_replaced_piece_service_part" Association="Self.FK_replaced_piece_service_part">
+            <End Role="ServicePart" EntitySet="ServicePart" />
+            <End Role="ReplacedPiece" EntitySet="ReplacedPiece" />
+          </AssociationSet>
+          <AssociationSet Name="FK_replaced_piece_status_type" Association="Self.FK_replaced_piece_status_type">
+            <End Role="Catalog" EntitySet="Catalog" />
+            <End Role="ReplacedPiece" EntitySet="ReplacedPiece" />
+          </AssociationSet>
+          <AssociationSet Name="FK_replaced_piece_supplier_piece" Association="Self.FK_replaced_piece_supplier_piece">
+            <End Role="SupplierPiece" EntitySet="SupplierPiece" />
+            <End Role="ReplacedPiece" EntitySet="ReplacedPiece" />
+          </AssociationSet>
+          <AssociationSet Name="FK_replaced_piece_track_replaced_piece" Association="Self.FK_replaced_piece_track_replaced_piece">
+            <End Role="ReplacedPiece" EntitySet="ReplacedPiece" />
+            <End Role="ReplacedPieceTrack" EntitySet="ReplacedPieceTrack" />
+          </AssociationSet>
+          <AssociationSet Name="FK_replaced_piece_track_status_type" Association="Self.FK_replaced_piece_track_status_type">
+            <End Role="Catalog" EntitySet="Catalog" />
+            <End Role="ReplacedPieceTrack" EntitySet="ReplacedPieceTrack" />
+          </AssociationSet>
+          <AssociationSet Name="fk_RoleId" Association="Self.fk_RoleId">
+            <End Role="webpages_Roles" EntitySet="webpages_Roles" />
+            <End Role="webpages_UsersInRoles" EntitySet="webpages_UsersInRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Service_Car_brand_type" Association="Self.FK_Service_Car_brand_type">
+            <End Role="Catalog" EntitySet="Catalog" />
+            <End Role="ServiceCar" EntitySet="ServiceCar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_service_car_miscellaneous_costs_Service_Car" Association="Self.FK_service_car_miscellaneous_costs_Service_Car">
+            <End Role="ServiceCar" EntitySet="ServiceCar" />
+            <End Role="ServiceCarMiscellaneousCosts" EntitySet="ServiceCarMiscellaneousCosts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_service_car_miscellaneous_costs_type" Association="Self.FK_service_car_miscellaneous_costs_type">
+            <End Role="Catalog" EntitySet="Catalog" />
+            <End Role="ServiceCarMiscellaneousCosts" EntitySet="ServiceCarMiscellaneousCosts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Service_Car_model_type" Association="Self.FK_Service_Car_model_type">
+            <End Role="Catalog" EntitySet="Catalog" />
+            <End Role="ServiceCar" EntitySet="ServiceCar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Service_Car_service" Association="Self.FK_Service_Car_service">
+            <End Role="Service" EntitySet="Service" />
+            <End Role="ServiceCar" EntitySet="ServiceCar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Service_Car_status_type" Association="Self.FK_Service_Car_status_type">
+            <End Role="Catalog" EntitySet="Catalog" />
+            <End Role="ServiceCar" EntitySet="ServiceCar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_service_car_track_Service_Car" Association="Self.FK_service_car_track_Service_Car">
+            <End Role="ServiceCar" EntitySet="ServiceCar" />
+            <End Role="ServiceCarTrack" EntitySet="ServiceCarTrack" />
+          </AssociationSet>
+          <AssociationSet Name="FK_service_car_track_status_type" Association="Self.FK_service_car_track_status_type">
+            <End Role="Catalog" EntitySet="Catalog" />
+            <End Role="ServiceCarTrack" EntitySet="ServiceCarTrack" />
+          </AssociationSet>
+          <AssociationSet Name="FK_service_customer" Association="Self.FK_service_customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Service" EntitySet="Service" />
+          </AssociationSet>
+          <AssociationSet Name="FK_service_employee" Association="Self.FK_service_employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Service" EntitySet="Service" />
+          </AssociationSet>
+          <AssociationSet Name="FK_service_miscellaneous_costs_service" Association="Self.FK_service_miscellaneous_costs_service">
+            <End Role="Service" EntitySet="Service" />
+            <End Role="ServiceMiscellaneousCosts" EntitySet="ServiceMiscellaneousCosts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_service_miscellaneous_costs_type" Association="Self.FK_service_miscellaneous_costs_type">
+            <End Role="Catalog" EntitySet="Catalog" />
+            <End Role="ServiceMiscellaneousCosts" EntitySet="ServiceMiscellaneousCosts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_service_part_miscellaneous_costs_service_part" Association="Self.FK_service_part_miscellaneous_costs_service_part">
+            <End Role="ServicePart" EntitySet="ServicePart" />
+            <End Role="ServicePartMiscellaneousCosts" EntitySet="ServicePartMiscellaneousCosts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_service_part_miscellaneous_costs_type" Association="Self.FK_service_part_miscellaneous_costs_type">
+            <End Role="Catalog" EntitySet="Catalog" />
+            <End Role="ServicePartMiscellaneousCosts" EntitySet="ServicePartMiscellaneousCosts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_service_part_part" Association="Self.FK_service_part_part">
+            <End Role="Part" EntitySet="Part" />
+            <End Role="ServicePart" EntitySet="ServicePart" />
+          </AssociationSet>
+          <AssociationSet Name="FK_service_part_service" Association="Self.FK_service_part_service">
+            <End Role="Service" EntitySet="Service" />
+            <End Role="ServicePart" EntitySet="ServicePart" />
+          </AssociationSet>
+          <AssociationSet Name="FK_service_part_status_type" Association="Self.FK_service_part_status_type">
+            <End Role="Catalog" EntitySet="Catalog" />
+            <End Role="ServicePart" EntitySet="ServicePart" />
+          </AssociationSet>
+          <AssociationSet Name="FK_service_part_track_service_part" Association="Self.FK_service_part_track_service_part">
+            <End Role="ServicePart" EntitySet="ServicePart" />
+            <End Role="ServicePartTrack" EntitySet="ServicePartTrack" />
+          </AssociationSet>
+          <AssociationSet Name="FK_service_part_track_status_type" Association="Self.FK_service_part_track_status_type">
+            <End Role="Catalog" EntitySet="Catalog" />
+            <End Role="ServicePartTrack" EntitySet="ServicePartTrack" />
+          </AssociationSet>
+          <AssociationSet Name="FK_service_status_type" Association="Self.FK_service_status_type">
+            <End Role="Catalog" EntitySet="Catalog" />
+            <End Role="Service" EntitySet="Service" />
+          </AssociationSet>
+          <AssociationSet Name="FK_service_track_service" Association="Self.FK_service_track_service">
+            <End Role="Service" EntitySet="Service" />
+            <End Role="ServiceTrack" EntitySet="ServiceTrack" />
+          </AssociationSet>
+          <AssociationSet Name="FK_service_track_status_type" Association="Self.FK_service_track_status_type">
+            <End Role="Catalog" EntitySet="Catalog" />
+            <End Role="ServiceTrack" EntitySet="ServiceTrack" />
+          </AssociationSet>
+          <AssociationSet Name="FK_supplier_employee" Association="Self.FK_supplier_employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Supplier" EntitySet="Supplier" />
+          </AssociationSet>
+          <AssociationSet Name="FK_supplier_part_part" Association="Self.FK_supplier_part_part">
+            <End Role="Part" EntitySet="Part" />
+            <End Role="SupplierPart" EntitySet="SupplierPart" />
+          </AssociationSet>
+          <AssociationSet Name="FK_supplier_part_supplier" Association="Self.FK_supplier_part_supplier">
+            <End Role="Supplier" EntitySet="Supplier" />
+            <End Role="SupplierPart" EntitySet="SupplierPart" />
+          </AssociationSet>
+          <AssociationSet Name="FK_supplier_piece_piece" Association="Self.FK_supplier_piece_piece">
+            <End Role="Piece" EntitySet="Piece" />
+            <End Role="SupplierPiece" EntitySet="SupplierPiece" />
+          </AssociationSet>
+          <AssociationSet Name="FK_supplier_piece_supplier" Association="Self.FK_supplier_piece_supplier">
+            <End Role="Supplier" EntitySet="Supplier" />
+            <End Role="SupplierPiece" EntitySet="SupplierPiece" />
+          </AssociationSet>
+          <AssociationSet Name="fk_UserId" Association="Self.fk_UserId">
+            <End Role="UserProfile" EntitySet="UserProfile" />
+            <End Role="webpages_UsersInRoles" EntitySet="webpages_UsersInRoles" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="db_cars_parts_reconstructionModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="customerId" />
+          </Key>
+          <Property Name="customerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="customerName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="eMail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="userLogin" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="address" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Services" Relationship="db_cars_parts_reconstructionModel.FK_service_customer" FromRole="Customer" ToRole="Service" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="employeeId" />
+          </Key>
+          <Property Name="employeeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="employeeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="eMail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="positionId" Type="Int32" Nullable="false" />
+          <Property Name="userLogin" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Suppliers" Relationship="Self.FK_supplier_employee" FromRole="Employee" ToRole="Supplier" />
+          <NavigationProperty Name="Catalog" Relationship="db_cars_parts_reconstructionModel.FK_employee_position" FromRole="Employee" ToRole="Catalog" />
+          <NavigationProperty Name="Services" Relationship="db_cars_parts_reconstructionModel.FK_service_employee" FromRole="Employee" ToRole="Service" />
+        </EntityType>
+        <EntityType Name="Piece">
+          <Key>
+            <PropertyRef Name="pieceId" />
+          </Key>
+          <Property Name="pieceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="pieceName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="pieceDescription" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="piecePrice" Type="Decimal" Precision="8" Scale="2" />
+          <NavigationProperty Name="SupplierPieces" Relationship="Self.FK_supplier_piece_piece" FromRole="Piece" ToRole="SupplierPiece" />
+        </EntityType>
+        <EntityType Name="ReplacedPart">
+          <Key>
+            <PropertyRef Name="replacedPartId" />
+          </Key>
+          <Property Name="replacedPartId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="serviceCarId" Type="Int32" Nullable="false" />
+          <Property Name="supplierPartId" Type="Int32" />
+          <Property Name="servicePartId" Type="Int32" />
+          <Property Name="replacedPartPrice" Type="Decimal" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="statusId" Type="Int32" Nullable="false" />
+          <Property Name="observations" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ServiceCar" Relationship="Self.FK_replaced_part_Service_Car" FromRole="ReplacedPart" ToRole="ServiceCar" />
+          <NavigationProperty Name="ServicePart" Relationship="Self.FK_replaced_part_service_part" FromRole="ReplacedPart" ToRole="ServicePart" />
+          <NavigationProperty Name="SupplierPart" Relationship="Self.FK_replaced_part_supplier_part" FromRole="ReplacedPart" ToRole="SupplierPart" />
+          <NavigationProperty Name="ReplacedPartTracks" Relationship="Self.FK_replaced_part_track_replaced_part" FromRole="ReplacedPart" ToRole="ReplacedPartTrack" />
+          <NavigationProperty Name="Catalog" Relationship="db_cars_parts_reconstructionModel.FK_replaced_part_status_type" FromRole="ReplacedPart" ToRole="Catalog" />
+        </EntityType>
+        <EntityType Name="ReplacedPartTrack">
+          <Key>
+            <PropertyRef Name="replacedPartTrackId" />
+          </Key>
+          <Property Name="replacedPartTrackId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="replacedPartId" Type="Int32" Nullable="false" />
+          <Property Name="statusId" Type="Int32" Nullable="false" />
+          <Property Name="observations" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="ReplacedPart" Relationship="Self.FK_replaced_part_track_replaced_part" FromRole="ReplacedPartTrack" ToRole="ReplacedPart" />
+          <NavigationProperty Name="Catalog" Relationship="db_cars_parts_reconstructionModel.FK_replaced_part_track_status_type" FromRole="ReplacedPartTrack" ToRole="Catalog" />
+        </EntityType>
+        <EntityType Name="ReplacedPiece">
+          <Key>
+            <PropertyRef Name="replacedPieceId" />
+          </Key>
+          <Property Name="replacedPieceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="servicePartId" Type="Int32" Nullable="false" />
+          <Property Name="supplierPieceId" Type="Int32" Nullable="false" />
+          <Property Name="replacedPiecePrice" Type="Decimal" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="statusId" Type="Int32" Nullable="false" />
+          <Property Name="observations" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ServicePart" Relationship="Self.FK_replaced_piece_service_part" FromRole="ReplacedPiece" ToRole="ServicePart" />
+          <NavigationProperty Name="SupplierPiece" Relationship="Self.FK_replaced_piece_supplier_piece" FromRole="ReplacedPiece" ToRole="SupplierPiece" />
+          <NavigationProperty Name="ReplacedPieceTracks" Relationship="Self.FK_replaced_piece_track_replaced_piece" FromRole="ReplacedPiece" ToRole="ReplacedPieceTrack" />
+          <NavigationProperty Name="Catalog" Relationship="db_cars_parts_reconstructionModel.FK_replaced_piece_status_type" FromRole="ReplacedPiece" ToRole="Catalog" />
+        </EntityType>
+        <EntityType Name="ReplacedPieceTrack">
+          <Key>
+            <PropertyRef Name="replacedPieceTrackId" />
+          </Key>
+          <Property Name="replacedPieceTrackId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="replacedPieceId" Type="Int32" Nullable="false" />
+          <Property Name="statusId" Type="Int32" Nullable="false" />
+          <Property Name="observations" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="ReplacedPiece" Relationship="Self.FK_replaced_piece_track_replaced_piece" FromRole="ReplacedPieceTrack" ToRole="ReplacedPiece" />
+          <NavigationProperty Name="Catalog" Relationship="db_cars_parts_reconstructionModel.FK_replaced_piece_track_status_type" FromRole="ReplacedPieceTrack" ToRole="Catalog" />
+        </EntityType>
+        <EntityType Name="ServiceCar">
+          <Key>
+            <PropertyRef Name="serviceCarId" />
+          </Key>
+          <Property Name="serviceCarId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="serviceId" Type="Int32" Nullable="false" />
+          <Property Name="carBrandId" Type="Int32" Nullable="false" />
+          <Property Name="carModelId" Type="Int32" Nullable="false" />
+          <Property Name="estimatedPrice" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="realPrice" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="serviceCarDescription" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="statusId" Type="Int32" Nullable="false" />
+          <Property Name="observations" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ReplacedParts" Relationship="Self.FK_replaced_part_Service_Car" FromRole="ServiceCar" ToRole="ReplacedPart" />
+          <NavigationProperty Name="ServiceCarMiscellaneousCosts" Relationship="Self.FK_service_car_miscellaneous_costs_Service_Car" FromRole="ServiceCar" ToRole="ServiceCarMiscellaneousCosts" />
+          <NavigationProperty Name="ServiceCarTracks" Relationship="Self.FK_service_car_track_Service_Car" FromRole="ServiceCar" ToRole="ServiceCarTrack" />
+          <NavigationProperty Name="Catalog" Relationship="db_cars_parts_reconstructionModel.FK_Service_Car_brand_type" FromRole="ServiceCar" ToRole="Catalog" />
+          <NavigationProperty Name="Catalog1" Relationship="db_cars_parts_reconstructionModel.FK_Service_Car_model_type" FromRole="ServiceCar" ToRole="Catalog" />
+          <NavigationProperty Name="Catalog2" Relationship="db_cars_parts_reconstructionModel.FK_Service_Car_status_type" FromRole="ServiceCar" ToRole="Catalog" />
+          <NavigationProperty Name="Service" Relationship="db_cars_parts_reconstructionModel.FK_Service_Car_service" FromRole="ServiceCar" ToRole="Service" />
+          </EntityType>
+        <EntityType Name="ServiceCarMiscellaneousCost">
+          <Key>
+            <PropertyRef Name="serviceCarMiscellaneousCostsId" />
+          </Key>
+          <Property Name="serviceCarMiscellaneousCostsId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="serviceCarId" Type="Int32" Nullable="false" />
+          <Property Name="cost" Type="Decimal" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="costTypeId" Type="Int32" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ServiceCar" Relationship="Self.FK_service_car_miscellaneous_costs_Service_Car" FromRole="ServiceCarMiscellaneousCosts" ToRole="ServiceCar" />
+          <NavigationProperty Name="Catalog" Relationship="db_cars_parts_reconstructionModel.FK_service_car_miscellaneous_costs_type" FromRole="ServiceCarMiscellaneousCost" ToRole="Catalog" />
+        </EntityType>
+        <EntityType Name="ServiceCarTrack">
+          <Key>
+            <PropertyRef Name="serviceCarTrackId" />
+          </Key>
+          <Property Name="serviceCarTrackId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="serviceCarId" Type="Int32" Nullable="false" />
+          <Property Name="statusId" Type="Int32" Nullable="false" />
+          <Property Name="observations" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="ServiceCar" Relationship="Self.FK_service_car_track_Service_Car" FromRole="ServiceCarTrack" ToRole="ServiceCar" />
+          <NavigationProperty Name="Catalog" Relationship="db_cars_parts_reconstructionModel.FK_service_car_track_status_type" FromRole="ServiceCarTrack" ToRole="Catalog" />
+        </EntityType>
+        <EntityType Name="ServiceMiscellaneousCost">
+          <Key>
+            <PropertyRef Name="service_miscellaneous_costs_id" />
+          </Key>
+          <Property Name="service_miscellaneous_costs_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="service_id" Type="Int32" Nullable="false" />
+          <Property Name="cost" Type="Decimal" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="cost_type_id" Type="Int32" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Catalog" Relationship="db_cars_parts_reconstructionModel.FK_service_miscellaneous_costs_type" FromRole="ServiceMiscellaneousCost" ToRole="Catalog" />
+          <NavigationProperty Name="Service" Relationship="db_cars_parts_reconstructionModel.FK_service_miscellaneous_costs_service" FromRole="ServiceMiscellaneousCost" ToRole="Service" />
+        </EntityType>
+        <EntityType Name="ServicePart">
+          <Key>
+            <PropertyRef Name="servicePartId" />
+          </Key>
+          <Property Name="servicePartId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="serviceId" Type="Int32" Nullable="false" />
+          <Property Name="partId" Type="Int32" Nullable="false" />
+          <Property Name="estimatedPrice" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="realPrice" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="servicePartDescription" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="statusId" Type="Int32" Nullable="false" />
+          <Property Name="observations" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ReplacedParts" Relationship="Self.FK_replaced_part_service_part" FromRole="ServicePart" ToRole="ReplacedPart" />
+          <NavigationProperty Name="ReplacedPieces" Relationship="Self.FK_replaced_piece_service_part" FromRole="ServicePart" ToRole="ReplacedPiece" />
+          <NavigationProperty Name="ServicePartMiscellaneousCosts" Relationship="Self.FK_service_part_miscellaneous_costs_service_part" FromRole="ServicePart" ToRole="ServicePartMiscellaneousCosts" />
+          <NavigationProperty Name="ServicePartTracks" Relationship="Self.FK_service_part_track_service_part" FromRole="ServicePart" ToRole="ServicePartTrack" />
+          <NavigationProperty Name="Part" Relationship="db_cars_parts_reconstructionModel.FK_service_part_part" FromRole="ServicePart" ToRole="Part" />
+          <NavigationProperty Name="Catalog" Relationship="db_cars_parts_reconstructionModel.FK_service_part_status_type" FromRole="ServicePart" ToRole="Catalog" />
+          <NavigationProperty Name="Service" Relationship="db_cars_parts_reconstructionModel.FK_service_part_service" FromRole="ServicePart" ToRole="Service" />
+        </EntityType>
+        <EntityType Name="ServicePartMiscellaneousCost">
+          <Key>
+            <PropertyRef Name="service_part_miscellaneous_costs_id" />
+          </Key>
+          <Property Name="service_part_miscellaneous_costs_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="service_part_id" Type="Int32" Nullable="false" />
+          <Property Name="cost" Type="Decimal" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="cost_type_id" Type="Int32" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ServicePart" Relationship="Self.FK_service_part_miscellaneous_costs_service_part" FromRole="ServicePartMiscellaneousCosts" ToRole="ServicePart" />
+          <NavigationProperty Name="Catalog" Relationship="db_cars_parts_reconstructionModel.FK_service_part_miscellaneous_costs_type" FromRole="ServicePartMiscellaneousCost" ToRole="Catalog" />
+        </EntityType>
+        <EntityType Name="ServicePartTrack">
+          <Key>
+            <PropertyRef Name="servicePartTrackId" />
+          </Key>
+          <Property Name="servicePartTrackId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="servicePartId" Type="Int32" Nullable="false" />
+          <Property Name="statusId" Type="Int32" Nullable="false" />
+          <Property Name="observations" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="ServicePart" Relationship="Self.FK_service_part_track_service_part" FromRole="ServicePartTrack" ToRole="ServicePart" />
+          <NavigationProperty Name="Catalog" Relationship="db_cars_parts_reconstructionModel.FK_service_part_track_status_type" FromRole="ServicePartTrack" ToRole="Catalog" />
+        </EntityType>
+        <EntityType Name="ServiceTrack">
+          <Key>
+            <PropertyRef Name="serviceTrackId" />
+          </Key>
+          <Property Name="serviceTrackId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="serviceId" Type="Int32" Nullable="false" />
+          <Property Name="statusId" Type="Int32" Nullable="false" />
+          <Property Name="observations" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Catalog" Relationship="db_cars_parts_reconstructionModel.FK_service_track_status_type" FromRole="ServiceTrack" ToRole="Catalog" />
+          <NavigationProperty Name="Service" Relationship="db_cars_parts_reconstructionModel.FK_service_track_service" FromRole="ServiceTrack" ToRole="Service" />
+        </EntityType>
+        <EntityType Name="Supplier">
+          <Key>
+            <PropertyRef Name="supplierId" />
+          </Key>
+          <Property Name="supplierId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="supplierName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="supplierEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="address" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="idRepresentative" Type="Int32" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_supplier_employee" FromRole="Supplier" ToRole="Employee" />
+          <NavigationProperty Name="SupplierParts" Relationship="Self.FK_supplier_part_supplier" FromRole="Supplier" ToRole="SupplierPart" />
+          <NavigationProperty Name="SupplierPieces" Relationship="Self.FK_supplier_piece_supplier" FromRole="Supplier" ToRole="SupplierPiece" />
+        </EntityType>
+        <EntityType Name="SupplierPart">
+          <Key>
+            <PropertyRef Name="supplierPartId" />
+          </Key>
+          <Property Name="supplierPartId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="supplierId" Type="Int32" Nullable="false" />
+          <Property Name="partId" Type="Int32" Nullable="false" />
+          <Property Name="price" Type="Decimal" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="existence" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ReplacedParts" Relationship="Self.FK_replaced_part_supplier_part" FromRole="SupplierPart" ToRole="ReplacedPart" />
+          <NavigationProperty Name="Supplier" Relationship="Self.FK_supplier_part_supplier" FromRole="SupplierPart" ToRole="Supplier" />
+          <NavigationProperty Name="Part" Relationship="db_cars_parts_reconstructionModel.FK_supplier_part_part" FromRole="SupplierPart" ToRole="Part" />
+        </EntityType>
+        <EntityType Name="SupplierPiece">
+          <Key>
+            <PropertyRef Name="supplierPieceId" />
+          </Key>
+          <Property Name="supplierPieceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="supplierId" Type="Int32" Nullable="false" />
+          <Property Name="pieceId" Type="Int32" Nullable="false" />
+          <Property Name="price" Type="Decimal" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="existence" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Piece" Relationship="Self.FK_supplier_piece_piece" FromRole="SupplierPiece" ToRole="Piece" />
+          <NavigationProperty Name="ReplacedPieces" Relationship="Self.FK_replaced_piece_supplier_piece" FromRole="SupplierPiece" ToRole="ReplacedPiece" />
+          <NavigationProperty Name="Supplier" Relationship="Self.FK_supplier_piece_supplier" FromRole="SupplierPiece" ToRole="Supplier" />
+        </EntityType>
+        <Association Name="FK_supplier_employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="Supplier" Type="Self.Supplier" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="employeeId" />
+            </Principal>
+            <Dependent Role="Supplier">
+              <PropertyRef Name="idRepresentative" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_supplier_piece_piece">
+          <End Role="Piece" Type="Self.Piece" Multiplicity="1" />
+          <End Role="SupplierPiece" Type="Self.SupplierPiece" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Piece">
+              <PropertyRef Name="pieceId" />
+            </Principal>
+            <Dependent Role="SupplierPiece">
+              <PropertyRef Name="pieceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_replaced_part_Service_Car">
+          <End Role="ServiceCar" Type="Self.ServiceCar" Multiplicity="1" />
+          <End Role="ReplacedPart" Type="Self.ReplacedPart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceCar">
+              <PropertyRef Name="serviceCarId" />
+            </Principal>
+            <Dependent Role="ReplacedPart">
+              <PropertyRef Name="serviceCarId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_replaced_part_service_part">
+          <End Role="ServicePart" Type="Self.ServicePart" Multiplicity="0..1" />
+          <End Role="ReplacedPart" Type="Self.ReplacedPart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServicePart">
+              <PropertyRef Name="servicePartId" />
+            </Principal>
+            <Dependent Role="ReplacedPart">
+              <PropertyRef Name="servicePartId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_replaced_part_supplier_part">
+          <End Role="SupplierPart" Type="Self.SupplierPart" Multiplicity="0..1" />
+          <End Role="ReplacedPart" Type="Self.ReplacedPart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SupplierPart">
+              <PropertyRef Name="supplierPartId" />
+            </Principal>
+            <Dependent Role="ReplacedPart">
+              <PropertyRef Name="supplierPartId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_replaced_part_track_replaced_part">
+          <End Role="ReplacedPart" Type="Self.ReplacedPart" Multiplicity="1" />
+          <End Role="ReplacedPartTrack" Type="Self.ReplacedPartTrack" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ReplacedPart">
+              <PropertyRef Name="replacedPartId" />
+            </Principal>
+            <Dependent Role="ReplacedPartTrack">
+              <PropertyRef Name="replacedPartId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_replaced_piece_service_part">
+          <End Role="ServicePart" Type="Self.ServicePart" Multiplicity="1" />
+          <End Role="ReplacedPiece" Type="Self.ReplacedPiece" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServicePart">
+              <PropertyRef Name="servicePartId" />
+            </Principal>
+            <Dependent Role="ReplacedPiece">
+              <PropertyRef Name="servicePartId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_replaced_piece_supplier_piece">
+          <End Role="SupplierPiece" Type="Self.SupplierPiece" Multiplicity="1" />
+          <End Role="ReplacedPiece" Type="Self.ReplacedPiece" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SupplierPiece">
+              <PropertyRef Name="supplierPieceId" />
+            </Principal>
+            <Dependent Role="ReplacedPiece">
+              <PropertyRef Name="supplierPieceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_replaced_piece_track_replaced_piece">
+          <End Role="ReplacedPiece" Type="Self.ReplacedPiece" Multiplicity="1" />
+          <End Role="ReplacedPieceTrack" Type="Self.ReplacedPieceTrack" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ReplacedPiece">
+              <PropertyRef Name="replacedPieceId" />
+            </Principal>
+            <Dependent Role="ReplacedPieceTrack">
+              <PropertyRef Name="replacedPieceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_service_car_miscellaneous_costs_Service_Car">
+          <End Role="ServiceCar" Type="Self.ServiceCar" Multiplicity="1" />
+          <End Role="ServiceCarMiscellaneousCosts" Type="Self.ServiceCarMiscellaneousCost" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceCar">
+              <PropertyRef Name="serviceCarId" />
+            </Principal>
+            <Dependent Role="ServiceCarMiscellaneousCosts">
+              <PropertyRef Name="serviceCarId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_service_car_track_Service_Car">
+          <End Role="ServiceCar" Type="Self.ServiceCar" Multiplicity="1" />
+          <End Role="ServiceCarTrack" Type="Self.ServiceCarTrack" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceCar">
+              <PropertyRef Name="serviceCarId" />
+            </Principal>
+            <Dependent Role="ServiceCarTrack">
+              <PropertyRef Name="serviceCarId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_service_part_miscellaneous_costs_service_part">
+          <End Role="ServicePart" Type="Self.ServicePart" Multiplicity="1" />
+          <End Role="ServicePartMiscellaneousCosts" Type="Self.ServicePartMiscellaneousCost" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServicePart">
+              <PropertyRef Name="servicePartId" />
+            </Principal>
+            <Dependent Role="ServicePartMiscellaneousCosts">
+              <PropertyRef Name="service_part_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_service_part_track_service_part">
+          <End Role="ServicePart" Type="Self.ServicePart" Multiplicity="1" />
+          <End Role="ServicePartTrack" Type="Self.ServicePartTrack" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServicePart">
+              <PropertyRef Name="servicePartId" />
+            </Principal>
+            <Dependent Role="ServicePartTrack">
+              <PropertyRef Name="servicePartId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_supplier_part_supplier">
+          <End Role="Supplier" Type="Self.Supplier" Multiplicity="1" />
+          <End Role="SupplierPart" Type="Self.SupplierPart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="supplierId" />
+            </Principal>
+            <Dependent Role="SupplierPart">
+              <PropertyRef Name="supplierId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_supplier_piece_supplier">
+          <End Role="Supplier" Type="Self.Supplier" Multiplicity="1" />
+          <End Role="SupplierPiece" Type="Self.SupplierPiece" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="supplierId" />
+            </Principal>
+            <Dependent Role="SupplierPiece">
+              <PropertyRef Name="supplierId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="db_cars_parts_reconstructionStrConn" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <EntitySet Name="Employees" EntityType="Self.Employee" />
+          <EntitySet Name="Pieces" EntityType="Self.Piece" />
+          <EntitySet Name="ReplacedParts" EntityType="Self.ReplacedPart" />
+          <EntitySet Name="ReplacedPartTracks" EntityType="Self.ReplacedPartTrack" />
+          <EntitySet Name="ReplacedPieces" EntityType="Self.ReplacedPiece" />
+          <EntitySet Name="ReplacedPieceTracks" EntityType="Self.ReplacedPieceTrack" />
+          <EntitySet Name="ServiceCars" EntityType="Self.ServiceCar" />
+          <EntitySet Name="ServiceCarMiscellaneousCosts" EntityType="Self.ServiceCarMiscellaneousCost" />
+          <EntitySet Name="ServiceCarTracks" EntityType="Self.ServiceCarTrack" />
+          <EntitySet Name="ServiceMiscellaneousCosts" EntityType="Self.ServiceMiscellaneousCost" />
+          <EntitySet Name="ServiceParts" EntityType="Self.ServicePart" />
+          <EntitySet Name="ServicePartMiscellaneousCosts" EntityType="Self.ServicePartMiscellaneousCost" />
+          <EntitySet Name="ServicePartTracks" EntityType="Self.ServicePartTrack" />
+          <EntitySet Name="ServiceTracks" EntityType="Self.ServiceTrack" />
+          <EntitySet Name="Suppliers" EntityType="Self.Supplier" />
+          <EntitySet Name="SupplierParts" EntityType="Self.SupplierPart" />
+          <EntitySet Name="SupplierPieces" EntityType="Self.SupplierPiece" />
+          <AssociationSet Name="FK_supplier_employee" Association="Self.FK_supplier_employee">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Supplier" EntitySet="Suppliers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_supplier_piece_piece" Association="Self.FK_supplier_piece_piece">
+            <End Role="Piece" EntitySet="Pieces" />
+            <End Role="SupplierPiece" EntitySet="SupplierPieces" />
+          </AssociationSet>
+          <AssociationSet Name="FK_replaced_part_Service_Car" Association="Self.FK_replaced_part_Service_Car">
+            <End Role="ServiceCar" EntitySet="ServiceCars" />
+            <End Role="ReplacedPart" EntitySet="ReplacedParts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_replaced_part_service_part" Association="Self.FK_replaced_part_service_part">
+            <End Role="ServicePart" EntitySet="ServiceParts" />
+            <End Role="ReplacedPart" EntitySet="ReplacedParts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_replaced_part_supplier_part" Association="Self.FK_replaced_part_supplier_part">
+            <End Role="SupplierPart" EntitySet="SupplierParts" />
+            <End Role="ReplacedPart" EntitySet="ReplacedParts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_replaced_part_track_replaced_part" Association="Self.FK_replaced_part_track_replaced_part">
+            <End Role="ReplacedPart" EntitySet="ReplacedParts" />
+            <End Role="ReplacedPartTrack" EntitySet="ReplacedPartTracks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_replaced_piece_service_part" Association="Self.FK_replaced_piece_service_part">
+            <End Role="ServicePart" EntitySet="ServiceParts" />
+            <End Role="ReplacedPiece" EntitySet="ReplacedPieces" />
+          </AssociationSet>
+          <AssociationSet Name="FK_replaced_piece_supplier_piece" Association="Self.FK_replaced_piece_supplier_piece">
+            <End Role="SupplierPiece" EntitySet="SupplierPieces" />
+            <End Role="ReplacedPiece" EntitySet="ReplacedPieces" />
+          </AssociationSet>
+          <AssociationSet Name="FK_replaced_piece_track_replaced_piece" Association="Self.FK_replaced_piece_track_replaced_piece">
+            <End Role="ReplacedPiece" EntitySet="ReplacedPieces" />
+            <End Role="ReplacedPieceTrack" EntitySet="ReplacedPieceTracks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_service_car_miscellaneous_costs_Service_Car" Association="Self.FK_service_car_miscellaneous_costs_Service_Car">
+            <End Role="ServiceCar" EntitySet="ServiceCars" />
+            <End Role="ServiceCarMiscellaneousCosts" EntitySet="ServiceCarMiscellaneousCosts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_service_car_track_Service_Car" Association="Self.FK_service_car_track_Service_Car">
+            <End Role="ServiceCar" EntitySet="ServiceCars" />
+            <End Role="ServiceCarTrack" EntitySet="ServiceCarTracks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_service_part_miscellaneous_costs_service_part" Association="Self.FK_service_part_miscellaneous_costs_service_part">
+            <End Role="ServicePart" EntitySet="ServiceParts" />
+            <End Role="ServicePartMiscellaneousCosts" EntitySet="ServicePartMiscellaneousCosts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_service_part_track_service_part" Association="Self.FK_service_part_track_service_part">
+            <End Role="ServicePart" EntitySet="ServiceParts" />
+            <End Role="ServicePartTrack" EntitySet="ServicePartTracks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_supplier_part_supplier" Association="Self.FK_supplier_part_supplier">
+            <End Role="Supplier" EntitySet="Suppliers" />
+            <End Role="SupplierPart" EntitySet="SupplierParts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_supplier_piece_supplier" Association="Self.FK_supplier_piece_supplier">
+            <End Role="Supplier" EntitySet="Suppliers" />
+            <End Role="SupplierPiece" EntitySet="SupplierPieces" />
+          </AssociationSet>
+          <EntitySet Name="Parts" EntityType="db_cars_parts_reconstructionModel.Part" />
+          <AssociationSet Name="FK_service_part_part" Association="db_cars_parts_reconstructionModel.FK_service_part_part">
+            <End Role="Part" EntitySet="Parts" />
+            <End Role="ServicePart" EntitySet="ServiceParts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_supplier_part_part" Association="db_cars_parts_reconstructionModel.FK_supplier_part_part">
+            <End Role="Part" EntitySet="Parts" />
+            <End Role="SupplierPart" EntitySet="SupplierParts" />
+          </AssociationSet>
+          <EntitySet Name="Catalogs" EntityType="db_cars_parts_reconstructionModel.Catalog" />
+          <AssociationSet Name="FK_Catalog_Catalog" Association="db_cars_parts_reconstructionModel.FK_Catalog_Catalog">
+            <End Role="Catalog" EntitySet="Catalogs" />
+            <End Role="Catalog1" EntitySet="Catalogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_employee_position" Association="db_cars_parts_reconstructionModel.FK_employee_position">
+            <End Role="Catalog" EntitySet="Catalogs" />
+            <End Role="Employee" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_replaced_part_status_type" Association="db_cars_parts_reconstructionModel.FK_replaced_part_status_type">
+            <End Role="Catalog" EntitySet="Catalogs" />
+            <End Role="ReplacedPart" EntitySet="ReplacedParts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_replaced_part_track_status_type" Association="db_cars_parts_reconstructionModel.FK_replaced_part_track_status_type">
+            <End Role="Catalog" EntitySet="Catalogs" />
+            <End Role="ReplacedPartTrack" EntitySet="ReplacedPartTracks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_replaced_piece_status_type" Association="db_cars_parts_reconstructionModel.FK_replaced_piece_status_type">
+            <End Role="Catalog" EntitySet="Catalogs" />
+            <End Role="ReplacedPiece" EntitySet="ReplacedPieces" />
+          </AssociationSet>
+          <AssociationSet Name="FK_replaced_piece_track_status_type" Association="db_cars_parts_reconstructionModel.FK_replaced_piece_track_status_type">
+            <End Role="Catalog" EntitySet="Catalogs" />
+            <End Role="ReplacedPieceTrack" EntitySet="ReplacedPieceTracks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Service_Car_brand_type" Association="db_cars_parts_reconstructionModel.FK_Service_Car_brand_type">
+            <End Role="Catalog" EntitySet="Catalogs" />
+            <End Role="ServiceCar" EntitySet="ServiceCars" />
+          </AssociationSet>
+          <AssociationSet Name="FK_service_car_miscellaneous_costs_type" Association="db_cars_parts_reconstructionModel.FK_service_car_miscellaneous_costs_type">
+            <End Role="Catalog" EntitySet="Catalogs" />
+            <End Role="ServiceCarMiscellaneousCost" EntitySet="ServiceCarMiscellaneousCosts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Service_Car_model_type" Association="db_cars_parts_reconstructionModel.FK_Service_Car_model_type">
+            <End Role="Catalog" EntitySet="Catalogs" />
+            <End Role="ServiceCar" EntitySet="ServiceCars" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Service_Car_status_type" Association="db_cars_parts_reconstructionModel.FK_Service_Car_status_type">
+            <End Role="Catalog" EntitySet="Catalogs" />
+            <End Role="ServiceCar" EntitySet="ServiceCars" />
+          </AssociationSet>
+          <AssociationSet Name="FK_service_car_track_status_type" Association="db_cars_parts_reconstructionModel.FK_service_car_track_status_type">
+            <End Role="Catalog" EntitySet="Catalogs" />
+            <End Role="ServiceCarTrack" EntitySet="ServiceCarTracks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_service_miscellaneous_costs_type" Association="db_cars_parts_reconstructionModel.FK_service_miscellaneous_costs_type">
+            <End Role="Catalog" EntitySet="Catalogs" />
+            <End Role="ServiceMiscellaneousCost" EntitySet="ServiceMiscellaneousCosts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_service_part_miscellaneous_costs_type" Association="db_cars_parts_reconstructionModel.FK_service_part_miscellaneous_costs_type">
+            <End Role="Catalog" EntitySet="Catalogs" />
+            <End Role="ServicePartMiscellaneousCost" EntitySet="ServicePartMiscellaneousCosts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_service_part_status_type" Association="db_cars_parts_reconstructionModel.FK_service_part_status_type">
+            <End Role="Catalog" EntitySet="Catalogs" />
+            <End Role="ServicePart" EntitySet="ServiceParts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_service_part_track_status_type" Association="db_cars_parts_reconstructionModel.FK_service_part_track_status_type">
+            <End Role="Catalog" EntitySet="Catalogs" />
+            <End Role="ServicePartTrack" EntitySet="ServicePartTracks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_service_track_status_type" Association="db_cars_parts_reconstructionModel.FK_service_track_status_type">
+            <End Role="Catalog" EntitySet="Catalogs" />
+            <End Role="ServiceTrack" EntitySet="ServiceTracks" />
+          </AssociationSet>
+          <EntitySet Name="webpages_Membership" EntityType="db_cars_parts_reconstructionModel.webpages_Membership" />
+          <EntitySet Name="webpages_OAuthMembership" EntityType="db_cars_parts_reconstructionModel.webpages_OAuthMembership" />
+          <EntitySet Name="Services" EntityType="db_cars_parts_reconstructionModel.Service" />
+          <AssociationSet Name="FK_service_status_type" Association="db_cars_parts_reconstructionModel.FK_service_status_type">
+            <End Role="Catalog" EntitySet="Catalogs" />
+            <End Role="Service" EntitySet="Services" />
+          </AssociationSet>
+          <AssociationSet Name="FK_service_customer" Association="db_cars_parts_reconstructionModel.FK_service_customer">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Service" EntitySet="Services" />
+          </AssociationSet>
+          <AssociationSet Name="FK_service_employee" Association="db_cars_parts_reconstructionModel.FK_service_employee">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Service" EntitySet="Services" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Service_Car_service" Association="db_cars_parts_reconstructionModel.FK_Service_Car_service">
+            <End Role="Service" EntitySet="Services" />
+            <End Role="ServiceCar" EntitySet="ServiceCars" />
+          </AssociationSet>
+          <AssociationSet Name="FK_service_miscellaneous_costs_service" Association="db_cars_parts_reconstructionModel.FK_service_miscellaneous_costs_service">
+            <End Role="Service" EntitySet="Services" />
+            <End Role="ServiceMiscellaneousCost" EntitySet="ServiceMiscellaneousCosts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_service_part_service" Association="db_cars_parts_reconstructionModel.FK_service_part_service">
+            <End Role="Service" EntitySet="Services" />
+            <End Role="ServicePart" EntitySet="ServiceParts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_service_track_service" Association="db_cars_parts_reconstructionModel.FK_service_track_service">
+            <End Role="Service" EntitySet="Services" />
+            <End Role="ServiceTrack" EntitySet="ServiceTracks" />
+          </AssociationSet>
+          <EntitySet Name="UserProfiles" EntityType="db_cars_parts_reconstructionModel.UserProfile" />
+          <EntitySet Name="webpages_Roles" EntityType="db_cars_parts_reconstructionModel.webpages_Roles" />
+          <AssociationSet Name="webpages_UsersInRoles" Association="db_cars_parts_reconstructionModel.webpages_UsersInRoles">
+            <End Role="webpages_Roles" EntitySet="webpages_Roles" />
+            <End Role="UserProfile" EntitySet="UserProfiles" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="Part">
+          <Key>
+            <PropertyRef Name="partId" />
+          </Key>
+          <Property Name="partId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="partName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="partDescription" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="partPrice" Type="Decimal" Precision="8" Scale="2" />
+          <NavigationProperty Name="ServiceParts" Relationship="db_cars_parts_reconstructionModel.FK_service_part_part" FromRole="Part" ToRole="ServicePart" />
+          <NavigationProperty Name="SupplierParts" Relationship="db_cars_parts_reconstructionModel.FK_supplier_part_part" FromRole="Part" ToRole="SupplierPart" />
+        </EntityType>
+        <Association Name="FK_service_part_part">
+          <End Type="db_cars_parts_reconstructionModel.Part" Role="Part" Multiplicity="1" />
+          <End Type="db_cars_parts_reconstructionModel.ServicePart" Role="ServicePart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Part">
+              <PropertyRef Name="partId" />
+            </Principal>
+            <Dependent Role="ServicePart">
+              <PropertyRef Name="partId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_supplier_part_part">
+          <End Type="db_cars_parts_reconstructionModel.Part" Role="Part" Multiplicity="1" />
+          <End Type="db_cars_parts_reconstructionModel.SupplierPart" Role="SupplierPart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Part">
+              <PropertyRef Name="partId" />
+            </Principal>
+            <Dependent Role="SupplierPart">
+              <PropertyRef Name="partId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Catalog">
+          <Key>
+            <PropertyRef Name="catalogId" />
+          </Key>
+          <Property Name="catalogId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="catalogValue" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="catalogName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="parentCatalog" Type="Int32" />
+          <NavigationProperty Name="Catalog1" Relationship="db_cars_parts_reconstructionModel.FK_Catalog_Catalog" FromRole="Catalog" ToRole="Catalog1" />
+          <NavigationProperty Name="Catalog2" Relationship="db_cars_parts_reconstructionModel.FK_Catalog_Catalog" FromRole="Catalog1" ToRole="Catalog" />
+          <NavigationProperty Name="Employees" Relationship="db_cars_parts_reconstructionModel.FK_employee_position" FromRole="Catalog" ToRole="Employee" />
+          <NavigationProperty Name="ReplacedParts" Relationship="db_cars_parts_reconstructionModel.FK_replaced_part_status_type" FromRole="Catalog" ToRole="ReplacedPart" />
+          <NavigationProperty Name="ReplacedPartTracks" Relationship="db_cars_parts_reconstructionModel.FK_replaced_part_track_status_type" FromRole="Catalog" ToRole="ReplacedPartTrack" />
+          <NavigationProperty Name="ReplacedPieces" Relationship="db_cars_parts_reconstructionModel.FK_replaced_piece_status_type" FromRole="Catalog" ToRole="ReplacedPiece" />
+          <NavigationProperty Name="ReplacedPieceTracks" Relationship="db_cars_parts_reconstructionModel.FK_replaced_piece_track_status_type" FromRole="Catalog" ToRole="ReplacedPieceTrack" />
+          <NavigationProperty Name="ServiceCars" Relationship="db_cars_parts_reconstructionModel.FK_Service_Car_brand_type" FromRole="Catalog" ToRole="ServiceCar" />
+          <NavigationProperty Name="ServiceCarMiscellaneousCosts" Relationship="db_cars_parts_reconstructionModel.FK_service_car_miscellaneous_costs_type" FromRole="Catalog" ToRole="ServiceCarMiscellaneousCost" />
+          <NavigationProperty Name="ServiceCars1" Relationship="db_cars_parts_reconstructionModel.FK_Service_Car_model_type" FromRole="Catalog" ToRole="ServiceCar" />
+          <NavigationProperty Name="ServiceCars2" Relationship="db_cars_parts_reconstructionModel.FK_Service_Car_status_type" FromRole="Catalog" ToRole="ServiceCar" />
+          <NavigationProperty Name="ServiceCarTracks" Relationship="db_cars_parts_reconstructionModel.FK_service_car_track_status_type" FromRole="Catalog" ToRole="ServiceCarTrack" />
+          <NavigationProperty Name="ServiceMiscellaneousCosts" Relationship="db_cars_parts_reconstructionModel.FK_service_miscellaneous_costs_type" FromRole="Catalog" ToRole="ServiceMiscellaneousCost" />
+          <NavigationProperty Name="ServicePartMiscellaneousCosts" Relationship="db_cars_parts_reconstructionModel.FK_service_part_miscellaneous_costs_type" FromRole="Catalog" ToRole="ServicePartMiscellaneousCost" />
+          <NavigationProperty Name="ServiceParts" Relationship="db_cars_parts_reconstructionModel.FK_service_part_status_type" FromRole="Catalog" ToRole="ServicePart" />
+          <NavigationProperty Name="ServicePartTracks" Relationship="db_cars_parts_reconstructionModel.FK_service_part_track_status_type" FromRole="Catalog" ToRole="ServicePartTrack" />
+          <NavigationProperty Name="ServiceTracks" Relationship="db_cars_parts_reconstructionModel.FK_service_track_status_type" FromRole="Catalog" ToRole="ServiceTrack" />
+          <NavigationProperty Name="Services" Relationship="db_cars_parts_reconstructionModel.FK_service_status_type" FromRole="Catalog" ToRole="Service" />
+        </EntityType>
+        <Association Name="FK_Catalog_Catalog">
+          <End Type="db_cars_parts_reconstructionModel.Catalog" Role="Catalog" Multiplicity="0..1" />
+          <End Type="db_cars_parts_reconstructionModel.Catalog" Role="Catalog1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Catalog">
+              <PropertyRef Name="catalogId" />
+            </Principal>
+            <Dependent Role="Catalog1">
+              <PropertyRef Name="parentCatalog" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_employee_position">
+          <End Type="db_cars_parts_reconstructionModel.Catalog" Role="Catalog" Multiplicity="1" />
+          <End Type="db_cars_parts_reconstructionModel.Employee" Role="Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Catalog">
+              <PropertyRef Name="catalogId" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="positionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_replaced_part_status_type">
+          <End Type="db_cars_parts_reconstructionModel.Catalog" Role="Catalog" Multiplicity="1" />
+          <End Type="db_cars_parts_reconstructionModel.ReplacedPart" Role="ReplacedPart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Catalog">
+              <PropertyRef Name="catalogId" />
+            </Principal>
+            <Dependent Role="ReplacedPart">
+              <PropertyRef Name="statusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_replaced_part_track_status_type">
+          <End Type="db_cars_parts_reconstructionModel.Catalog" Role="Catalog" Multiplicity="1" />
+          <End Type="db_cars_parts_reconstructionModel.ReplacedPartTrack" Role="ReplacedPartTrack" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Catalog">
+              <PropertyRef Name="catalogId" />
+            </Principal>
+            <Dependent Role="ReplacedPartTrack">
+              <PropertyRef Name="statusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_replaced_piece_status_type">
+          <End Type="db_cars_parts_reconstructionModel.Catalog" Role="Catalog" Multiplicity="1" />
+          <End Type="db_cars_parts_reconstructionModel.ReplacedPiece" Role="ReplacedPiece" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Catalog">
+              <PropertyRef Name="catalogId" />
+            </Principal>
+            <Dependent Role="ReplacedPiece">
+              <PropertyRef Name="statusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_replaced_piece_track_status_type">
+          <End Type="db_cars_parts_reconstructionModel.Catalog" Role="Catalog" Multiplicity="1" />
+          <End Type="db_cars_parts_reconstructionModel.ReplacedPieceTrack" Role="ReplacedPieceTrack" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Catalog">
+              <PropertyRef Name="catalogId" />
+            </Principal>
+            <Dependent Role="ReplacedPieceTrack">
+              <PropertyRef Name="statusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Service_Car_brand_type">
+          <End Type="db_cars_parts_reconstructionModel.Catalog" Role="Catalog" Multiplicity="1" />
+          <End Type="db_cars_parts_reconstructionModel.ServiceCar" Role="ServiceCar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Catalog">
+              <PropertyRef Name="catalogId" />
+            </Principal>
+            <Dependent Role="ServiceCar">
+              <PropertyRef Name="carBrandId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_service_car_miscellaneous_costs_type">
+          <End Type="db_cars_parts_reconstructionModel.Catalog" Role="Catalog" Multiplicity="1" />
+          <End Type="db_cars_parts_reconstructionModel.ServiceCarMiscellaneousCost" Role="ServiceCarMiscellaneousCost" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Catalog">
+              <PropertyRef Name="catalogId" />
+            </Principal>
+            <Dependent Role="ServiceCarMiscellaneousCost">
+              <PropertyRef Name="costTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Service_Car_model_type">
+          <End Type="db_cars_parts_reconstructionModel.Catalog" Role="Catalog" Multiplicity="1" />
+          <End Type="db_cars_parts_reconstructionModel.ServiceCar" Role="ServiceCar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Catalog">
+              <PropertyRef Name="catalogId" />
+            </Principal>
+            <Dependent Role="ServiceCar">
+              <PropertyRef Name="carModelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Service_Car_status_type">
+          <End Type="db_cars_parts_reconstructionModel.Catalog" Role="Catalog" Multiplicity="1" />
+          <End Type="db_cars_parts_reconstructionModel.ServiceCar" Role="ServiceCar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Catalog">
+              <PropertyRef Name="catalogId" />
+            </Principal>
+            <Dependent Role="ServiceCar">
+              <PropertyRef Name="statusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_service_car_track_status_type">
+          <End Type="db_cars_parts_reconstructionModel.Catalog" Role="Catalog" Multiplicity="1" />
+          <End Type="db_cars_parts_reconstructionModel.ServiceCarTrack" Role="ServiceCarTrack" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Catalog">
+              <PropertyRef Name="catalogId" />
+            </Principal>
+            <Dependent Role="ServiceCarTrack">
+              <PropertyRef Name="statusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_service_miscellaneous_costs_type">
+          <End Type="db_cars_parts_reconstructionModel.Catalog" Role="Catalog" Multiplicity="1" />
+          <End Type="db_cars_parts_reconstructionModel.ServiceMiscellaneousCost" Role="ServiceMiscellaneousCost" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Catalog">
+              <PropertyRef Name="catalogId" />
+            </Principal>
+            <Dependent Role="ServiceMiscellaneousCost">
+              <PropertyRef Name="cost_type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_service_part_miscellaneous_costs_type">
+          <End Type="db_cars_parts_reconstructionModel.Catalog" Role="Catalog" Multiplicity="1" />
+          <End Type="db_cars_parts_reconstructionModel.ServicePartMiscellaneousCost" Role="ServicePartMiscellaneousCost" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Catalog">
+              <PropertyRef Name="catalogId" />
+            </Principal>
+            <Dependent Role="ServicePartMiscellaneousCost">
+              <PropertyRef Name="cost_type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_service_part_status_type">
+          <End Type="db_cars_parts_reconstructionModel.Catalog" Role="Catalog" Multiplicity="1" />
+          <End Type="db_cars_parts_reconstructionModel.ServicePart" Role="ServicePart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Catalog">
+              <PropertyRef Name="catalogId" />
+            </Principal>
+            <Dependent Role="ServicePart">
+              <PropertyRef Name="statusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_service_part_track_status_type">
+          <End Type="db_cars_parts_reconstructionModel.Catalog" Role="Catalog" Multiplicity="1" />
+          <End Type="db_cars_parts_reconstructionModel.ServicePartTrack" Role="ServicePartTrack" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Catalog">
+              <PropertyRef Name="catalogId" />
+            </Principal>
+            <Dependent Role="ServicePartTrack">
+              <PropertyRef Name="statusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_service_track_status_type">
+          <End Type="db_cars_parts_reconstructionModel.Catalog" Role="Catalog" Multiplicity="1" />
+          <End Type="db_cars_parts_reconstructionModel.ServiceTrack" Role="ServiceTrack" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Catalog">
+              <PropertyRef Name="catalogId" />
+            </Principal>
+            <Dependent Role="ServiceTrack">
+              <PropertyRef Name="statusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="webpages_Membership">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="ConfirmationToken" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="IsConfirmed" Type="Boolean" />
+          <Property Name="LastPasswordFailureDate" Type="DateTime" Precision="3" />
+          <Property Name="PasswordFailuresSinceLastSuccess" Type="Int32" Nullable="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="PasswordChangedDate" Type="DateTime" Precision="3" />
+          <Property Name="PasswordSalt" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="PasswordVerificationToken" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="PasswordVerificationTokenExpirationDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="webpages_OAuthMembership">
+          <Key>
+            <PropertyRef Name="Provider" />
+            <PropertyRef Name="ProviderUserId" />
+          </Key>
+          <Property Name="Provider" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="ProviderUserId" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Service">
+          <Key>
+            <PropertyRef Name="serviceId" />
+          </Key>
+          <Property Name="serviceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="customerId" Type="Int32" Nullable="false" />
+          <Property Name="serviceDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="employeeId" Type="Int32" />
+          <Property Name="estimatedPrice" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="realPrice" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="serviceDescription" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="statusId" Type="Int32" Nullable="false" />
+          <Property Name="statusObservations" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Catalog" Relationship="db_cars_parts_reconstructionModel.FK_service_status_type" FromRole="Service" ToRole="Catalog" />
+          <NavigationProperty Name="Customer" Relationship="db_cars_parts_reconstructionModel.FK_service_customer" FromRole="Service" ToRole="Customer" />
+          <NavigationProperty Name="Employee" Relationship="db_cars_parts_reconstructionModel.FK_service_employee" FromRole="Service" ToRole="Employee" />
+          <NavigationProperty Name="ServiceCars" Relationship="db_cars_parts_reconstructionModel.FK_Service_Car_service" FromRole="Service" ToRole="ServiceCar" />
+          <NavigationProperty Name="ServiceMiscellaneousCosts" Relationship="db_cars_parts_reconstructionModel.FK_service_miscellaneous_costs_service" FromRole="Service" ToRole="ServiceMiscellaneousCost" />
+          <NavigationProperty Name="ServiceParts" Relationship="db_cars_parts_reconstructionModel.FK_service_part_service" FromRole="Service" ToRole="ServicePart" />
+          <NavigationProperty Name="ServiceTracks" Relationship="db_cars_parts_reconstructionModel.FK_service_track_service" FromRole="Service" ToRole="ServiceTrack" />
+        </EntityType>
+        <Association Name="FK_service_status_type">
+          <End Type="db_cars_parts_reconstructionModel.Catalog" Role="Catalog" Multiplicity="1" />
+          <End Type="db_cars_parts_reconstructionModel.Service" Role="Service" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Catalog">
+              <PropertyRef Name="catalogId" />
+            </Principal>
+            <Dependent Role="Service">
+              <PropertyRef Name="statusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_service_customer">
+          <End Type="db_cars_parts_reconstructionModel.Customer" Role="Customer" Multiplicity="1" />
+          <End Type="db_cars_parts_reconstructionModel.Service" Role="Service" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="customerId" />
+            </Principal>
+            <Dependent Role="Service">
+              <PropertyRef Name="customerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_service_employee">
+          <End Type="db_cars_parts_reconstructionModel.Employee" Role="Employee" Multiplicity="0..1" />
+          <End Type="db_cars_parts_reconstructionModel.Service" Role="Service" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="employeeId" />
+            </Principal>
+            <Dependent Role="Service">
+              <PropertyRef Name="employeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Service_Car_service">
+          <End Type="db_cars_parts_reconstructionModel.Service" Role="Service" Multiplicity="1" />
+          <End Type="db_cars_parts_reconstructionModel.ServiceCar" Role="ServiceCar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="serviceId" />
+            </Principal>
+            <Dependent Role="ServiceCar">
+              <PropertyRef Name="serviceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_service_miscellaneous_costs_service">
+          <End Type="db_cars_parts_reconstructionModel.Service" Role="Service" Multiplicity="1" />
+          <End Type="db_cars_parts_reconstructionModel.ServiceMiscellaneousCost" Role="ServiceMiscellaneousCost" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="serviceId" />
+            </Principal>
+            <Dependent Role="ServiceMiscellaneousCost">
+              <PropertyRef Name="service_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_service_part_service">
+          <End Type="db_cars_parts_reconstructionModel.Service" Role="Service" Multiplicity="1" />
+          <End Type="db_cars_parts_reconstructionModel.ServicePart" Role="ServicePart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="serviceId" />
+            </Principal>
+            <Dependent Role="ServicePart">
+              <PropertyRef Name="serviceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_service_track_service">
+          <End Type="db_cars_parts_reconstructionModel.Service" Role="Service" Multiplicity="1" />
+          <End Type="db_cars_parts_reconstructionModel.ServiceTrack" Role="ServiceTrack" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="serviceId" />
+            </Principal>
+            <Dependent Role="ServiceTrack">
+              <PropertyRef Name="serviceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="UserProfile">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="webpages_Roles" Relationship="db_cars_parts_reconstructionModel.webpages_UsersInRoles" FromRole="UserProfile" ToRole="webpages_Roles" />
+        </EntityType>
+        <EntityType Name="webpages_Roles">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="UserProfiles" Relationship="db_cars_parts_reconstructionModel.webpages_UsersInRoles" FromRole="webpages_Roles" ToRole="UserProfile" />
+        </EntityType>
+        <Association Name="webpages_UsersInRoles">
+          <End Type="db_cars_parts_reconstructionModel.webpages_Roles" Role="webpages_Roles" Multiplicity="*" />
+          <End Type="db_cars_parts_reconstructionModel.UserProfile" Role="UserProfile" Multiplicity="*" />
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="db_cars_parts_reconstructionModelStoreContainer" CdmEntityContainer="db_cars_parts_reconstructionStrConn">
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="db_cars_parts_reconstructionModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="customerId" ColumnName="customerId" />
+                <ScalarProperty Name="customerName" ColumnName="customerName" />
+                <ScalarProperty Name="eMail" ColumnName="eMail" />
+                <ScalarProperty Name="userLogin" ColumnName="userLogin" />
+                <ScalarProperty Name="address" ColumnName="address" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="db_cars_parts_reconstructionModel.Employee">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="employeeId" ColumnName="employeeId" />
+                <ScalarProperty Name="employeeName" ColumnName="employeeName" />
+                <ScalarProperty Name="eMail" ColumnName="eMail" />
+                <ScalarProperty Name="positionId" ColumnName="positionId" />
+                <ScalarProperty Name="userLogin" ColumnName="userLogin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pieces">
+            <EntityTypeMapping TypeName="db_cars_parts_reconstructionModel.Piece">
+              <MappingFragment StoreEntitySet="Piece">
+                <ScalarProperty Name="pieceId" ColumnName="pieceId" />
+                <ScalarProperty Name="pieceName" ColumnName="pieceName" />
+                <ScalarProperty Name="pieceDescription" ColumnName="pieceDescription" />
+                <ScalarProperty Name="piecePrice" ColumnName="piecePrice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReplacedParts">
+            <EntityTypeMapping TypeName="db_cars_parts_reconstructionModel.ReplacedPart">
+              <MappingFragment StoreEntitySet="ReplacedPart">
+                <ScalarProperty Name="replacedPartId" ColumnName="replacedPartId" />
+                <ScalarProperty Name="serviceCarId" ColumnName="serviceCarId" />
+                <ScalarProperty Name="supplierPartId" ColumnName="supplierPartId" />
+                <ScalarProperty Name="servicePartId" ColumnName="servicePartId" />
+                <ScalarProperty Name="replacedPartPrice" ColumnName="replacedPartPrice" />
+                <ScalarProperty Name="statusId" ColumnName="statusId" />
+                <ScalarProperty Name="observations" ColumnName="observations" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReplacedPartTracks">
+            <EntityTypeMapping TypeName="db_cars_parts_reconstructionModel.ReplacedPartTrack">
+              <MappingFragment StoreEntitySet="ReplacedPartTrack">
+                <ScalarProperty Name="replacedPartTrackId" ColumnName="replacedPartTrackId" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="replacedPartId" ColumnName="replacedPartId" />
+                <ScalarProperty Name="statusId" ColumnName="statusId" />
+                <ScalarProperty Name="observations" ColumnName="observations" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReplacedPieces">
+            <EntityTypeMapping TypeName="db_cars_parts_reconstructionModel.ReplacedPiece">
+              <MappingFragment StoreEntitySet="ReplacedPiece">
+                <ScalarProperty Name="replacedPieceId" ColumnName="replacedPieceId" />
+                <ScalarProperty Name="servicePartId" ColumnName="servicePartId" />
+                <ScalarProperty Name="supplierPieceId" ColumnName="supplierPieceId" />
+                <ScalarProperty Name="replacedPiecePrice" ColumnName="replacedPiecePrice" />
+                <ScalarProperty Name="statusId" ColumnName="statusId" />
+                <ScalarProperty Name="observations" ColumnName="observations" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReplacedPieceTracks">
+            <EntityTypeMapping TypeName="db_cars_parts_reconstructionModel.ReplacedPieceTrack">
+              <MappingFragment StoreEntitySet="ReplacedPieceTrack">
+                <ScalarProperty Name="replacedPieceTrackId" ColumnName="replacedPieceTrackId" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="replacedPieceId" ColumnName="replacedPieceId" />
+                <ScalarProperty Name="statusId" ColumnName="statusId" />
+                <ScalarProperty Name="observations" ColumnName="observations" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ServiceCars">
+            <EntityTypeMapping TypeName="db_cars_parts_reconstructionModel.ServiceCar">
+              <MappingFragment StoreEntitySet="ServiceCar">
+                <ScalarProperty Name="serviceCarId" ColumnName="serviceCarId" />
+                <ScalarProperty Name="serviceId" ColumnName="serviceId" />
+                <ScalarProperty Name="carBrandId" ColumnName="carBrandId" />
+                <ScalarProperty Name="carModelId" ColumnName="carModelId" />
+                <ScalarProperty Name="estimatedPrice" ColumnName="estimatedPrice" />
+                <ScalarProperty Name="realPrice" ColumnName="realPrice" />
+                <ScalarProperty Name="serviceCarDescription" ColumnName="serviceCarDescription" />
+                <ScalarProperty Name="statusId" ColumnName="statusId" />
+                <ScalarProperty Name="observations" ColumnName="observations" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ServiceCarMiscellaneousCosts">
+            <EntityTypeMapping TypeName="db_cars_parts_reconstructionModel.ServiceCarMiscellaneousCost">
+              <MappingFragment StoreEntitySet="ServiceCarMiscellaneousCosts">
+                <ScalarProperty Name="serviceCarMiscellaneousCostsId" ColumnName="serviceCarMiscellaneousCostsId" />
+                <ScalarProperty Name="serviceCarId" ColumnName="serviceCarId" />
+                <ScalarProperty Name="cost" ColumnName="cost" />
+                <ScalarProperty Name="costTypeId" ColumnName="costTypeId" />
+                <ScalarProperty Name="description" ColumnName="description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ServiceCarTracks">
+            <EntityTypeMapping TypeName="db_cars_parts_reconstructionModel.ServiceCarTrack">
+              <MappingFragment StoreEntitySet="ServiceCarTrack">
+                <ScalarProperty Name="serviceCarTrackId" ColumnName="serviceCarTrackId" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="serviceCarId" ColumnName="serviceCarId" />
+                <ScalarProperty Name="statusId" ColumnName="statusId" />
+                <ScalarProperty Name="observations" ColumnName="observations" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ServiceMiscellaneousCosts">
+            <EntityTypeMapping TypeName="db_cars_parts_reconstructionModel.ServiceMiscellaneousCost">
+              <MappingFragment StoreEntitySet="ServiceMiscellaneousCosts">
+                <ScalarProperty Name="service_miscellaneous_costs_id" ColumnName="service_miscellaneous_costs_id" />
+                <ScalarProperty Name="service_id" ColumnName="service_id" />
+                <ScalarProperty Name="cost" ColumnName="cost" />
+                <ScalarProperty Name="cost_type_id" ColumnName="cost_type_id" />
+                <ScalarProperty Name="description" ColumnName="description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ServiceParts">
+            <EntityTypeMapping TypeName="db_cars_parts_reconstructionModel.ServicePart">
+              <MappingFragment StoreEntitySet="ServicePart">
+                <ScalarProperty Name="servicePartId" ColumnName="servicePartId" />
+                <ScalarProperty Name="serviceId" ColumnName="serviceId" />
+                <ScalarProperty Name="partId" ColumnName="partId" />
+                <ScalarProperty Name="estimatedPrice" ColumnName="estimatedPrice" />
+                <ScalarProperty Name="realPrice" ColumnName="realPrice" />
+                <ScalarProperty Name="servicePartDescription" ColumnName="servicePartDescription" />
+                <ScalarProperty Name="statusId" ColumnName="statusId" />
+                <ScalarProperty Name="observations" ColumnName="observations" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ServicePartMiscellaneousCosts">
+            <EntityTypeMapping TypeName="db_cars_parts_reconstructionModel.ServicePartMiscellaneousCost">
+              <MappingFragment StoreEntitySet="ServicePartMiscellaneousCosts">
+                <ScalarProperty Name="service_part_miscellaneous_costs_id" ColumnName="service_part_miscellaneous_costs_id" />
+                <ScalarProperty Name="service_part_id" ColumnName="service_part_id" />
+                <ScalarProperty Name="cost" ColumnName="cost" />
+                <ScalarProperty Name="cost_type_id" ColumnName="cost_type_id" />
+                <ScalarProperty Name="description" ColumnName="description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ServicePartTracks">
+            <EntityTypeMapping TypeName="db_cars_parts_reconstructionModel.ServicePartTrack">
+              <MappingFragment StoreEntitySet="ServicePartTrack">
+                <ScalarProperty Name="servicePartTrackId" ColumnName="servicePartTrackId" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="servicePartId" ColumnName="servicePartId" />
+                <ScalarProperty Name="statusId" ColumnName="statusId" />
+                <ScalarProperty Name="observations" ColumnName="observations" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ServiceTracks">
+            <EntityTypeMapping TypeName="db_cars_parts_reconstructionModel.ServiceTrack">
+              <MappingFragment StoreEntitySet="ServiceTrack">
+                <ScalarProperty Name="serviceTrackId" ColumnName="serviceTrackId" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="serviceId" ColumnName="serviceId" />
+                <ScalarProperty Name="statusId" ColumnName="statusId" />
+                <ScalarProperty Name="observations" ColumnName="observations" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Suppliers">
+            <EntityTypeMapping TypeName="db_cars_parts_reconstructionModel.Supplier">
+              <MappingFragment StoreEntitySet="Supplier">
+                <ScalarProperty Name="supplierId" ColumnName="supplierId" />
+                <ScalarProperty Name="supplierName" ColumnName="supplierName" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="supplierEmail" ColumnName="supplierEmail" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="idRepresentative" ColumnName="idRepresentative" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SupplierParts">
+            <EntityTypeMapping TypeName="db_cars_parts_reconstructionModel.SupplierPart">
+              <MappingFragment StoreEntitySet="SupplierPart">
+                <ScalarProperty Name="supplierPartId" ColumnName="supplierPartId" />
+                <ScalarProperty Name="supplierId" ColumnName="supplierId" />
+                <ScalarProperty Name="partId" ColumnName="partId" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="existence" ColumnName="existence" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SupplierPieces">
+            <EntityTypeMapping TypeName="db_cars_parts_reconstructionModel.SupplierPiece">
+              <MappingFragment StoreEntitySet="SupplierPiece">
+                <ScalarProperty Name="supplierPieceId" ColumnName="supplierPieceId" />
+                <ScalarProperty Name="supplierId" ColumnName="supplierId" />
+                <ScalarProperty Name="pieceId" ColumnName="pieceId" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="existence" ColumnName="existence" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Parts">
+            <EntityTypeMapping TypeName="db_cars_parts_reconstructionModel.Part">
+              <MappingFragment StoreEntitySet="Part">
+                <ScalarProperty Name="partPrice" ColumnName="partPrice" />
+                <ScalarProperty Name="partDescription" ColumnName="partDescription" />
+                <ScalarProperty Name="partName" ColumnName="partName" />
+                <ScalarProperty Name="partId" ColumnName="partId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Catalogs">
+            <EntityTypeMapping TypeName="db_cars_parts_reconstructionModel.Catalog">
+              <MappingFragment StoreEntitySet="Catalog">
+                <ScalarProperty Name="parentCatalog" ColumnName="parentCatalog" />
+                <ScalarProperty Name="catalogName" ColumnName="catalogName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="catalogValue" ColumnName="catalogValue" />
+                <ScalarProperty Name="catalogId" ColumnName="catalogId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="webpages_Membership">
+            <EntityTypeMapping TypeName="db_cars_parts_reconstructionModel.webpages_Membership">
+              <MappingFragment StoreEntitySet="webpages_Membership">
+                <ScalarProperty Name="PasswordVerificationTokenExpirationDate" ColumnName="PasswordVerificationTokenExpirationDate" />
+                <ScalarProperty Name="PasswordVerificationToken" ColumnName="PasswordVerificationToken" />
+                <ScalarProperty Name="PasswordSalt" ColumnName="PasswordSalt" />
+                <ScalarProperty Name="PasswordChangedDate" ColumnName="PasswordChangedDate" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="PasswordFailuresSinceLastSuccess" ColumnName="PasswordFailuresSinceLastSuccess" />
+                <ScalarProperty Name="LastPasswordFailureDate" ColumnName="LastPasswordFailureDate" />
+                <ScalarProperty Name="IsConfirmed" ColumnName="IsConfirmed" />
+                <ScalarProperty Name="ConfirmationToken" ColumnName="ConfirmationToken" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="webpages_OAuthMembership">
+            <EntityTypeMapping TypeName="db_cars_parts_reconstructionModel.webpages_OAuthMembership">
+              <MappingFragment StoreEntitySet="webpages_OAuthMembership">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ProviderUserId" ColumnName="ProviderUserId" />
+                <ScalarProperty Name="Provider" ColumnName="Provider" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Services">
+            <EntityTypeMapping TypeName="db_cars_parts_reconstructionModel.Service">
+              <MappingFragment StoreEntitySet="Service">
+                <ScalarProperty Name="statusObservations" ColumnName="statusObservations" />
+                <ScalarProperty Name="statusId" ColumnName="statusId" />
+                <ScalarProperty Name="serviceDescription" ColumnName="serviceDescription" />
+                <ScalarProperty Name="realPrice" ColumnName="realPrice" />
+                <ScalarProperty Name="estimatedPrice" ColumnName="estimatedPrice" />
+                <ScalarProperty Name="employeeId" ColumnName="employeeId" />
+                <ScalarProperty Name="serviceDate" ColumnName="serviceDate" />
+                <ScalarProperty Name="customerId" ColumnName="customerId" />
+                <ScalarProperty Name="serviceId" ColumnName="serviceId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserProfiles">
+            <EntityTypeMapping TypeName="db_cars_parts_reconstructionModel.UserProfile">
+              <MappingFragment StoreEntitySet="UserProfile">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="webpages_Roles">
+            <EntityTypeMapping TypeName="db_cars_parts_reconstructionModel.webpages_Roles">
+              <MappingFragment StoreEntitySet="webpages_Roles">
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="webpages_UsersInRoles" TypeName="db_cars_parts_reconstructionModel.webpages_UsersInRoles" StoreEntitySet="webpages_UsersInRoles">
+            <EndProperty Name="UserProfile">
+              <ScalarProperty Name="UserId" ColumnName="UserId" />
+            </EndProperty>
+            <EndProperty Name="webpages_Roles">
+              <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

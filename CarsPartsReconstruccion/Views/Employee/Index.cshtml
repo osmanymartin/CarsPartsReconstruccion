@@ -1,0 +1,65 @@
+﻿@model IEnumerable<CarsPartsReconstruccion.Models.Employee>
+
+@{
+    ViewBag.Title = "Employee List";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+@if (string.IsNullOrEmpty(ViewBag.NoElementsAdvise))
+{
+    <table class="ItemsListTable">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.employeeName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.eMail)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.positionId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.userLogin)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.employeeName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.eMail)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Catalog.catalogValue)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.userLogin)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.employeeId }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.employeeId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.employeeId })
+                </td>
+            </tr>
+        }
+
+    </table>
+
+    <p>
+        @Html.ActionLink("Back to Catalogs", "Catalogs", "Home")
+    </p>
+
+}
+else
+{
+    <h2>@ViewBag.NoElementsAdvise</h2>
+}

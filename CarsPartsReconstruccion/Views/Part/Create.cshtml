@@ -1,0 +1,53 @@
+﻿@model CarsPartsReconstruccion.Models.Part
+
+@{
+    ViewBag.Title = "Create a Part";
+}
+
+<h2>@ViewBag.Title</h2>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+
+        <fieldset>
+            <legend>Part</legend>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.partName)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.partName)
+                @Html.ValidationMessageFor(model => model.partName)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.partDescription)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.partDescription)
+                @Html.ValidationMessageFor(model => model.partDescription)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.partPrice)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.partPrice)
+                @Html.ValidationMessageFor(model => model.partPrice)
+            </div>
+
+            <p>
+                <input type="submit" value="Create" />
+            </p>
+        </fieldset>
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }

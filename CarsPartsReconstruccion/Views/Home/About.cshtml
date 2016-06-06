@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "About";
+}
+
+<hgroup class="title">
+    <h1>@ViewBag.Title.</h1>
+    <h2>@ViewBag.Message</h2>
+</hgroup>
+
+<article>
+    <p>
+        <img src="~/Images/classic_car_havana1.jpg" />
+        We leave it as new.
+    </p>
+
+</article>
+
+<aside>
+    <h3>QUICK ACCESS</h3>
+    <p>
+        Quick access to the most important.
+    </p>
+    <ul>
+        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+        <li>@Html.ActionLink("Reconstructions", "Index", "Reconstruction")</li>
+        <li>@Html.ActionLink("Catalogs", "Catalogs", "Home")</li>
+        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+    </ul>
+</aside>

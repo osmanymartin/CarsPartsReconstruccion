@@ -1,0 +1,76 @@
+﻿@model CarsPartsReconstruccion.Models.Service
+
+@{
+    ViewBag.Title = "Delete a Reconstruction";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>Service</legend>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.customerId)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Customer.customerName)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.serviceDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.serviceDate)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.employeeId)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Employee.employeeName)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.estimatedPrice)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.estimatedPrice)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.realPrice)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.realPrice)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.serviceDescription)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.serviceDescription)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.statusId)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Catalog.catalogValue)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.statusObservations)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.statusObservations)
+    </div>
+</fieldset>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

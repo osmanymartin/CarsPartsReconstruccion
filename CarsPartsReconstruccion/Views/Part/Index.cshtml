@@ -1,0 +1,50 @@
+﻿@model IEnumerable<CarsPartsReconstruccion.Models.Part>
+
+@{
+    ViewBag.Title = "Parts List";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="ItemsListTable">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.partName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.partDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.partPrice)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.partName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.partDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.partPrice)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.partId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.partId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.partId })
+            </td>
+        </tr>
+    }
+
+</table>
+
+<p>
+    @Html.ActionLink("Back to Catalogs", "Catalogs", "Home")
+</p>

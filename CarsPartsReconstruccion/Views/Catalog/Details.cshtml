@@ -1,0 +1,44 @@
+﻿@model CarsPartsReconstruccion.Models.Catalog
+
+@{
+    ViewBag.Title = "Catalog Details";
+}
+
+<h2>@ViewBag.Title</h2>
+<p></p>
+
+<fieldset class="fieldsetTable">
+    <legend>Catalog</legend>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.catalogName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.catalogName)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.catalogValue)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.catalogValue)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Description)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Description)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.parentCatalog)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Catalog2.catalogValue)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.catalogId }) |
+    @Html.ActionLink("Back to List", "Index", new { catalogName = Model.catalogName })
+</p>

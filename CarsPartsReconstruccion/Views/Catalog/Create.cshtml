@@ -1,0 +1,61 @@
+﻿@model CarsPartsReconstruccion.Models.Catalog
+
+@{
+    ViewBag.Title = "Create a Catalog";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Catalog</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.catalogName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.catalogName)
+            @Html.ValidationMessageFor(model => model.catalogName)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.catalogValue)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.catalogValue)
+            @Html.ValidationMessageFor(model => model.catalogValue)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Description)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Description)
+            @Html.ValidationMessageFor(model => model.Description)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.parentCatalog)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("parentCatalog", String.Empty)
+            @Html.ValidationMessageFor(model => model.parentCatalog)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index", new { catalogName = Model.catalogName })
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

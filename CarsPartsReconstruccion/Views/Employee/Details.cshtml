@@ -1,0 +1,44 @@
+﻿@model CarsPartsReconstruccion.Models.Employee
+
+@{
+    ViewBag.Title = "Employee Details";
+}
+
+<h2>@ViewBag.Title</h2>
+<p></p>
+
+<fieldset class="fieldsetTable">
+    <legend>Employee</legend>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.employeeName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.employeeName)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.eMail)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.eMail)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.positionId)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Catalog.catalogValue)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.userLogin)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.userLogin)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.employeeId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

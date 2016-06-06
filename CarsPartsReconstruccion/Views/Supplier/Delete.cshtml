@@ -1,0 +1,56 @@
+﻿@model CarsPartsReconstruccion.Models.Supplier
+
+@{
+    ViewBag.Title = "Delete a Supplier";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<p></p>
+
+<fieldset class="fieldsetTable">
+    <legend>Supplier</legend>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.supplierName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.supplierName)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.description)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.description)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.supplierEmail)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.supplierEmail)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.address)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.address)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Employee.employeeName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Employee.employeeName)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

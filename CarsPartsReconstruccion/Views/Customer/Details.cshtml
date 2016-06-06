@@ -1,0 +1,44 @@
+﻿@model CarsPartsReconstruccion.Models.Customer
+
+@{
+    ViewBag.Title = "Customer Details";
+}
+
+<h2>@ViewBag.Title</h2>
+<p></p>
+
+<fieldset class="fieldsetTable">
+    <legend>Customer</legend>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.customerName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.customerName)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.eMail)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.eMail)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.userLogin)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.userLogin)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.address)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.address)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.customerId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

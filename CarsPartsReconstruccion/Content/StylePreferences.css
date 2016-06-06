@@ -1,0 +1,111 @@
+﻿th {
+    color: #04126e;
+    background-color: #b7d0e9;
+    text-align: center;
+    /*border: #4e95f4 2px solid;*/
+}
+
+h2 {
+    color: #0856a4;
+}
+
+h3 {
+    color: #04126e;
+}
+
+.display-label {
+    color: #04126e;
+    background-color: #b7d0e9;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.ItemsListTable {
+    width: 100%;
+    border: 3px solid rgb(75,75,75);
+    box-shadow: 0 0 15px 5px rgba(40,80,100,.75);
+    padding: 8px 8px 8px 8px;
+    /*max-width: 50%;*/
+}
+
+.fieldsetTable {
+    width: 100%;
+    border: 3px solid rgb(75,75,75);
+    box-shadow: 0 0 15px 5px rgba(40,80,100,.75);
+    padding: 8px 8px 8px 8px;
+    max-width: 50%;
+}
+
+.ItemsListTable td {
+    padding: 7px;
+}
+
+/* define the vertical borders */
+.ItemsListTable td {
+    border-left: 2px solid #b7d0e9;
+}
+
+/*  Define the background color for all the ODD background rows  */
+.ItemsListTable tr:nth-child(odd) {
+    background: #dae5f4;
+}
+
+ul#menu li a {
+    color: #04126e;
+}
+
+#image1 {
+    width: 134px;
+    height: 136px;
+    margin: 5px;
+    float: left;
+}
+
+#image2 {
+    width: 65px;
+    height: 50px;
+    margin: -5px;
+    float: right;
+}
+
+#frontImage {
+    float: left;
+}
+
+#backImage {
+    float: left;
+}
+
+p.site-title {
+    float: right;
+    vertical-align: middle;
+    margin-left: 20px;
+}
+
+    p.site-title a {
+        color: #0856a4;
+    }
+
+ul.borderMenu {
+    list-style-type: none;
+    padding-left: 0;
+    margin-left: 0;
+}
+
+.borderMenu li {
+    background: #ffffff;
+    display: block;
+    max-width: 100px;
+    padding: 0 0 0 0;
+}
+
+.borderMenu a {
+    background-color: #eaeaea;
+    color: #0856a4;
+    display: block;
+    border-bottom: none;
+    padding: 5px 15px 5px 15px;
+    text-decoration: none;
+    box-shadow: 0 0 15px 5px rgba(40,80,100,.75);
+    font-size: medium;
+}

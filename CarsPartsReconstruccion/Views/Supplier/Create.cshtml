@@ -1,0 +1,68 @@
+﻿@model CarsPartsReconstruccion.Models.Supplier
+
+@{
+    ViewBag.Title = "Create a Supplier";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Supplier</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.supplierName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.supplierName)
+            @Html.ValidationMessageFor(model => model.supplierName)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.description)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.description)
+            @Html.ValidationMessageFor(model => model.description)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.supplierEmail)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.supplierEmail)
+            @Html.ValidationMessageFor(model => model.supplierEmail)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.address)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.address)
+            @Html.ValidationMessageFor(model => model.address)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.idRepresentative, "Employee")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("idRepresentative", String.Empty)
+            @Html.ValidationMessageFor(model => model.idRepresentative)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

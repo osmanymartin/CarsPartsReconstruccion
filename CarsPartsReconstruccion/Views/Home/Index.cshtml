@@ -1,0 +1,55 @@
+﻿@{
+    ViewBag.Title = "Cars & Parts Reconstruction";
+}
+
+<aside>
+    <h3>QUICK ACCESS</h3>
+    <div>
+        <ul class="borderMenu">
+            <li>@Html.ActionLink("Catalogs", "Index", "Catalog")</li>
+            <li>@Html.ActionLink("Pieces", "Index", "Piece")</li>
+            <li>@Html.ActionLink("Parts", "Index", "Part")</li>
+            <li>@Html.ActionLink("Suppliers", "Index", "Supplier")</li>
+            <li>@Html.ActionLink("Customers", "Index", "Customer")</li>
+            <li>@Html.ActionLink("Employees", "Index", "Employee")</li>
+        </ul>
+    </div>
+</aside>
+
+@section featured {
+    <section class="featured">
+        <div class="content-wrapper">
+            <hgroup class="title">
+                <h1>@ViewBag.Title.</h1>
+                <h2>@ViewBag.Message</h2>
+            </hgroup>
+        </div>
+    </section>
+}
+<div>
+    <img id="image1" src="~/Images/wizard.jpg" />
+
+    <div id="imageWrapper">
+        <img id="frontImage" src="~/Images/old_car_crash1.jpg" /><img id="backImage" src="~/Images/classic_car_havana1.jpg" />
+    </div>
+    &laquo; Point us to see the magic.
+</div>
+<h3>We suggest the following:</h3>
+<ol class="round">
+    <li class="one">
+        <h5>@Html.ActionLink("Make your request", "Index", "Service")</h5>
+        Contact us to ask for a Reconstruction of your Car or Part
+    </li>
+
+    <li class="two">
+        <h5>Follow the process</h5>
+        Follow step by step reconstruction of your Car or Part
+    </li>
+
+    <li class="three">
+        <h5>Your dream come true</h5>
+        Receive your car better than new
+    </li>
+</ol>
+
+
