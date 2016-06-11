@@ -1,7 +1,7 @@
 ﻿@model CarsPartsReconstruccion.Models.Catalog
 
 @{
-    ViewBag.Title = "Catalog Details";
+    ViewBag.Title = @Model.catalogName + " Details";
 }
 
 <h2>@ViewBag.Title</h2>
@@ -38,6 +38,28 @@
         @Html.DisplayFor(model => model.Catalog2.catalogValue)
     </div>
 </fieldset>
+
+@if (Model.Catalog1.Count() > 0)
+{
+    <table class="ItemsListTable" style="max-width: 50%">
+        <tr>
+            <th>
+                @ViewBag.ChildCatalogType
+            </th>
+        </tr>
+
+        @foreach (var item in Model.Catalog1)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.catalogValue)
+                </td>
+            </tr>
+        }
+
+    </table>
+}
+
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.catalogId }) |
     @Html.ActionLink("Back to List", "Index", new { catalogName = Model.catalogName })

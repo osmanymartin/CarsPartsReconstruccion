@@ -49,6 +49,11 @@ namespace CarsPartsReconstruccion.Controllers
         public ActionResult Details(int id = 0)
         {
             Catalog catalog = db.Catalogs.Find(id);
+            if (catalog.Catalog1.Count > 0)
+            {
+                ViewBag.ChildCatalogType = catalog.Catalog1.ToList()[0].catalogName;
+            }
+            //catalog.Catalog1 = db.Catalogs.Where(cat => cat.parentCatalog == id).ToList();
             if (catalog == null)
             {
                 return HttpNotFound();
