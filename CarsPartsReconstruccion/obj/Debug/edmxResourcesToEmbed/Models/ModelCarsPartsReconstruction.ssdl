@@ -54,7 +54,8 @@
     </Key>
     <Property Name="replacedPartId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="serviceCarId" Type="int" Nullable="false" />
-    <Property Name="supplierPartId" Type="int" />
+    <Property Name="supplierId" Type="int" />
+    <Property Name="partId" Type="int" />
     <Property Name="servicePartId" Type="int" />
     <Property Name="replacedPartPrice" Type="numeric" Precision="8" Scale="2" Nullable="false" />
     <Property Name="statusId" Type="int" Nullable="false" />
@@ -205,9 +206,9 @@
   </EntityType>
   <EntityType Name="SupplierPart">
     <Key>
-      <PropertyRef Name="supplierPartId" />
+      <PropertyRef Name="supplierId" />
+      <PropertyRef Name="partId" />
     </Key>
-    <Property Name="supplierPartId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="supplierId" Type="int" Nullable="false" />
     <Property Name="partId" Type="int" Nullable="false" />
     <Property Name="price" Type="numeric" Precision="8" Scale="2" Nullable="false" />
@@ -330,18 +331,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_replaced_part_supplier_part">
-    <End Role="SupplierPart" Type="Self.SupplierPart" Multiplicity="0..1" />
-    <End Role="ReplacedPart" Type="Self.ReplacedPart" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="SupplierPart">
-        <PropertyRef Name="supplierPartId" />
-      </Principal>
-      <Dependent Role="ReplacedPart">
-        <PropertyRef Name="supplierPartId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_replaced_part_track_replaced_part">
     <End Role="ReplacedPart" Type="Self.ReplacedPart" Multiplicity="1" />
     <End Role="ReplacedPartTrack" Type="Self.ReplacedPartTrack" Multiplicity="*" />
@@ -423,6 +412,20 @@
       </Principal>
       <Dependent Role="ReplacedPieceTrack">
         <PropertyRef Name="statusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ReplacedPart_SupplierPart">
+    <End Role="SupplierPart" Type="Self.SupplierPart" Multiplicity="0..1" />
+    <End Role="ReplacedPart" Type="Self.ReplacedPart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SupplierPart">
+        <PropertyRef Name="supplierId" />
+        <PropertyRef Name="partId" />
+      </Principal>
+      <Dependent Role="ReplacedPart">
+        <PropertyRef Name="supplierId" />
+        <PropertyRef Name="partId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -821,10 +824,6 @@
       <End Role="Catalog" EntitySet="Catalog" />
       <End Role="ReplacedPart" EntitySet="ReplacedPart" />
     </AssociationSet>
-    <AssociationSet Name="FK_replaced_part_supplier_part" Association="Self.FK_replaced_part_supplier_part">
-      <End Role="SupplierPart" EntitySet="SupplierPart" />
-      <End Role="ReplacedPart" EntitySet="ReplacedPart" />
-    </AssociationSet>
     <AssociationSet Name="FK_replaced_part_track_replaced_part" Association="Self.FK_replaced_part_track_replaced_part">
       <End Role="ReplacedPart" EntitySet="ReplacedPart" />
       <End Role="ReplacedPartTrack" EntitySet="ReplacedPartTrack" />
@@ -852,6 +851,10 @@
     <AssociationSet Name="FK_replaced_piece_track_status_type" Association="Self.FK_replaced_piece_track_status_type">
       <End Role="Catalog" EntitySet="Catalog" />
       <End Role="ReplacedPieceTrack" EntitySet="ReplacedPieceTrack" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ReplacedPart_SupplierPart" Association="Self.FK_ReplacedPart_SupplierPart">
+      <End Role="SupplierPart" EntitySet="SupplierPart" />
+      <End Role="ReplacedPart" EntitySet="ReplacedPart" />
     </AssociationSet>
     <AssociationSet Name="fk_RoleId" Association="Self.fk_RoleId">
       <End Role="webpages_Roles" EntitySet="webpages_Roles" />

@@ -16,9 +16,9 @@ namespace CarsPartsReconstruccion.Models
     {
         public ServiceCar()
         {
-            this.ReplacedParts = new HashSet<ReplacedPart>();
             this.ServiceCarMiscellaneousCosts = new HashSet<ServiceCarMiscellaneousCost>();
             this.ServiceCarTracks = new HashSet<ServiceCarTrack>();
+            this.ReplacedParts = new HashSet<ReplacedPart>();
         }
     
         public int serviceCarId { get; set; }
@@ -31,12 +31,12 @@ namespace CarsPartsReconstruccion.Models
         public int statusId { get; set; }
         public string observations { get; set; }
     
-        public virtual ICollection<ReplacedPart> ReplacedParts { get; set; }
         public virtual ICollection<ServiceCarMiscellaneousCost> ServiceCarMiscellaneousCosts { get; set; }
         public virtual ICollection<ServiceCarTrack> ServiceCarTracks { get; set; }
         public virtual Catalog Catalog { get; set; }
         public virtual Catalog Catalog1 { get; set; }
         public virtual Catalog Catalog2 { get; set; }
         public virtual Service Service { get; set; }
+        public virtual ICollection<ReplacedPart> ReplacedParts { get; set; }
     }
 }

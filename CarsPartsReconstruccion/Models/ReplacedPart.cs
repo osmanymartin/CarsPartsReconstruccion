@@ -21,16 +21,17 @@ namespace CarsPartsReconstruccion.Models
     
         public int replacedPartId { get; set; }
         public int serviceCarId { get; set; }
-        public Nullable<int> supplierPartId { get; set; }
+        public Nullable<int> supplierId { get; set; }
+        public Nullable<int> partId { get; set; }
         public Nullable<int> servicePartId { get; set; }
         public decimal replacedPartPrice { get; set; }
         public int statusId { get; set; }
         public string observations { get; set; }
     
+        public virtual Catalog Catalog { get; set; }
         public virtual ServiceCar ServiceCar { get; set; }
         public virtual ServicePart ServicePart { get; set; }
-        public virtual SupplierPart SupplierPart { get; set; }
         public virtual ICollection<ReplacedPartTrack> ReplacedPartTracks { get; set; }
-        public virtual Catalog Catalog { get; set; }
+        public virtual SupplierPart SupplierPart { get; set; }
     }
 }

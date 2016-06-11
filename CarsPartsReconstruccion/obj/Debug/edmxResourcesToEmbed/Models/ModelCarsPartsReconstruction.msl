@@ -33,19 +33,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="ReplacedParts">
-      <EntityTypeMapping TypeName="db_cars_parts_reconstructionModel.ReplacedPart">
-        <MappingFragment StoreEntitySet="ReplacedPart">
-          <ScalarProperty Name="replacedPartId" ColumnName="replacedPartId" />
-          <ScalarProperty Name="serviceCarId" ColumnName="serviceCarId" />
-          <ScalarProperty Name="supplierPartId" ColumnName="supplierPartId" />
-          <ScalarProperty Name="servicePartId" ColumnName="servicePartId" />
-          <ScalarProperty Name="replacedPartPrice" ColumnName="replacedPartPrice" />
-          <ScalarProperty Name="statusId" ColumnName="statusId" />
-          <ScalarProperty Name="observations" ColumnName="observations" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="ReplacedPartTracks">
       <EntityTypeMapping TypeName="db_cars_parts_reconstructionModel.ReplacedPartTrack">
         <MappingFragment StoreEntitySet="ReplacedPartTrack">
@@ -187,17 +174,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="SupplierParts">
-      <EntityTypeMapping TypeName="db_cars_parts_reconstructionModel.SupplierPart">
-        <MappingFragment StoreEntitySet="SupplierPart">
-          <ScalarProperty Name="supplierPartId" ColumnName="supplierPartId" />
-          <ScalarProperty Name="supplierId" ColumnName="supplierId" />
-          <ScalarProperty Name="partId" ColumnName="partId" />
-          <ScalarProperty Name="price" ColumnName="price" />
-          <ScalarProperty Name="existence" ColumnName="existence" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="SupplierPieces">
       <EntityTypeMapping TypeName="db_cars_parts_reconstructionModel.SupplierPiece">
         <MappingFragment StoreEntitySet="SupplierPiece">
@@ -295,5 +271,29 @@
         <ScalarProperty Name="RoleId" ColumnName="RoleId" />
       </EndProperty>
     </AssociationSetMapping>
+    <EntitySetMapping Name="ReplacedParts">
+      <EntityTypeMapping TypeName="db_cars_parts_reconstructionModel.ReplacedPart">
+        <MappingFragment StoreEntitySet="ReplacedPart">
+          <ScalarProperty Name="observations" ColumnName="observations" />
+          <ScalarProperty Name="statusId" ColumnName="statusId" />
+          <ScalarProperty Name="replacedPartPrice" ColumnName="replacedPartPrice" />
+          <ScalarProperty Name="servicePartId" ColumnName="servicePartId" />
+          <ScalarProperty Name="partId" ColumnName="partId" />
+          <ScalarProperty Name="supplierId" ColumnName="supplierId" />
+          <ScalarProperty Name="serviceCarId" ColumnName="serviceCarId" />
+          <ScalarProperty Name="replacedPartId" ColumnName="replacedPartId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SupplierParts">
+      <EntityTypeMapping TypeName="db_cars_parts_reconstructionModel.SupplierPart">
+        <MappingFragment StoreEntitySet="SupplierPart">
+          <ScalarProperty Name="existence" ColumnName="existence" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="partId" ColumnName="partId" />
+          <ScalarProperty Name="supplierId" ColumnName="supplierId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

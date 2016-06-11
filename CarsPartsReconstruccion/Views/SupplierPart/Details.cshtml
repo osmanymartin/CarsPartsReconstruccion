@@ -1,0 +1,43 @@
+﻿@model CarsPartsReconstruccion.Models.SupplierPart
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>SupplierPart</legend>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Supplier.supplierName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Supplier.supplierName)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Part.partName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Part.partName)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.price)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.price)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.existence)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.existence)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { idSupplier = Model.supplierId, idPart = Model.partId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -18,7 +18,6 @@ namespace CarsPartsReconstruccion.Models
         {
             this.Catalog1 = new HashSet<Catalog>();
             this.Employees = new HashSet<Employee>();
-            this.ReplacedParts = new HashSet<ReplacedPart>();
             this.ReplacedPartTracks = new HashSet<ReplacedPartTrack>();
             this.ReplacedPieces = new HashSet<ReplacedPiece>();
             this.ReplacedPieceTracks = new HashSet<ReplacedPieceTrack>();
@@ -33,6 +32,7 @@ namespace CarsPartsReconstruccion.Models
             this.ServicePartTracks = new HashSet<ServicePartTrack>();
             this.ServiceTracks = new HashSet<ServiceTrack>();
             this.Services = new HashSet<Service>();
+            this.ReplacedParts = new HashSet<ReplacedPart>();
         }
     
         public int catalogId { get; set; }
@@ -44,7 +44,6 @@ namespace CarsPartsReconstruccion.Models
         public virtual ICollection<Catalog> Catalog1 { get; set; }
         public virtual Catalog Catalog2 { get; set; }
         public virtual ICollection<Employee> Employees { get; set; }
-        public virtual ICollection<ReplacedPart> ReplacedParts { get; set; }
         public virtual ICollection<ReplacedPartTrack> ReplacedPartTracks { get; set; }
         public virtual ICollection<ReplacedPiece> ReplacedPieces { get; set; }
         public virtual ICollection<ReplacedPieceTrack> ReplacedPieceTracks { get; set; }
@@ -59,5 +58,6 @@ namespace CarsPartsReconstruccion.Models
         public virtual ICollection<ServicePartTrack> ServicePartTracks { get; set; }
         public virtual ICollection<ServiceTrack> ServiceTracks { get; set; }
         public virtual ICollection<Service> Services { get; set; }
+        public virtual ICollection<ReplacedPart> ReplacedParts { get; set; }
     }
 }

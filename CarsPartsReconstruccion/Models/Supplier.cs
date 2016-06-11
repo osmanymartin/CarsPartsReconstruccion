@@ -16,8 +16,8 @@ namespace CarsPartsReconstruccion.Models
     {
         public Supplier()
         {
-            this.SupplierParts = new HashSet<SupplierPart>();
             this.SupplierPieces = new HashSet<SupplierPiece>();
+            this.SupplierParts = new HashSet<SupplierPart>();
         }
     
         public int supplierId { get; set; }
@@ -28,7 +28,7 @@ namespace CarsPartsReconstruccion.Models
         public Nullable<int> idRepresentative { get; set; }
     
         public virtual Employee Employee { get; set; }
-        public virtual ICollection<SupplierPart> SupplierParts { get; set; }
         public virtual ICollection<SupplierPiece> SupplierPieces { get; set; }
+        public virtual ICollection<SupplierPart> SupplierParts { get; set; }
     }
 }

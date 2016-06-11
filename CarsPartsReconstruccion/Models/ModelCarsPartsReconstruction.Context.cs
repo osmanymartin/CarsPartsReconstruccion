@@ -28,7 +28,6 @@ namespace CarsPartsReconstruccion.Models
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Piece> Pieces { get; set; }
-        public DbSet<ReplacedPart> ReplacedParts { get; set; }
         public DbSet<ReplacedPartTrack> ReplacedPartTracks { get; set; }
         public DbSet<ReplacedPiece> ReplacedPieces { get; set; }
         public DbSet<ReplacedPieceTrack> ReplacedPieceTracks { get; set; }
@@ -41,7 +40,6 @@ namespace CarsPartsReconstruccion.Models
         public DbSet<ServicePartTrack> ServicePartTracks { get; set; }
         public DbSet<ServiceTrack> ServiceTracks { get; set; }
         public DbSet<Supplier> Suppliers { get; set; }
-        public DbSet<SupplierPart> SupplierParts { get; set; }
         public DbSet<SupplierPiece> SupplierPieces { get; set; }
         public DbSet<Part> Parts { get; set; }
         public DbSet<Catalog> Catalogs { get; set; }
@@ -50,5 +48,7 @@ namespace CarsPartsReconstruccion.Models
         public DbSet<Service> Services { get; set; }
         public DbSet<UserProfile> UserProfiles { get; set; }
         public DbSet<webpages_Roles> webpages_Roles { get; set; }
+        public DbSet<ReplacedPart> ReplacedParts { get; set; }
+        public DbSet<SupplierPart> SupplierParts { get; set; }
     }
 }

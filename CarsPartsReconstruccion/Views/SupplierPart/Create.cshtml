@@ -1,0 +1,60 @@
+﻿@model CarsPartsReconstruccion.Models.SupplierPart
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>SupplierPart</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.supplierId, "Supplier")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("supplierId", String.Empty)
+            @Html.ValidationMessageFor(model => model.supplierId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.partId, "Part")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("partId", String.Empty)
+            @Html.ValidationMessageFor(model => model.partId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.price)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.price)
+            @Html.ValidationMessageFor(model => model.price)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.existence)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.existence)
+            @Html.ValidationMessageFor(model => model.existence)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -20,7 +20,7 @@ namespace CarsPartsReconstruccion.Models
         public int statusId { get; set; }
         public string observations { get; set; }
     
-        public virtual ReplacedPart ReplacedPart { get; set; }
         public virtual Catalog Catalog { get; set; }
+        public virtual ReplacedPart ReplacedPart { get; set; }
     }
 }

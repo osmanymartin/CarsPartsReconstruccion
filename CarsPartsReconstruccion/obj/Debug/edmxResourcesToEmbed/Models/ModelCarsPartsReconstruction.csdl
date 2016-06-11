@@ -34,23 +34,6 @@
     <Property Name="piecePrice" Type="Decimal" Precision="8" Scale="2" />
     <NavigationProperty Name="SupplierPieces" Relationship="Self.FK_supplier_piece_piece" FromRole="Piece" ToRole="SupplierPiece" />
   </EntityType>
-  <EntityType Name="ReplacedPart">
-    <Key>
-      <PropertyRef Name="replacedPartId" />
-    </Key>
-    <Property Name="replacedPartId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="serviceCarId" Type="Int32" Nullable="false" />
-    <Property Name="supplierPartId" Type="Int32" />
-    <Property Name="servicePartId" Type="Int32" />
-    <Property Name="replacedPartPrice" Type="Decimal" Precision="8" Scale="2" Nullable="false" />
-    <Property Name="statusId" Type="Int32" Nullable="false" />
-    <Property Name="observations" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="ServiceCar" Relationship="Self.FK_replaced_part_Service_Car" FromRole="ReplacedPart" ToRole="ServiceCar" />
-    <NavigationProperty Name="ServicePart" Relationship="Self.FK_replaced_part_service_part" FromRole="ReplacedPart" ToRole="ServicePart" />
-    <NavigationProperty Name="SupplierPart" Relationship="Self.FK_replaced_part_supplier_part" FromRole="ReplacedPart" ToRole="SupplierPart" />
-    <NavigationProperty Name="ReplacedPartTracks" Relationship="Self.FK_replaced_part_track_replaced_part" FromRole="ReplacedPart" ToRole="ReplacedPartTrack" />
-    <NavigationProperty Name="Catalog" Relationship="db_cars_parts_reconstructionModel.FK_replaced_part_status_type" FromRole="ReplacedPart" ToRole="Catalog" />
-  </EntityType>
   <EntityType Name="ReplacedPartTrack">
     <Key>
       <PropertyRef Name="replacedPartTrackId" />
@@ -60,8 +43,8 @@
     <Property Name="replacedPartId" Type="Int32" Nullable="false" />
     <Property Name="statusId" Type="Int32" Nullable="false" />
     <Property Name="observations" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
-    <NavigationProperty Name="ReplacedPart" Relationship="Self.FK_replaced_part_track_replaced_part" FromRole="ReplacedPartTrack" ToRole="ReplacedPart" />
     <NavigationProperty Name="Catalog" Relationship="db_cars_parts_reconstructionModel.FK_replaced_part_track_status_type" FromRole="ReplacedPartTrack" ToRole="Catalog" />
+    <NavigationProperty Name="ReplacedPart" Relationship="db_cars_parts_reconstructionModel.FK_replaced_part_track_replaced_part" FromRole="ReplacedPartTrack" ToRole="ReplacedPart" />
   </EntityType>
   <EntityType Name="ReplacedPiece">
     <Key>
@@ -103,13 +86,13 @@
     <Property Name="serviceCarDescription" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
     <Property Name="statusId" Type="Int32" Nullable="false" />
     <Property Name="observations" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="ReplacedParts" Relationship="Self.FK_replaced_part_Service_Car" FromRole="ServiceCar" ToRole="ReplacedPart" />
     <NavigationProperty Name="ServiceCarMiscellaneousCosts" Relationship="Self.FK_service_car_miscellaneous_costs_Service_Car" FromRole="ServiceCar" ToRole="ServiceCarMiscellaneousCosts" />
     <NavigationProperty Name="ServiceCarTracks" Relationship="Self.FK_service_car_track_Service_Car" FromRole="ServiceCar" ToRole="ServiceCarTrack" />
     <NavigationProperty Name="Catalog" Relationship="db_cars_parts_reconstructionModel.FK_Service_Car_brand_type" FromRole="ServiceCar" ToRole="Catalog" />
     <NavigationProperty Name="Catalog1" Relationship="db_cars_parts_reconstructionModel.FK_Service_Car_model_type" FromRole="ServiceCar" ToRole="Catalog" />
     <NavigationProperty Name="Catalog2" Relationship="db_cars_parts_reconstructionModel.FK_Service_Car_status_type" FromRole="ServiceCar" ToRole="Catalog" />
     <NavigationProperty Name="Service" Relationship="db_cars_parts_reconstructionModel.FK_Service_Car_service" FromRole="ServiceCar" ToRole="Service" />
+    <NavigationProperty Name="ReplacedParts" Relationship="db_cars_parts_reconstructionModel.FK_replaced_part_Service_Car" FromRole="ServiceCar" ToRole="ReplacedPart" />
   </EntityType>
   <EntityType Name="ServiceCarMiscellaneousCost">
     <Key>
@@ -159,13 +142,13 @@
     <Property Name="servicePartDescription" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
     <Property Name="statusId" Type="Int32" Nullable="false" />
     <Property Name="observations" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="ReplacedParts" Relationship="Self.FK_replaced_part_service_part" FromRole="ServicePart" ToRole="ReplacedPart" />
     <NavigationProperty Name="ReplacedPieces" Relationship="Self.FK_replaced_piece_service_part" FromRole="ServicePart" ToRole="ReplacedPiece" />
     <NavigationProperty Name="ServicePartMiscellaneousCosts" Relationship="Self.FK_service_part_miscellaneous_costs_service_part" FromRole="ServicePart" ToRole="ServicePartMiscellaneousCosts" />
     <NavigationProperty Name="ServicePartTracks" Relationship="Self.FK_service_part_track_service_part" FromRole="ServicePart" ToRole="ServicePartTrack" />
     <NavigationProperty Name="Part" Relationship="db_cars_parts_reconstructionModel.FK_service_part_part" FromRole="ServicePart" ToRole="Part" />
     <NavigationProperty Name="Catalog" Relationship="db_cars_parts_reconstructionModel.FK_service_part_status_type" FromRole="ServicePart" ToRole="Catalog" />
     <NavigationProperty Name="Service" Relationship="db_cars_parts_reconstructionModel.FK_service_part_service" FromRole="ServicePart" ToRole="Service" />
+    <NavigationProperty Name="ReplacedParts" Relationship="db_cars_parts_reconstructionModel.FK_replaced_part_service_part" FromRole="ServicePart" ToRole="ReplacedPart" />
   </EntityType>
   <EntityType Name="ServicePartMiscellaneousCost">
     <Key>
@@ -214,21 +197,8 @@
     <Property Name="address" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
     <Property Name="idRepresentative" Type="Int32" />
     <NavigationProperty Name="Employee" Relationship="Self.FK_supplier_employee" FromRole="Supplier" ToRole="Employee" />
-    <NavigationProperty Name="SupplierParts" Relationship="Self.FK_supplier_part_supplier" FromRole="Supplier" ToRole="SupplierPart" />
     <NavigationProperty Name="SupplierPieces" Relationship="Self.FK_supplier_piece_supplier" FromRole="Supplier" ToRole="SupplierPiece" />
-  </EntityType>
-  <EntityType Name="SupplierPart">
-    <Key>
-      <PropertyRef Name="supplierPartId" />
-    </Key>
-    <Property Name="supplierPartId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="supplierId" Type="Int32" Nullable="false" />
-    <Property Name="partId" Type="Int32" Nullable="false" />
-    <Property Name="price" Type="Decimal" Precision="8" Scale="2" Nullable="false" />
-    <Property Name="existence" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="ReplacedParts" Relationship="Self.FK_replaced_part_supplier_part" FromRole="SupplierPart" ToRole="ReplacedPart" />
-    <NavigationProperty Name="Supplier" Relationship="Self.FK_supplier_part_supplier" FromRole="SupplierPart" ToRole="Supplier" />
-    <NavigationProperty Name="Part" Relationship="db_cars_parts_reconstructionModel.FK_supplier_part_part" FromRole="SupplierPart" ToRole="Part" />
+    <NavigationProperty Name="SupplierParts" Relationship="db_cars_parts_reconstructionModel.FK_supplier_part_supplier" FromRole="Supplier" ToRole="SupplierPart" />
   </EntityType>
   <EntityType Name="SupplierPiece">
     <Key>
@@ -264,54 +234,6 @@
       </Principal>
       <Dependent Role="SupplierPiece">
         <PropertyRef Name="pieceId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_replaced_part_Service_Car">
-    <End Role="ServiceCar" Type="Self.ServiceCar" Multiplicity="1" />
-    <End Role="ReplacedPart" Type="Self.ReplacedPart" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ServiceCar">
-        <PropertyRef Name="serviceCarId" />
-      </Principal>
-      <Dependent Role="ReplacedPart">
-        <PropertyRef Name="serviceCarId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_replaced_part_service_part">
-    <End Role="ServicePart" Type="Self.ServicePart" Multiplicity="0..1" />
-    <End Role="ReplacedPart" Type="Self.ReplacedPart" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ServicePart">
-        <PropertyRef Name="servicePartId" />
-      </Principal>
-      <Dependent Role="ReplacedPart">
-        <PropertyRef Name="servicePartId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_replaced_part_supplier_part">
-    <End Role="SupplierPart" Type="Self.SupplierPart" Multiplicity="0..1" />
-    <End Role="ReplacedPart" Type="Self.ReplacedPart" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="SupplierPart">
-        <PropertyRef Name="supplierPartId" />
-      </Principal>
-      <Dependent Role="ReplacedPart">
-        <PropertyRef Name="supplierPartId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_replaced_part_track_replaced_part">
-    <End Role="ReplacedPart" Type="Self.ReplacedPart" Multiplicity="1" />
-    <End Role="ReplacedPartTrack" Type="Self.ReplacedPartTrack" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ReplacedPart">
-        <PropertyRef Name="replacedPartId" />
-      </Principal>
-      <Dependent Role="ReplacedPartTrack">
-        <PropertyRef Name="replacedPartId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -399,18 +321,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_supplier_part_supplier">
-    <End Role="Supplier" Type="Self.Supplier" Multiplicity="1" />
-    <End Role="SupplierPart" Type="Self.SupplierPart" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Supplier">
-        <PropertyRef Name="supplierId" />
-      </Principal>
-      <Dependent Role="SupplierPart">
-        <PropertyRef Name="supplierId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_supplier_piece_supplier">
     <End Role="Supplier" Type="Self.Supplier" Multiplicity="1" />
     <End Role="SupplierPiece" Type="Self.SupplierPiece" Multiplicity="*" />
@@ -427,7 +337,6 @@
     <EntitySet Name="Customers" EntityType="Self.Customer" />
     <EntitySet Name="Employees" EntityType="Self.Employee" />
     <EntitySet Name="Pieces" EntityType="Self.Piece" />
-    <EntitySet Name="ReplacedParts" EntityType="Self.ReplacedPart" />
     <EntitySet Name="ReplacedPartTracks" EntityType="Self.ReplacedPartTrack" />
     <EntitySet Name="ReplacedPieces" EntityType="Self.ReplacedPiece" />
     <EntitySet Name="ReplacedPieceTracks" EntityType="Self.ReplacedPieceTrack" />
@@ -440,7 +349,6 @@
     <EntitySet Name="ServicePartTracks" EntityType="Self.ServicePartTrack" />
     <EntitySet Name="ServiceTracks" EntityType="Self.ServiceTrack" />
     <EntitySet Name="Suppliers" EntityType="Self.Supplier" />
-    <EntitySet Name="SupplierParts" EntityType="Self.SupplierPart" />
     <EntitySet Name="SupplierPieces" EntityType="Self.SupplierPiece" />
     <AssociationSet Name="FK_supplier_employee" Association="Self.FK_supplier_employee">
       <End Role="Employee" EntitySet="Employees" />
@@ -449,22 +357,6 @@
     <AssociationSet Name="FK_supplier_piece_piece" Association="Self.FK_supplier_piece_piece">
       <End Role="Piece" EntitySet="Pieces" />
       <End Role="SupplierPiece" EntitySet="SupplierPieces" />
-    </AssociationSet>
-    <AssociationSet Name="FK_replaced_part_Service_Car" Association="Self.FK_replaced_part_Service_Car">
-      <End Role="ServiceCar" EntitySet="ServiceCars" />
-      <End Role="ReplacedPart" EntitySet="ReplacedParts" />
-    </AssociationSet>
-    <AssociationSet Name="FK_replaced_part_service_part" Association="Self.FK_replaced_part_service_part">
-      <End Role="ServicePart" EntitySet="ServiceParts" />
-      <End Role="ReplacedPart" EntitySet="ReplacedParts" />
-    </AssociationSet>
-    <AssociationSet Name="FK_replaced_part_supplier_part" Association="Self.FK_replaced_part_supplier_part">
-      <End Role="SupplierPart" EntitySet="SupplierParts" />
-      <End Role="ReplacedPart" EntitySet="ReplacedParts" />
-    </AssociationSet>
-    <AssociationSet Name="FK_replaced_part_track_replaced_part" Association="Self.FK_replaced_part_track_replaced_part">
-      <End Role="ReplacedPart" EntitySet="ReplacedParts" />
-      <End Role="ReplacedPartTrack" EntitySet="ReplacedPartTracks" />
     </AssociationSet>
     <AssociationSet Name="FK_replaced_piece_service_part" Association="Self.FK_replaced_piece_service_part">
       <End Role="ServicePart" EntitySet="ServiceParts" />
@@ -494,10 +386,6 @@
       <End Role="ServicePart" EntitySet="ServiceParts" />
       <End Role="ServicePartTrack" EntitySet="ServicePartTracks" />
     </AssociationSet>
-    <AssociationSet Name="FK_supplier_part_supplier" Association="Self.FK_supplier_part_supplier">
-      <End Role="Supplier" EntitySet="Suppliers" />
-      <End Role="SupplierPart" EntitySet="SupplierParts" />
-    </AssociationSet>
     <AssociationSet Name="FK_supplier_piece_supplier" Association="Self.FK_supplier_piece_supplier">
       <End Role="Supplier" EntitySet="Suppliers" />
       <End Role="SupplierPiece" EntitySet="SupplierPieces" />
@@ -507,10 +395,6 @@
       <End Role="Part" EntitySet="Parts" />
       <End Role="ServicePart" EntitySet="ServiceParts" />
     </AssociationSet>
-    <AssociationSet Name="FK_supplier_part_part" Association="db_cars_parts_reconstructionModel.FK_supplier_part_part">
-      <End Role="Part" EntitySet="Parts" />
-      <End Role="SupplierPart" EntitySet="SupplierParts" />
-    </AssociationSet>
     <EntitySet Name="Catalogs" EntityType="db_cars_parts_reconstructionModel.Catalog" />
     <AssociationSet Name="FK_Catalog_Catalog" Association="db_cars_parts_reconstructionModel.FK_Catalog_Catalog">
       <End Role="Catalog" EntitySet="Catalogs" />
@@ -519,10 +403,6 @@
     <AssociationSet Name="FK_employee_position" Association="db_cars_parts_reconstructionModel.FK_employee_position">
       <End Role="Catalog" EntitySet="Catalogs" />
       <End Role="Employee" EntitySet="Employees" />
-    </AssociationSet>
-    <AssociationSet Name="FK_replaced_part_status_type" Association="db_cars_parts_reconstructionModel.FK_replaced_part_status_type">
-      <End Role="Catalog" EntitySet="Catalogs" />
-      <End Role="ReplacedPart" EntitySet="ReplacedParts" />
     </AssociationSet>
     <AssociationSet Name="FK_replaced_part_track_status_type" Association="db_cars_parts_reconstructionModel.FK_replaced_part_track_status_type">
       <End Role="Catalog" EntitySet="Catalogs" />
@@ -613,6 +493,36 @@
       <End Role="webpages_Roles" EntitySet="webpages_Roles" />
       <End Role="UserProfile" EntitySet="UserProfiles" />
     </AssociationSet>
+    <EntitySet Name="ReplacedParts" EntityType="db_cars_parts_reconstructionModel.ReplacedPart" />
+    <EntitySet Name="SupplierParts" EntityType="db_cars_parts_reconstructionModel.SupplierPart" />
+    <AssociationSet Name="FK_replaced_part_status_type" Association="db_cars_parts_reconstructionModel.FK_replaced_part_status_type">
+      <End Role="Catalog" EntitySet="Catalogs" />
+      <End Role="ReplacedPart" EntitySet="ReplacedParts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_supplier_part_part" Association="db_cars_parts_reconstructionModel.FK_supplier_part_part">
+      <End Role="Part" EntitySet="Parts" />
+      <End Role="SupplierPart" EntitySet="SupplierParts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_replaced_part_Service_Car" Association="db_cars_parts_reconstructionModel.FK_replaced_part_Service_Car">
+      <End Role="ServiceCar" EntitySet="ServiceCars" />
+      <End Role="ReplacedPart" EntitySet="ReplacedParts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_replaced_part_service_part" Association="db_cars_parts_reconstructionModel.FK_replaced_part_service_part">
+      <End Role="ServicePart" EntitySet="ServiceParts" />
+      <End Role="ReplacedPart" EntitySet="ReplacedParts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_replaced_part_track_replaced_part" Association="db_cars_parts_reconstructionModel.FK_replaced_part_track_replaced_part">
+      <End Role="ReplacedPart" EntitySet="ReplacedParts" />
+      <End Role="ReplacedPartTrack" EntitySet="ReplacedPartTracks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ReplacedPart_SupplierPart" Association="db_cars_parts_reconstructionModel.FK_ReplacedPart_SupplierPart">
+      <End Role="SupplierPart" EntitySet="SupplierParts" />
+      <End Role="ReplacedPart" EntitySet="ReplacedParts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_supplier_part_supplier" Association="db_cars_parts_reconstructionModel.FK_supplier_part_supplier">
+      <End Role="Supplier" EntitySet="Suppliers" />
+      <End Role="SupplierPart" EntitySet="SupplierParts" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Part">
     <Key>
@@ -637,18 +547,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_supplier_part_part">
-    <End Type="db_cars_parts_reconstructionModel.Part" Role="Part" Multiplicity="1" />
-    <End Type="db_cars_parts_reconstructionModel.SupplierPart" Role="SupplierPart" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Part">
-        <PropertyRef Name="partId" />
-      </Principal>
-      <Dependent Role="SupplierPart">
-        <PropertyRef Name="partId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityType Name="Catalog">
     <Key>
       <PropertyRef Name="catalogId" />
@@ -661,7 +559,6 @@
     <NavigationProperty Name="Catalog1" Relationship="db_cars_parts_reconstructionModel.FK_Catalog_Catalog" FromRole="Catalog" ToRole="Catalog1" />
     <NavigationProperty Name="Catalog2" Relationship="db_cars_parts_reconstructionModel.FK_Catalog_Catalog" FromRole="Catalog1" ToRole="Catalog" />
     <NavigationProperty Name="Employees" Relationship="db_cars_parts_reconstructionModel.FK_employee_position" FromRole="Catalog" ToRole="Employee" />
-    <NavigationProperty Name="ReplacedParts" Relationship="db_cars_parts_reconstructionModel.FK_replaced_part_status_type" FromRole="Catalog" ToRole="ReplacedPart" />
     <NavigationProperty Name="ReplacedPartTracks" Relationship="db_cars_parts_reconstructionModel.FK_replaced_part_track_status_type" FromRole="Catalog" ToRole="ReplacedPartTrack" />
     <NavigationProperty Name="ReplacedPieces" Relationship="db_cars_parts_reconstructionModel.FK_replaced_piece_status_type" FromRole="Catalog" ToRole="ReplacedPiece" />
     <NavigationProperty Name="ReplacedPieceTracks" Relationship="db_cars_parts_reconstructionModel.FK_replaced_piece_track_status_type" FromRole="Catalog" ToRole="ReplacedPieceTrack" />
@@ -676,6 +573,7 @@
     <NavigationProperty Name="ServicePartTracks" Relationship="db_cars_parts_reconstructionModel.FK_service_part_track_status_type" FromRole="Catalog" ToRole="ServicePartTrack" />
     <NavigationProperty Name="ServiceTracks" Relationship="db_cars_parts_reconstructionModel.FK_service_track_status_type" FromRole="Catalog" ToRole="ServiceTrack" />
     <NavigationProperty Name="Services" Relationship="db_cars_parts_reconstructionModel.FK_service_status_type" FromRole="Catalog" ToRole="Service" />
+    <NavigationProperty Name="ReplacedParts" Relationship="db_cars_parts_reconstructionModel.FK_replaced_part_status_type" FromRole="Catalog" ToRole="ReplacedPart" />
   </EntityType>
   <Association Name="FK_Catalog_Catalog">
     <End Type="db_cars_parts_reconstructionModel.Catalog" Role="Catalog" Multiplicity="0..1" />
@@ -698,18 +596,6 @@
       </Principal>
       <Dependent Role="Employee">
         <PropertyRef Name="positionId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_replaced_part_status_type">
-    <End Type="db_cars_parts_reconstructionModel.Catalog" Role="Catalog" Multiplicity="1" />
-    <End Type="db_cars_parts_reconstructionModel.ReplacedPart" Role="ReplacedPart" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Catalog">
-        <PropertyRef Name="catalogId" />
-      </Principal>
-      <Dependent Role="ReplacedPart">
-        <PropertyRef Name="statusId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1018,5 +904,122 @@
   <Association Name="webpages_UsersInRoles">
     <End Type="db_cars_parts_reconstructionModel.webpages_Roles" Role="webpages_Roles" Multiplicity="*" />
     <End Type="db_cars_parts_reconstructionModel.UserProfile" Role="UserProfile" Multiplicity="*" />
+  </Association>
+  <EntityType Name="ReplacedPart">
+    <Key>
+      <PropertyRef Name="replacedPartId" />
+    </Key>
+    <Property Name="replacedPartId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="serviceCarId" Type="Int32" Nullable="false" />
+    <Property Name="supplierId" Type="Int32" />
+    <Property Name="partId" Type="Int32" />
+    <Property Name="servicePartId" Type="Int32" />
+    <Property Name="replacedPartPrice" Type="Decimal" Nullable="false" Precision="8" Scale="2" />
+    <Property Name="statusId" Type="Int32" Nullable="false" />
+    <Property Name="observations" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Catalog" Relationship="db_cars_parts_reconstructionModel.FK_replaced_part_status_type" FromRole="ReplacedPart" ToRole="Catalog" />
+    <NavigationProperty Name="ServiceCar" Relationship="db_cars_parts_reconstructionModel.FK_replaced_part_Service_Car" FromRole="ReplacedPart" ToRole="ServiceCar" />
+    <NavigationProperty Name="ServicePart" Relationship="db_cars_parts_reconstructionModel.FK_replaced_part_service_part" FromRole="ReplacedPart" ToRole="ServicePart" />
+    <NavigationProperty Name="ReplacedPartTracks" Relationship="db_cars_parts_reconstructionModel.FK_replaced_part_track_replaced_part" FromRole="ReplacedPart" ToRole="ReplacedPartTrack" />
+    <NavigationProperty Name="SupplierPart" Relationship="db_cars_parts_reconstructionModel.FK_ReplacedPart_SupplierPart" FromRole="ReplacedPart" ToRole="SupplierPart" />
+  </EntityType>
+  <EntityType Name="SupplierPart">
+    <Key>
+      <PropertyRef Name="supplierId" />
+      <PropertyRef Name="partId" />
+    </Key>
+    <Property Name="supplierId" Type="Int32" Nullable="false" />
+    <Property Name="partId" Type="Int32" Nullable="false" />
+    <Property Name="price" Type="Decimal" Nullable="false" Precision="8" Scale="2" />
+    <Property Name="existence" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Part" Relationship="db_cars_parts_reconstructionModel.FK_supplier_part_part" FromRole="SupplierPart" ToRole="Part" />
+    <NavigationProperty Name="ReplacedParts" Relationship="db_cars_parts_reconstructionModel.FK_ReplacedPart_SupplierPart" FromRole="SupplierPart" ToRole="ReplacedPart" />
+    <NavigationProperty Name="Supplier" Relationship="db_cars_parts_reconstructionModel.FK_supplier_part_supplier" FromRole="SupplierPart" ToRole="Supplier" />
+  </EntityType>
+  <Association Name="FK_replaced_part_status_type">
+    <End Type="db_cars_parts_reconstructionModel.Catalog" Role="Catalog" Multiplicity="1" />
+    <End Type="db_cars_parts_reconstructionModel.ReplacedPart" Role="ReplacedPart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Catalog">
+        <PropertyRef Name="catalogId" />
+      </Principal>
+      <Dependent Role="ReplacedPart">
+        <PropertyRef Name="statusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_supplier_part_part">
+    <End Type="db_cars_parts_reconstructionModel.Part" Role="Part" Multiplicity="1" />
+    <End Type="db_cars_parts_reconstructionModel.SupplierPart" Role="SupplierPart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Part">
+        <PropertyRef Name="partId" />
+      </Principal>
+      <Dependent Role="SupplierPart">
+        <PropertyRef Name="partId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_replaced_part_Service_Car">
+    <End Type="db_cars_parts_reconstructionModel.ServiceCar" Role="ServiceCar" Multiplicity="1" />
+    <End Type="db_cars_parts_reconstructionModel.ReplacedPart" Role="ReplacedPart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ServiceCar">
+        <PropertyRef Name="serviceCarId" />
+      </Principal>
+      <Dependent Role="ReplacedPart">
+        <PropertyRef Name="serviceCarId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_replaced_part_service_part">
+    <End Type="db_cars_parts_reconstructionModel.ServicePart" Role="ServicePart" Multiplicity="0..1" />
+    <End Type="db_cars_parts_reconstructionModel.ReplacedPart" Role="ReplacedPart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ServicePart">
+        <PropertyRef Name="servicePartId" />
+      </Principal>
+      <Dependent Role="ReplacedPart">
+        <PropertyRef Name="servicePartId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_replaced_part_track_replaced_part">
+    <End Type="db_cars_parts_reconstructionModel.ReplacedPart" Role="ReplacedPart" Multiplicity="1" />
+    <End Type="db_cars_parts_reconstructionModel.ReplacedPartTrack" Role="ReplacedPartTrack" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ReplacedPart">
+        <PropertyRef Name="replacedPartId" />
+      </Principal>
+      <Dependent Role="ReplacedPartTrack">
+        <PropertyRef Name="replacedPartId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ReplacedPart_SupplierPart">
+    <End Type="db_cars_parts_reconstructionModel.SupplierPart" Role="SupplierPart" Multiplicity="0..1" />
+    <End Type="db_cars_parts_reconstructionModel.ReplacedPart" Role="ReplacedPart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SupplierPart">
+        <PropertyRef Name="supplierId" />
+        <PropertyRef Name="partId" />
+      </Principal>
+      <Dependent Role="ReplacedPart">
+        <PropertyRef Name="supplierId" />
+        <PropertyRef Name="partId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_supplier_part_supplier">
+    <End Type="db_cars_parts_reconstructionModel.Supplier" Role="Supplier" Multiplicity="1" />
+    <End Type="db_cars_parts_reconstructionModel.SupplierPart" Role="SupplierPart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Supplier">
+        <PropertyRef Name="supplierId" />
+      </Principal>
+      <Dependent Role="SupplierPart">
+        <PropertyRef Name="supplierId" />
+      </Dependent>
+    </ReferentialConstraint>
   </Association>
 </Schema>
