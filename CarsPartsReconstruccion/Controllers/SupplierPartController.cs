@@ -78,8 +78,8 @@ namespace CarsPartsReconstruccion.Controllers
                 //Obtain the average price
                 var average = (decimal)db.SupplierParts.Where(sp => sp.partId == supplierpart.partId).Average(sp => sp.price);
                 //Verify if the difference between reference price and the average of the suppliers prices exceed the five percent
-                var tenPercent = (decimal)(part.partPrice * 0.05m);
-                if (Math.Abs((decimal)(part.partPrice - average)) > tenPercent)
+                var twoPercent = (decimal)(part.partPrice * 0.02m);
+                if (Math.Abs((decimal)(part.partPrice - average)) > twoPercent)
                 {
                     var referencePrice = part.partPrice;
                     part.partPrice = Math.Round(average, 2);
@@ -154,6 +154,22 @@ namespace CarsPartsReconstruccion.Controllers
             {
                 db.Entry(supplierpart).State = EntityState.Modified;
                 db.SaveChanges();
+
+                //Find the Part
+                var part = db.Parts.Find(supplierpart.partId);
+                //Obtain the average price
+                var average = (decimal)db.SupplierParts.Where(sp => sp.partId == supplierpart.partId).Average(sp => sp.price);
+                //Verify if the difference between reference price and the average of the suppliers prices exceed the five percent
+                var twoPercent = (decimal)(part.partPrice * 0.02m);
+                if (Math.Abs((decimal)(part.partPrice - average)) > twoPercent)
+                {
+                    var referencePrice = part.partPrice;
+                    part.partPrice = Math.Round(average, 2);
+
+                    return RedirectToAction("UpdatePartPrice",
+                        new { partId = part.partId, supplierId = supplierpart.supplierId, averagePrice = average });
+                }
+
                 return RedirectToAction("Index", new { SupplierId = supplierpart.supplierId });
             }
 
@@ -190,6 +206,22 @@ namespace CarsPartsReconstruccion.Controllers
             SupplierPart supplierpart = db.SupplierParts.Where(sp => sp.partId == partId && sp.supplierId == supplierId).FirstOrDefault();
             db.SupplierParts.Remove(supplierpart);
             db.SaveChanges();
+
+            //Find the Part
+            var part = db.Parts.Find(supplierpart.partId);
+            //Obtain the average price
+            var average = (decimal)db.SupplierParts.Where(sp => sp.partId == supplierpart.partId).Average(sp => sp.price);
+            //Verify if the difference between reference price and the average of the suppliers prices exceed the five percent
+            var twoPercent = (decimal)(part.partPrice * 0.02m);
+            if (Math.Abs((decimal)(part.partPrice - average)) > twoPercent)
+            {
+                var referencePrice = part.partPrice;
+                part.partPrice = Math.Round(average, 2);
+
+                return RedirectToAction("UpdatePartPrice",
+                    new { partId = part.partId, supplierId = supplierpart.supplierId, averagePrice = average });
+            }
+
             return RedirectToAction("Index", new { SupplierId = supplierpart.supplierId });
         }
 

@@ -6,7 +6,7 @@
 
 <h3>
     The reference price (@String.Format("{0:C}", @ViewBag.PartPrice)) is too far from the average of the suppliers prices (@String.Format("{0:C}", @Model.partPrice))
-    
+
 </h3>
 
 <h2>@ViewBag.Title</h2>
@@ -44,7 +44,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index", "SupplierPart", new { supplierId = ViewBag.supplierId })
+    @Html.ActionLink("Back to List", "Index", new { supplierId = @ViewBag.supplierId })
 </div>
 
 @section Scripts {
