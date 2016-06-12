@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using CarsPartsReconstruccion.Models;
+using System.Globalization;
 
 namespace CarsPartsReconstruccion.Controllers
 {
@@ -74,31 +75,18 @@ namespace CarsPartsReconstruccion.Controllers
 
                 //Find the Part
                 var part = db.Parts.Find(supplierpart.partId);
-
                 //Obtain the average price
                 var average = (decimal)db.SupplierParts.Where(sp => sp.partId == supplierpart.partId).Average(sp => sp.price);
-
-                //Verify if the difference between reference price and the average of the suppliers prices exceed the ten percent
-                var tenPercent = (decimal)(part.partPrice * 0.1m);
+                //Verify if the difference between reference price and the average of the suppliers prices exceed the five percent
+                var tenPercent = (decimal)(part.partPrice * 0.05m);
                 if (Math.Abs((decimal)(part.partPrice - average)) > tenPercent)
                 {
                     var referencePrice = part.partPrice;
                     part.partPrice = Math.Round(average, 2);
 
                     return RedirectToAction("UpdatePartPrice",
-                        new
-                        {
-                            part = new Part() { partId = part.partId, partName = part.partName, partDescription = part.partDescription, partPrice = part.partPrice },
-                            supplierId = supplierpart.supplierId,
-                            partPrice = referencePrice
-                        });
+                        new { partId = part.partId, supplierId = supplierpart.supplierId, averagePrice = average });
                 }
-
-                //Set the average price
-                //part.partPrice = db.SupplierParts.Where(sp => sp.partId == supplierpart.partId).Average(sp => sp.price);
-                //db.Entry(part).State = EntityState.Modified;
-                //db.SaveChanges();
-
                 return RedirectToAction("Index", new { supplierId = supplierpart.supplierId });
             }
 
@@ -112,22 +100,24 @@ namespace CarsPartsReconstruccion.Controllers
             return View(supplierpart);
         }
 
-        public ActionResult UpdatePartPrice(Part part, int supplierId, decimal partPrice)
+        public ActionResult UpdatePartPrice(int partId, int supplierId, decimal averagePrice)
         {
-            ViewBag.PartPrice = partPrice;
+            var model = db.Parts.Find(partId);
+            ViewBag.PartPrice = model.partPrice;
             ViewBag.supplierId = supplierId;
-            return View(part);
+            model.partPrice = averagePrice;
+            return View(model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult UpdatePartPrice(Part part)
+        public ActionResult UpdatePartPrice(Part part, int supplierId)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(part).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { supplierId = supplierId });
             }
             return View(part);
         }

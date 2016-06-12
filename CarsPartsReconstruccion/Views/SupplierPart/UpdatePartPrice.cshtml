@@ -5,7 +5,8 @@
 }
 
 <h3>
-    The reference price (@ViewBag.PartPrice) is too far from the average of the suppliers prices (@Model.partPrice)
+    The reference price (@String.Format("{0:C}", @ViewBag.PartPrice)) is too far from the average of the suppliers prices (@String.Format("{0:C}", @Model.partPrice))
+    
 </h3>
 
 <h2>@ViewBag.Title</h2>
