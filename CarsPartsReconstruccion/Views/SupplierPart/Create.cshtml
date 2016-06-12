@@ -1,12 +1,13 @@
 ﻿@model CarsPartsReconstruccion.Models.SupplierPart
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Create a Part";
 }
 
-<h2>Create</h2>
+<h2>@ViewBag.Title</h2>
 
-@using (Html.BeginForm()) {
+@using (Html.BeginForm())
+{
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
@@ -52,7 +53,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "Index", new { SupplierId = Model.supplierId })
 </div>
 
 @section Scripts {

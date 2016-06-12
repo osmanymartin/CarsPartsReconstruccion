@@ -1,21 +1,18 @@
 ﻿@model IEnumerable<CarsPartsReconstruccion.Models.SupplierPart>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Parts List";
 }
 
-<h2>Index</h2>
+<h2>@ViewBag.Title in "@ViewBag.SupplierName"</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "Create", new { supplierId = ViewBag.SupplierId })
 </p>
 <table>
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Supplier.supplierName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Part.partName)
+            @Html.DisplayNameFor(model => model.partId)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.price)
@@ -30,9 +27,6 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Supplier.supplierName)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Part.partName)
             </td>
             <td>
@@ -42,11 +36,15 @@
                 @Html.DisplayFor(modelItem => item.existence)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { idSupplier = item.supplierId, idPart = item.partId }) |
-                @Html.ActionLink("Details", "Details", new { idSupplier = item.supplierId, idPart = item.partId }) |
-                @Html.ActionLink("Delete", "Delete", new { idSupplier = item.supplierId, idPart = item.partId })
+                @Html.ActionLink("Edit", "Edit", new { supplierId = item.supplierId, partId = item.partId }) |
+                @Html.ActionLink("Details", "Details", new { supplierId = item.supplierId, partId = item.partId }) |
+                @Html.ActionLink("Delete", "Delete", new { supplierId = item.supplierId, partId = item.partId })
             </td>
         </tr>
     }
 
 </table>
+
+<p>
+    @Html.ActionLink("Back to Suppliers", "Index", "Supplier")
+</p>

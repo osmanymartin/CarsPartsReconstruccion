@@ -38,6 +38,6 @@
     </div>
 </fieldset>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { idSupplier = Model.supplierId, idPart = Model.partId }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Edit", "Edit", new { supplierId = Model.supplierId, partId = Model.partId }) |
+    @Html.ActionLink("Back to List", "Index", new { SupplierId = Model.supplierId })
 </p>

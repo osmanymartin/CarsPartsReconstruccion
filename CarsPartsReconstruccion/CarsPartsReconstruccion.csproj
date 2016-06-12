@@ -211,6 +211,7 @@
     <Compile Include="Models\Metadata\CustomerMetadata.cs" />
     <Compile Include="Models\Metadata\EmployeeMetadata.cs" />
     <Compile Include="Models\Metadata\PieceMetadata.cs" />
+    <Compile Include="Models\Metadata\SupplierPartMetadata.cs" />
     <Compile Include="Models\Metadata\SupplierMetadata.cs" />
     <Compile Include="Models\Metadata\PartMetadata.cs" />
     <Compile Include="Models\ModelCarsPartsReconstruction.Context.cs">
@@ -477,6 +478,7 @@
     <Content Include="Views\SupplierPart\Create.cshtml" />
     <Content Include="Views\SupplierPart\Edit.cshtml" />
     <Content Include="Views\SupplierPart\Delete.cshtml" />
+    <Content Include="Views\SupplierPart\UpdatePartPrice.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Filters\" />

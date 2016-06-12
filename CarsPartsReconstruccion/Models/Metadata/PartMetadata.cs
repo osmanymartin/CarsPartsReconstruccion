@@ -8,7 +8,7 @@
     {
         
         [Required()]
-        [Display(Name = "Name")]
+        [Display(Name = "Part")]
         [StringLength(50)]
         public string partName { get; set; }
 

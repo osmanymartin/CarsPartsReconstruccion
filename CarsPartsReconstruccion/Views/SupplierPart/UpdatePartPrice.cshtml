@@ -1,0 +1,51 @@
+﻿@model CarsPartsReconstruccion.Models.Part
+
+@{
+    ViewBag.Title = "Update the Part Price??";
+}
+
+<h3>
+    The reference price (@ViewBag.PartPrice) is too far from the average of the suppliers prices (@Model.partPrice)
+</h3>
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>   </legend>
+
+        @Html.HiddenFor(model => model.partId)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.partName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.partName)
+            @Html.ValidationMessageFor(model => model.partName)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.partPrice)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.partPrice)
+            @Html.ValidationMessageFor(model => model.partPrice)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index", "SupplierPart", new { supplierId = ViewBag.supplierId })
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

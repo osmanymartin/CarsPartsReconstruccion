@@ -33,7 +33,10 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.supplierName)
+                @Html.ActionLink(item.supplierName, "Index", "SupplierPart", new { supplierId = item.supplierId },
+                new { title = "Parts List in \"" + item.supplierName + "\"" })
+
+                @*  @Html.DisplayFor(modelItem => item.supplierName) *@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.description)

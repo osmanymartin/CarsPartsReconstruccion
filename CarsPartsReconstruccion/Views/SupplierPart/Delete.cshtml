@@ -11,37 +11,38 @@
     <legend>SupplierPart</legend>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.Supplier.supplierName)
+        @Html.DisplayNameFor(model => model.Supplier.supplierName)
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.Supplier.supplierName)
     </div>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.Part.partName)
+        @Html.DisplayNameFor(model => model.Part.partName)
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.Part.partName)
     </div>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.price)
+        @Html.DisplayNameFor(model => model.price)
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.price)
     </div>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.existence)
+        @Html.DisplayNameFor(model => model.existence)
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.existence)
     </div>
 </fieldset>
-@using (Html.BeginForm()) {
+@using (Html.BeginForm())
+{
     @Html.AntiForgeryToken()
     <p>
         <input type="submit" value="Delete" /> |
-        @Html.ActionLink("Back to List", "Index")
+        @Html.ActionLink("Back to List", "Index", new { SupplierId = Model.supplierId })
     </p>
 }

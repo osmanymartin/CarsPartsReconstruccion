@@ -16,18 +16,27 @@ namespace CarsPartsReconstruccion.Controllers
         //
         // GET: /SupplierPart/
 
-        public ActionResult Index()
+        public ActionResult Index(int supplierId)
         {
-            var supplierparts = db.SupplierParts.Include(s => s.Part).Include(s => s.Supplier);
-            return View(supplierparts.ToList());
+            var supplierparts = db.SupplierParts
+                                .Where(sp => sp.supplierId == supplierId)
+                                .Include(s => s.Part).Include(s => s.Supplier).ToList();
+
+            var supplier = db.Suppliers.Find(supplierId);
+            if (supplier != null)
+            {
+                ViewBag.SupplierName = supplier.supplierName;
+                ViewBag.SupplierId = supplier.supplierId;
+            }
+            return View(supplierparts);
         }
 
         //
         // GET: /SupplierPart/Details/5
 
-        public ActionResult Details(int idSupplier, int idPart)
+        public ActionResult Details(int supplierId, int partId)
         {
-            SupplierPart supplierpart = db.SupplierParts.Where(sp => sp.partId == idPart && sp.supplierId == idSupplier).FirstOrDefault();
+            SupplierPart supplierpart = db.SupplierParts.Where(sp => sp.partId == partId && sp.supplierId == supplierId).FirstOrDefault();
             if (supplierpart == null)
             {
                 return HttpNotFound();
@@ -38,11 +47,17 @@ namespace CarsPartsReconstruccion.Controllers
         //
         // GET: /SupplierPart/Create
 
-        public ActionResult Create()
+        public ActionResult Create(int supplierId)
         {
-            ViewBag.partId = new SelectList(db.Parts, "partId", "partName");
-            ViewBag.supplierId = new SelectList(db.Suppliers, "supplierId", "supplierName");
-            return View();
+            var model = new SupplierPart() { supplierId = supplierId };
+
+            ViewBag.partId = new SelectList(
+                db.Parts.Where(pa => !db.SupplierParts.Any(sp => sp.supplierId == supplierId && sp.partId == pa.partId))
+                , "partId", "partName");
+
+            ViewBag.supplierId = new SelectList(
+                db.Suppliers.Where(su => su.supplierId == supplierId), "supplierId", "supplierName", supplierId);
+            return View(model);
         }
 
         //
@@ -56,26 +71,85 @@ namespace CarsPartsReconstruccion.Controllers
             {
                 db.SupplierParts.Add(supplierpart);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+
+                //Find the Part
+                var part = db.Parts.Find(supplierpart.partId);
+
+                //Obtain the average price
+                var average = (decimal)db.SupplierParts.Where(sp => sp.partId == supplierpart.partId).Average(sp => sp.price);
+
+                //Verify if the difference between reference price and the average of the suppliers prices exceed the ten percent
+                var tenPercent = (decimal)(part.partPrice * 0.1m);
+                if (Math.Abs((decimal)(part.partPrice - average)) > tenPercent)
+                {
+                    var referencePrice = part.partPrice;
+                    part.partPrice = Math.Round(average, 2);
+
+                    return RedirectToAction("UpdatePartPrice",
+                        new
+                        {
+                            part = new Part() { partId = part.partId, partName = part.partName, partDescription = part.partDescription, partPrice = part.partPrice },
+                            supplierId = supplierpart.supplierId,
+                            partPrice = referencePrice
+                        });
+                }
+
+                //Set the average price
+                //part.partPrice = db.SupplierParts.Where(sp => sp.partId == supplierpart.partId).Average(sp => sp.price);
+                //db.Entry(part).State = EntityState.Modified;
+                //db.SaveChanges();
+
+                return RedirectToAction("Index", new { supplierId = supplierpart.supplierId });
             }
 
-            ViewBag.partId = new SelectList(db.Parts, "partId", "partName", supplierpart.partId);
-            ViewBag.supplierId = new SelectList(db.Suppliers, "supplierId", "supplierName", supplierpart.supplierId);
+            ViewBag.partId = new SelectList(
+                db.Parts.Where(pa => !db.SupplierParts.Any(sp => sp.supplierId == supplierpart.supplierId && sp.partId == pa.partId))
+                , "partId", "partName", supplierpart.partId);
+
+            ViewBag.supplierId = new SelectList(
+                db.Suppliers.Where(su => su.supplierId == supplierpart.supplierId), "supplierId", "supplierName", supplierpart.supplierId);
+
             return View(supplierpart);
+        }
+
+        public ActionResult UpdatePartPrice(Part part, int supplierId, decimal partPrice)
+        {
+            ViewBag.PartPrice = partPrice;
+            ViewBag.supplierId = supplierId;
+            return View(part);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult UpdatePartPrice(Part part)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(part).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(part);
         }
 
         //
         // GET: /SupplierPart/Edit/5
 
-        public ActionResult Edit(int idSupplier, int idPart)
+        public ActionResult Edit(int supplierId, int partId)
         {
-            SupplierPart supplierpart = db.SupplierParts.Where(sp => sp.partId == idPart && sp.supplierId == idSupplier).FirstOrDefault();
+            SupplierPart supplierpart = db.SupplierParts.Where(sp => sp.partId == partId && sp.supplierId == supplierId).FirstOrDefault();
             if (supplierpart == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.partId = new SelectList(db.Parts, "partId", "partName", supplierpart.partId);
-            ViewBag.supplierId = new SelectList(db.Suppliers, "supplierId", "supplierName", supplierpart.supplierId);
+
+            ViewBag.partId = new SelectList(
+                db.Parts.Where(pa => pa.partId == partId || !db.SupplierParts.Any(sp => sp.supplierId == supplierpart.supplierId && sp.partId == pa.partId))
+                , "partId", "partName", supplierpart.partId);
+
+            ViewBag.supplierId = new SelectList(
+                db.Suppliers.Where(su => su.supplierId == supplierpart.supplierId), "supplierId", "supplierName", supplierpart.supplierId);
+
             return View(supplierpart);
         }
 
@@ -90,19 +164,25 @@ namespace CarsPartsReconstruccion.Controllers
             {
                 db.Entry(supplierpart).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { SupplierId = supplierpart.supplierId });
             }
-            ViewBag.partId = new SelectList(db.Parts, "partId", "partName", supplierpart.partId);
-            ViewBag.supplierId = new SelectList(db.Suppliers, "supplierId", "supplierName", supplierpart.supplierId);
+
+            ViewBag.partId = new SelectList(
+                db.Parts.Where(pa => pa.partId == supplierpart.partId || !db.SupplierParts.Any(sp => sp.supplierId == supplierpart.supplierId && sp.partId == pa.partId))
+                , "partId", "partName", supplierpart.partId);
+
+            ViewBag.supplierId = new SelectList(
+                db.Suppliers.Where(su => su.supplierId == supplierpart.supplierId), "supplierId", "supplierName", supplierpart.supplierId);
+
             return View(supplierpart);
         }
 
         //
         // GET: /SupplierPart/Delete/5
 
-        public ActionResult Delete(int idSupplier, int idPart)
+        public ActionResult Delete(int supplierId, int partId)
         {
-            SupplierPart supplierpart = db.SupplierParts.Where(sp => sp.partId == idPart && sp.supplierId == idSupplier).FirstOrDefault();
+            SupplierPart supplierpart = db.SupplierParts.Where(sp => sp.partId == partId && sp.supplierId == supplierId).FirstOrDefault();
             if (supplierpart == null)
             {
                 return HttpNotFound();
@@ -115,12 +195,12 @@ namespace CarsPartsReconstruccion.Controllers
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int idSupplier, int idPart)
+        public ActionResult DeleteConfirmed(int supplierId, int partId)
         {
-            SupplierPart supplierpart = db.SupplierParts.Where(sp => sp.partId == idPart && sp.supplierId == idSupplier).FirstOrDefault();
+            SupplierPart supplierpart = db.SupplierParts.Where(sp => sp.partId == partId && sp.supplierId == supplierId).FirstOrDefault();
             db.SupplierParts.Remove(supplierpart);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { SupplierId = supplierpart.supplierId });
         }
 
         protected override void Dispose(bool disposing)

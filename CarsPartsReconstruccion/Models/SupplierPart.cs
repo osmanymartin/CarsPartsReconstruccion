@@ -20,9 +20,7 @@ namespace CarsPartsReconstruccion.Models
             this.ReplacedParts = new HashSet<ReplacedPart>();
         }
 
-        [Key]
         public int supplierId { get; set; }
-        [Key]
         public int partId { get; set; }
         public decimal price { get; set; }
         public int existence { get; set; }
