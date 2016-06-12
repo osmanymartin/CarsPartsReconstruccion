@@ -193,6 +193,7 @@
     <Compile Include="Controllers\ServiceController.cs" />
     <Compile Include="Controllers\SupplierController.cs" />
     <Compile Include="Controllers\SupplierPartController.cs" />
+    <Compile Include="Controllers\SupplierPieceController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -479,6 +480,12 @@
     <Content Include="Views\SupplierPart\Edit.cshtml" />
     <Content Include="Views\SupplierPart\Delete.cshtml" />
     <Content Include="Views\SupplierPart\UpdatePartPrice.cshtml" />
+    <Content Include="Views\SupplierPiece\UpdatePiecePrice.cshtml" />
+    <Content Include="Views\SupplierPiece\Index.cshtml" />
+    <Content Include="Views\SupplierPiece\Details.cshtml" />
+    <Content Include="Views\SupplierPiece\Create.cshtml" />
+    <Content Include="Views\SupplierPiece\Edit.cshtml" />
+    <Content Include="Views\SupplierPiece\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Filters\" />

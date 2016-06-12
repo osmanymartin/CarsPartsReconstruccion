@@ -1,0 +1,50 @@
+﻿@model IEnumerable<CarsPartsReconstruccion.Models.SupplierPiece>
+
+@{
+    ViewBag.Title = "Pieces List";
+}
+
+<h2>@ViewBag.Title in "@ViewBag.SupplierName"</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create", new { supplierId = ViewBag.SupplierId })
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.pieceId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.existence)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Piece.pieceName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.existence)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { supplierId = item.supplierId, pieceId = item.pieceId }) |
+                @Html.ActionLink("Details", "Details", new { supplierId = item.supplierId, pieceId = item.pieceId }) |
+                @Html.ActionLink("Delete", "Delete", new { supplierId = item.supplierId, pieceId = item.pieceId })
+            </td>
+        </tr>
+    }
+
+</table>
+
+<p>
+    @Html.ActionLink("Back to Suppliers", "Index", "Supplier")
+</p>

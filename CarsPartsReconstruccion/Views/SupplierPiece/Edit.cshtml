@@ -1,10 +1,10 @@
-﻿@model CarsPartsReconstruccion.Models.SupplierPart
+﻿@model CarsPartsReconstruccion.Models.SupplierPiece
 
 @{
-    ViewBag.Title = "Add a Part";
+    ViewBag.Title = "Edit";
 }
 
-<h2>@ViewBag.Title</h2>
+<h2>Edit</h2>
 
 @using (Html.BeginForm())
 {
@@ -12,7 +12,9 @@
     @Html.ValidationSummary(true)
 
     <fieldset>
-        <legend>SupplierPart</legend>
+        <legend>SupplierPiece</legend>
+
+        @Html.HiddenFor(model => model.supplierPieceId)
 
         <div class="editor-label">
             @Html.LabelFor(model => model.supplierId, "Supplier")
@@ -23,11 +25,11 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.partId, "Part")
+            @Html.LabelFor(model => model.pieceId, "Piece")
         </div>
         <div class="editor-field">
-            @Html.DropDownList("partId", String.Empty)
-            @Html.ValidationMessageFor(model => model.partId)
+            @Html.DropDownList("pieceId", String.Empty)
+            @Html.ValidationMessageFor(model => model.pieceId)
         </div>
 
         <div class="editor-label">
@@ -47,7 +49,7 @@
         </div>
 
         <p>
-            <input type="submit" value="Add" />
+            <input type="submit" value="Save" />
         </p>
     </fieldset>
 }
