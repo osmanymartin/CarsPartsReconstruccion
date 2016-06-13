@@ -6,7 +6,8 @@
 
 <h2>@ViewBag.Title</h2>
 
-@using (Html.BeginForm()) {
+@using (Html.BeginForm())
+{
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
@@ -38,7 +39,12 @@
             @Html.EditorFor(model => model.piecePrice)
             @Html.ValidationMessageFor(model => model.piecePrice)
         </div>
-
+        <div class="editor-label">
+            @Html.LabelFor(model => model.AverageSuppliersPrice)
+        </div>
+        <div class="editor-field">
+            @Html.DisplayFor(model => model.AverageSuppliersPrice)
+        </div>
         <p>
             <input type="submit" value="Save" />
         </p>

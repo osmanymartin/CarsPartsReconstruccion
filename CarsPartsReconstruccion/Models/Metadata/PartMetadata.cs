@@ -6,7 +6,7 @@
 
     public partial class PartMetadata
     {
-        
+
         [Required()]
         [Display(Name = "Part")]
         [StringLength(50)]
@@ -25,5 +25,8 @@
     [MetadataType(typeof(PartMetadata))]
     public partial class Part
     {
+        [Display(Name = "AverageSuppliers")]
+        [DataType(DataType.Currency)]
+        public decimal? AverageSuppliersPrice { get; set; }
     }
 }

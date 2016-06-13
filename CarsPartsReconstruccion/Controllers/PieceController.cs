@@ -18,7 +18,14 @@ namespace CarsPartsReconstruccion.Controllers
         // GET: /Piece/
         public ActionResult Index()
         {
-            return View(db.Pieces.ToList());
+            var pieces = db.Pieces.ToList();
+
+            var piecesAvg = pieces.Select(piece =>
+            {
+                piece.AverageSuppliersPrice = db.SupplierPieces.Where(sp => sp.pieceId == piece.pieceId && sp.supplierId != 4).Average(spa => (decimal?)spa.price); return piece;
+            }).ToList();
+
+            return View(piecesAvg);
         }
 
         //
@@ -65,6 +72,7 @@ namespace CarsPartsReconstruccion.Controllers
         public ActionResult Edit(int id = 0)
         {
             Piece piece = db.Pieces.Find(id);
+            piece.AverageSuppliersPrice = db.SupplierPieces.Where(sp => sp.pieceId == piece.pieceId && sp.supplierId != 4).Average(spa => (decimal?)spa.price);
             if (piece == null)
             {
                 return HttpNotFound();

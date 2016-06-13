@@ -15,10 +15,13 @@
             @Html.DisplayNameFor(model => model.partName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.partDescription)
+            @Html.DisplayNameFor(model => model.partPrice)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.partPrice)
+            @Html.DisplayNameFor(model => model.AverageSuppliersPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.partDescription)
         </th>
         <th></th>
     </tr>
@@ -30,10 +33,28 @@
                 @Html.DisplayFor(modelItem => item.partName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.partDescription)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.partPrice)
+            </td>
+            @if (item.partPrice > item.AverageSuppliersPrice)
+            {
+                <td style="color: green; background-color: #fbfaeb; ">
+                    @Html.DisplayFor(modelItem => item.AverageSuppliersPrice)
+                </td>
+            }
+            else if (item.partPrice < item.AverageSuppliersPrice)
+            {
+                <td style="color: red; background-color:#fbfaeb">
+                    @Html.DisplayFor(modelItem => item.AverageSuppliersPrice)
+                </td>
+            }
+            else
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => item.AverageSuppliersPrice)
+                </td>
+            }
+            <td>
+                @Html.DisplayFor(modelItem => item.partDescription)
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.partId }) |

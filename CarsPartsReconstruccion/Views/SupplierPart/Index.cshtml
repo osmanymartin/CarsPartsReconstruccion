@@ -20,6 +20,12 @@
         <th>
             @Html.DisplayNameFor(model => model.AverageSuppliersPrice)
         </th>
+        @if (ViewBag.SupplierId == 4)
+        {
+            <th>
+                @Html.DisplayNameFor(model => model.Part.partPrice)
+            </th>
+        }
         <th>
             @Html.DisplayNameFor(model => model.existence)
         </th>
@@ -35,13 +41,13 @@
             <td>
                 @Html.DisplayFor(modelItem => item.price)
             </td>
-            @if (item.price < item.AverageSuppliersPrice)
+            @if (item.price > item.AverageSuppliersPrice)
             {
                 <td style="color: green; background-color: #fbfaeb; ">
                     @Html.DisplayFor(modelItem => item.AverageSuppliersPrice)
                 </td>
             }
-            else if (item.price > item.AverageSuppliersPrice)
+            else if (item.price < item.AverageSuppliersPrice)
             {
                 <td style="color: red; background-color:#fbfaeb">
                     @Html.DisplayFor(modelItem => item.AverageSuppliersPrice)
@@ -51,6 +57,12 @@
             {
                 <td>
                     @Html.DisplayFor(modelItem => item.AverageSuppliersPrice)
+                </td>
+            }
+            @if (ViewBag.SupplierId == 4)
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => item.Part.partPrice)
                 </td>
             }
             <td>
