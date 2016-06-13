@@ -23,13 +23,18 @@ namespace CarsPartsReconstruccion.Controllers
                                 .Where(sp => sp.supplierId == supplierId)
                                 .Include(s => s.Part).Include(s => s.Supplier).ToList();
 
+            var supplierpartsAver = supplierparts.Select(spart =>
+            {
+                spart.AverageSuppliersPrice = db.SupplierParts.Where(sp => sp.partId == spart.partId && sp.supplierId != 4).Average(spa => (decimal?)spa.price); return spart;
+            });
+
             var supplier = db.Suppliers.Find(supplierId);
             if (supplier != null)
             {
                 ViewBag.SupplierName = supplier.supplierName;
                 ViewBag.SupplierId = supplier.supplierId;
             }
-            return View(supplierparts);
+            return View(supplierpartsAver);
         }
 
         //
@@ -76,17 +81,21 @@ namespace CarsPartsReconstruccion.Controllers
                 //Find the Part
                 var part = db.Parts.Find(supplierpart.partId);
                 //Obtain the average price
-                var average = (decimal)db.SupplierParts.Where(sp => sp.partId == supplierpart.partId).Average(sp => sp.price);
-                //Verify if the difference between reference price and the average of the suppliers prices exceed the five percent
-                var twoPercent = (decimal)(part.partPrice * 0.02m);
-                if (Math.Abs((decimal)(part.partPrice - average)) > twoPercent)
+                var average = (decimal?)db.SupplierParts.Where(sp => sp.partId == supplierpart.partId && sp.supplierId != 4).Average(sp => (decimal?)sp.price);
+                if (average != null)
                 {
-                    var referencePrice = part.partPrice;
-                    part.partPrice = Math.Round(average, 2);
+                    //Verify if the difference between reference price and the average of the suppliers prices exceed the five percent
+                    var twoPercent = (decimal)(part.partPrice * 0.02m);
+                    if (Math.Abs((decimal)(part.partPrice - average)) > twoPercent)
+                    {
+                        var referencePrice = part.partPrice;
+                        part.partPrice = Math.Round((decimal)average, 2);
 
-                    return RedirectToAction("UpdatePartPrice",
-                        new { partId = part.partId, supplierId = supplierpart.supplierId, averagePrice = average });
+                        return RedirectToAction("UpdatePartPrice",
+                            new { partId = part.partId, supplierId = supplierpart.supplierId, averagePrice = average });
+                    }
                 }
+
                 return RedirectToAction("Index", new { supplierId = supplierpart.supplierId });
             }
 
@@ -158,16 +167,19 @@ namespace CarsPartsReconstruccion.Controllers
                 //Find the Part
                 var part = db.Parts.Find(supplierpart.partId);
                 //Obtain the average price
-                var average = (decimal)db.SupplierParts.Where(sp => sp.partId == supplierpart.partId).Average(sp => sp.price);
-                //Verify if the difference between reference price and the average of the suppliers prices exceed the five percent
-                var twoPercent = (decimal)(part.partPrice * 0.02m);
-                if (Math.Abs((decimal)(part.partPrice - average)) > twoPercent)
+                var average = (decimal?)db.SupplierParts.Where(sp => sp.partId == supplierpart.partId && sp.supplierId != 4).Average(sp => (decimal?)sp.price);
+                if (average != null)
                 {
-                    var referencePrice = part.partPrice;
-                    part.partPrice = Math.Round(average, 2);
+                    //Verify if the difference between reference price and the average of the suppliers prices exceed the five percent
+                    var twoPercent = (decimal)(part.partPrice * 0.02m);
+                    if (Math.Abs((decimal)(part.partPrice - average)) > twoPercent)
+                    {
+                        var referencePrice = part.partPrice;
+                        part.partPrice = Math.Round((decimal)average, 2);
 
-                    return RedirectToAction("UpdatePartPrice",
-                        new { partId = part.partId, supplierId = supplierpart.supplierId, averagePrice = average });
+                        return RedirectToAction("UpdatePartPrice",
+                            new { partId = part.partId, supplierId = supplierpart.supplierId, averagePrice = average });
+                    }
                 }
 
                 return RedirectToAction("Index", new { SupplierId = supplierpart.supplierId });
@@ -210,16 +222,19 @@ namespace CarsPartsReconstruccion.Controllers
             //Find the Part
             var part = db.Parts.Find(supplierpart.partId);
             //Obtain the average price
-            var average = (decimal)db.SupplierParts.Where(sp => sp.partId == supplierpart.partId).Average(sp => sp.price);
-            //Verify if the difference between reference price and the average of the suppliers prices exceed the five percent
-            var twoPercent = (decimal)(part.partPrice * 0.02m);
-            if (Math.Abs((decimal)(part.partPrice - average)) > twoPercent)
+            var average = (decimal?)db.SupplierParts.Where(sp => sp.partId == supplierpart.partId && sp.supplierId != 4).Average(sp => (decimal?)sp.price);
+            if (average != null)
             {
-                var referencePrice = part.partPrice;
-                part.partPrice = Math.Round(average, 2);
+                //Verify if the difference between reference price and the average of the suppliers prices exceed the five percent
+                var twoPercent = (decimal)(part.partPrice * 0.02m);
+                if (Math.Abs((decimal)(part.partPrice - average)) > twoPercent)
+                {
+                    var referencePrice = part.partPrice;
+                    part.partPrice = Math.Round((decimal)average, 2);
 
-                return RedirectToAction("UpdatePartPrice",
-                    new { partId = part.partId, supplierId = supplierpart.supplierId, averagePrice = average });
+                    return RedirectToAction("UpdatePartPrice",
+                        new { partId = part.partId, supplierId = supplierpart.supplierId, averagePrice = average });
+                }
             }
 
             return RedirectToAction("Index", new { SupplierId = supplierpart.supplierId });

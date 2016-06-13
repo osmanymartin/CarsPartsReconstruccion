@@ -212,6 +212,7 @@
     <Compile Include="Models\Metadata\CustomerMetadata.cs" />
     <Compile Include="Models\Metadata\EmployeeMetadata.cs" />
     <Compile Include="Models\Metadata\PieceMetadata.cs" />
+    <Compile Include="Models\Metadata\SupplierPieceMetadata.cs" />
     <Compile Include="Models\Metadata\SupplierPartMetadata.cs" />
     <Compile Include="Models\Metadata\SupplierMetadata.cs" />
     <Compile Include="Models\Metadata\PartMetadata.cs" />

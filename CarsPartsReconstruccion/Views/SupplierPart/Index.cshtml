@@ -18,6 +18,9 @@
             @Html.DisplayNameFor(model => model.price)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.AverageSuppliersPrice)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.existence)
         </th>
         <th></th>
@@ -32,6 +35,24 @@
             <td>
                 @Html.DisplayFor(modelItem => item.price)
             </td>
+            @if (item.price < item.AverageSuppliersPrice)
+            {
+                <td style="color: green; background-color: #fbfaeb; ">
+                    @Html.DisplayFor(modelItem => item.AverageSuppliersPrice)
+                </td>
+            }
+            else if (item.price > item.AverageSuppliersPrice)
+            {
+                <td style="color: red; background-color:#fbfaeb">
+                    @Html.DisplayFor(modelItem => item.AverageSuppliersPrice)
+                </td>
+            }
+            else
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => item.AverageSuppliersPrice)
+                </td>
+            }
             <td>
                 @Html.DisplayFor(modelItem => item.existence)
             </td>

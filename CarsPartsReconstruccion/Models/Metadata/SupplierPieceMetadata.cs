@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
-    public partial class SupplierPartMetadata
+    public partial class SupplierPieceMetadata
     {
 
         [Required()]
@@ -12,8 +12,8 @@
         public int supplierId { get; set; }
 
         [Required()]
-        [Display(Name = "Part")]
-        public int partId { get; set; }
+        [Display(Name = "Piece")]
+        public int pieceId { get; set; }
 
         [Required()]
         [Display(Name = "Price")]
@@ -26,8 +26,8 @@
         public int existence { get; set; }
     }
 
-    [MetadataType(typeof(SupplierPartMetadata))]
-    public partial class SupplierPart
+    [MetadataType(typeof(SupplierPieceMetadata))]
+    public partial class SupplierPiece
     {
         [Display(Name = "AverageSuppliers")]
         [DataType(DataType.Currency)]
