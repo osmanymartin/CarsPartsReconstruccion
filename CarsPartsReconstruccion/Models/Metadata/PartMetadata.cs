@@ -16,7 +16,7 @@
         [StringLength(250)]
         public string partDescription { get; set; }
 
-        [Display(Name = "Price")]
+        [Display(Name = "Ref Price")]
         [DataType(DataType.Currency)]
         public Nullable<decimal> partPrice { get; set; }
 

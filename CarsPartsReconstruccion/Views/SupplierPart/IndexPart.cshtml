@@ -1,12 +1,15 @@
-﻿@model IEnumerable<CarsPartsReconstruccion.Models.SupplierPiece>
+﻿@model IEnumerable<CarsPartsReconstruccion.Models.SupplierPart>
 
 @{
     ViewBag.Title = "Suppliers List";
 }
 
-<h2>@ViewBag.Title for "@ViewBag.PieceName"</h2>
-<h2>Reference Price: @ViewBag.PiecePrice</h2>
+<h2>@ViewBag.Title for "@ViewBag.PartName"</h2>
+<h2>Reference Price: @ViewBag.PartPrice</h2>
 
+<p>
+    @Html.ActionLink("Create New", "Create", new { supplierId = ViewBag.SupplierId })
+</p>
 <table>
     <tr>
         <th>
@@ -25,7 +28,7 @@
         <tr>
             <td>
                 @Html.ActionLink(item.Supplier.supplierName,
-                "Index", "SupplierPiece", new { supplierId = item.supplierId }, null)
+                "Index", "SupplierPart", new { supplierId = item.supplierId }, null)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.price)
@@ -39,5 +42,5 @@
 </table>
 
 <p>
-    @Html.ActionLink("Back to Pieces", "Index", "Piece")
+    @Html.ActionLink("Back to Pieces", "Index", "Part")
 </p>

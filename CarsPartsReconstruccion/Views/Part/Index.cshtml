@@ -15,6 +15,9 @@
             @Html.DisplayNameFor(model => model.partName)
         </th>
         <th>
+            Suppliers
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.partPrice)
         </th>
         <th>
@@ -32,6 +35,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.partName)
             </td>
+            <td>
+                @Html.ActionLink("Suppliers", "IndexPart", "SupplierPart", new { partId = item.partId }, null)
+            </td>d
             <td>
                 @Html.DisplayFor(modelItem => item.partPrice)
             </td>
