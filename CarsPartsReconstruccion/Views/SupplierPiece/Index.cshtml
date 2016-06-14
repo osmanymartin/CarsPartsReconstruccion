@@ -61,9 +61,25 @@
             }
             @if (ViewBag.SupplierId == 4)
             {
-                <td>
-                    @Html.DisplayFor(modelItem => item.Piece.piecePrice)
-                </td>
+                if (item.price > item.Piece.piecePrice)
+                {
+                    <td style="color: green; background-color: #fbfaeb; ">
+                        @Html.DisplayFor(modelItem => item.Piece.piecePrice)
+                    </td>
+                }
+                else if (item.price < item.AverageSuppliersPrice)
+                {
+                    <td style="color: red; background-color:#fbfaeb">
+                        @Html.DisplayFor(modelItem => item.Piece.piecePrice)
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Piece.piecePrice)
+                    </td>
+                }
+
             }
             <td>
                 @Html.DisplayFor(modelItem => item.existence)

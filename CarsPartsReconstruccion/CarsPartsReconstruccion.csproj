@@ -487,6 +487,7 @@
     <Content Include="Views\SupplierPiece\Create.cshtml" />
     <Content Include="Views\SupplierPiece\Edit.cshtml" />
     <Content Include="Views\SupplierPiece\Delete.cshtml" />
+    <Content Include="Views\SupplierPiece\IndexPiece.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Filters\" />

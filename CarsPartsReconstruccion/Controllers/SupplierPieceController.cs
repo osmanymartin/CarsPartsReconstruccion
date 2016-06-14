@@ -36,6 +36,23 @@ namespace CarsPartsReconstruccion.Controllers
             return View(supplierpiecesAver);
         }
 
+        public ActionResult IndexPiece(int pieceId)
+        {
+            var supplierpieces = db.SupplierPieces
+                                    .Where(sp => sp.pieceId == pieceId)
+                                    .Include(s => s.Piece).Include(s => s.Supplier).ToList()
+                                    .OrderBy(sp => sp.price).OrderByDescending(sp => (sp.existence > 0 ? 1 : 0));
+
+            var piece = db.Pieces.Find(pieceId);
+            if (piece != null)
+            {
+                ViewBag.PieceName = piece.pieceName;
+                ViewBag.PieceId = piece.pieceId;
+                ViewBag.PiecePrice = piece.piecePrice;
+            }
+            return View(supplierpieces);
+        }
+
         //
         // GET: /SupplierPiece/Details/5
 

@@ -42,11 +42,9 @@
                 @Html.DisplayFor(modelItem => item.supplierName)
             </td>
             <td>
-                @Html.ActionLink("Parts", "Index", "SupplierPart", new { supplierId = item.supplierId },
-                new { title = "Parts List in \"" + item.supplierName + "\"" })
+                @Html.ActionLink("Parts", "Index", "SupplierPart", new { supplierId = item.supplierId }, null)
 
-                @Html.ActionLink("Pieces", "Index", "SupplierPiece", new { supplierId = item.supplierId },
-                new { title = "Parts List in \"" + item.supplierName + "\"" })
+                @Html.ActionLink("Pieces", "Index", "SupplierPiece", new { supplierId = item.supplierId }, null)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.description)

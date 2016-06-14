@@ -15,6 +15,9 @@
             @Html.DisplayNameFor(model => model.pieceName)
         </th>
         <th>
+            Suppliers
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.piecePrice)
         </th>
         <th>
@@ -31,6 +34,9 @@
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.pieceName)
+            </td>
+            <td>
+                @Html.ActionLink("Suppliers", "IndexPiece", "SupplierPiece", new { pieceId = item.pieceId }, null)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.piecePrice)
