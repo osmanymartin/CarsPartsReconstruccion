@@ -22,7 +22,7 @@ namespace CarsPartsReconstruccion.Controllers
 
             var partsAvg = parts.Select(part =>
             {
-                part.AverageSuppliersPrice = db.SupplierPieces.Where(sp => sp.pieceId == part.partId && sp.supplierId != 4).Average(spa => (decimal?)spa.price); return part;
+                part.AverageSuppliersPrice = db.SupplierParts.Where(sp => sp.partId == part.partId && sp.supplierId != 4).Average(spa => (decimal?)spa.price); return part;
             }).ToList();
 
             return View(partsAvg);
