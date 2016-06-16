@@ -37,6 +37,7 @@ namespace CarsPartsReconstruccion.Controllers
             return View(supplierpartsAver);
         }
 
+        [ChildActionOnly]
         public ActionResult PartSuppliers(int partId)
         {
             var supplierParts = db.SupplierParts
