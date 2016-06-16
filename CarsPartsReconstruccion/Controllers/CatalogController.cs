@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using CarsPartsReconstruccion.Models;
+using CarsPartsReconstruccion.Filters;
 
 namespace CarsPartsReconstruccion.Controllers
 {
@@ -16,8 +17,11 @@ namespace CarsPartsReconstruccion.Controllers
 
         //
         // GET: /Catalog/
+        [Log]
         public ActionResult Index(string catalogName)
         {
+            //throw new Exception("What the fuck is happening!!!");
+
             List<Catalog> CatalogList = db.Catalogs.Include(c => c.Catalog2).ToList();
             List<Catalog> model = new List<Catalog>();
 
