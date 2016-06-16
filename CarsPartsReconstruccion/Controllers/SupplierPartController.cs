@@ -37,6 +37,16 @@ namespace CarsPartsReconstruccion.Controllers
             return View(supplierpartsAver);
         }
 
+        public ActionResult PartSuppliers(int partId)
+        {
+            var supplierParts = db.SupplierParts
+                                    .Where(sp => sp.partId == partId)
+                                    .Include(s => s.Part).Include(s => s.Supplier).ToList()
+                                    .OrderBy(sp => sp.price).OrderByDescending(sp => (sp.existence > 0 ? 1 : 0));
+
+            return PartialView("_PartSuppliers", supplierParts);
+        }
+
         public ActionResult IndexPart(int partId)
         {
             var supplierParts = db.SupplierParts

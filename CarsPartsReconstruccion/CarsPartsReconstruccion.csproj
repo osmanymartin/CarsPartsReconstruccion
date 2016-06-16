@@ -490,6 +490,8 @@
     <Content Include="Views\SupplierPiece\Delete.cshtml" />
     <Content Include="Views\SupplierPiece\IndexPiece.cshtml" />
     <Content Include="Views\SupplierPart\IndexPart.cshtml" />
+    <Content Include="Views\SupplierPiece\_PieceSuppliers.cshtml" />
+    <Content Include="Views\SupplierPart\_PartSuppliers.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

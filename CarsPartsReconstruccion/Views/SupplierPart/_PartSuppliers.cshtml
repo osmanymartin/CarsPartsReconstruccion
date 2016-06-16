@@ -1,0 +1,32 @@
+﻿@model IEnumerable<CarsPartsReconstruccion.Models.SupplierPart>
+
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.supplierId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.existence)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink(item.Supplier.supplierName,
+                "Index", "SupplierPart", new { supplierId = item.supplierId }, null)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.existence)
+            </td>
+        </tr>
+    }
+
+</table>

@@ -7,37 +7,39 @@
 <h2>@ViewBag.Title for "@ViewBag.PieceName"</h2>
 <h2>Reference Price: @ViewBag.PiecePrice</h2>
 
-<table>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.supplierId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.price)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.existence)
-        </th>
-    </tr>
+@Html.Partial("_PieceSuppliers", Model)
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.ActionLink(item.Supplier.supplierName,
-                "Index", "SupplierPiece", new { supplierId = item.supplierId }, null)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.price)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.existence)
-            </td>
-        </tr>
-    }
+    @*<table>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.supplierId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.price)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.existence)
+                </th>
+            </tr>
 
-</table>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.ActionLink(item.Supplier.supplierName,
+                        "Index", "SupplierPiece", new { supplierId = item.supplierId }, null)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.existence)
+                    </td>
+                </tr>
+            }
 
-<p>
-    @Html.ActionLink("Back to Pieces", "Index", "Piece")
-</p>
+        </table>*@
+
+    <p>
+        @Html.ActionLink("Back to Pieces", "Index", "Piece")
+    </p>
