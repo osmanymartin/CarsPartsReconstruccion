@@ -36,7 +36,7 @@
                 @Html.DisplayFor(modelItem => item.partName)
             </td>
             <td>
-                @Html.ActionLink("Suppliers", "IndexPart", "SupplierPart", new { partId = item.partId }, null)
+                ->@Html.ActionLink("Suppliers", "IndexPart", "SupplierPart", new { partId = item.partId }, null)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.partPrice)

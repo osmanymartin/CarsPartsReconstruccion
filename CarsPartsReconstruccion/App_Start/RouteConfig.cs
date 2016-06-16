@@ -13,11 +13,11 @@ namespace CarsPartsReconstruccion
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-            routes.MapRoute(
-                name: "Catalog",
-                url: "catalog/{catalogName}",
-                defaults: new { controller = "Catalog", action = "Index", catalogName = "Employee Position" }
-            );
+            //routes.MapRoute(
+            //    name: "Catalog",
+            //    url: "catalog/{catalogName}",
+            //    defaults: new { controller = "Catalog", action = "Index", catalogName = "Employee Position" }
+            //);
 
             routes.MapRoute(
                 name: "Default",
