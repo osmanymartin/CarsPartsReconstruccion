@@ -6,12 +6,14 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using CarsPartsReconstruccion.Models;
+using System.Configuration;
 
 namespace CarsPartsReconstruccion.Controllers
 {
     [Authorize(Roles = "Admin,Employee")]
     public class PartController : Controller
     {
+        int CarPartReconstructionId = Convert.ToInt32(ConfigurationManager.AppSettings["CarPartReconstructionId"]);
         private db_cars_parts_reconstructionStrConn db = new db_cars_parts_reconstructionStrConn();
 
         //
@@ -22,7 +24,7 @@ namespace CarsPartsReconstruccion.Controllers
 
             var partsAvg = parts.Select(part =>
             {
-                part.AverageSuppliersPrice = db.SupplierParts.Where(sp => sp.partId == part.partId && sp.supplierId != 4).Average(spa => (decimal?)spa.price); return part;
+                part.AverageSuppliersPrice = db.SupplierParts.Where(sp => sp.partId == part.partId && sp.supplierId != CarPartReconstructionId).Average(spa => (decimal?)spa.price); return part;
             }).ToList();
 
             return View(partsAvg);
@@ -71,7 +73,7 @@ namespace CarsPartsReconstruccion.Controllers
         public ActionResult Edit(int id = 0)
         {
             Part part = db.Parts.Find(id);
-            part.AverageSuppliersPrice = db.SupplierParts.Where(sp => sp.partId == part.partId && sp.supplierId != 4).Average(spa => (decimal?)spa.price);
+            part.AverageSuppliersPrice = db.SupplierParts.Where(sp => sp.partId == part.partId && sp.supplierId != CarPartReconstructionId).Average(spa => (decimal?)spa.price);
             if (part == null)
             {
                 return HttpNotFound();

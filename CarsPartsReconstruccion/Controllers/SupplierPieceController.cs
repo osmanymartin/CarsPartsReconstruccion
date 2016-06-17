@@ -6,11 +6,13 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using CarsPartsReconstruccion.Models;
+using System.Configuration;
 
 namespace CarsPartsReconstruccion.Controllers
 {
     public class SupplierPieceController : Controller
     {
+        int CarPartReconstructionId = Convert.ToInt32(ConfigurationManager.AppSettings["CarPartReconstructionId"]);
         private db_cars_parts_reconstructionStrConn db = new db_cars_parts_reconstructionStrConn();
 
         //
@@ -24,7 +26,7 @@ namespace CarsPartsReconstruccion.Controllers
 
             var supplierpiecesAver = supplierpieces.Select(spiece =>
             {
-                spiece.AverageSuppliersPrice = db.SupplierPieces.Where(sp => sp.pieceId == spiece.pieceId && sp.supplierId != 4).Average(spa => (decimal?)spa.price); return spiece;
+                spiece.AverageSuppliersPrice = db.SupplierPieces.Where(sp => sp.pieceId == spiece.pieceId && sp.supplierId != CarPartReconstructionId).Average(spa => (decimal?)spa.price); return spiece;
             });
 
             var supplier = db.Suppliers.Find(supplierId);
@@ -99,7 +101,7 @@ namespace CarsPartsReconstruccion.Controllers
                 //Find the Piece
                 var piece = db.Pieces.Find(supplierpiece.pieceId);
                 //Obtain the average price
-                var average = (decimal?)db.SupplierPieces.Where(sp => sp.pieceId == supplierpiece.pieceId && sp.supplierId != 4).Average(sp => (decimal?)sp.price);
+                var average = (decimal?)db.SupplierPieces.Where(sp => sp.pieceId == supplierpiece.pieceId && sp.supplierId != CarPartReconstructionId).Average(sp => (decimal?)sp.price);
                 if (average != null)
                 {
                     //Verify if the difference between reference price and the average of the suppliers prices exceed the five percent
@@ -187,7 +189,7 @@ namespace CarsPartsReconstruccion.Controllers
                 //Find the Piece
                 var piece = db.Pieces.Find(supplierpiece.pieceId);
                 //Obtain the average price
-                var average = (decimal?)db.SupplierPieces.Where(sp => sp.pieceId == supplierpiece.pieceId && sp.supplierId != 4).Average(sp => (decimal?)sp.price);
+                var average = (decimal?)db.SupplierPieces.Where(sp => sp.pieceId == supplierpiece.pieceId && sp.supplierId != CarPartReconstructionId).Average(sp => (decimal?)sp.price);
                 if (average != null)
                 {
                     //Verify if the difference between reference price and the average of the suppliers prices exceed the five percent
@@ -242,7 +244,7 @@ namespace CarsPartsReconstruccion.Controllers
             //Find the piece
             var piece = db.Pieces.Find(supplierpiece.pieceId);
             //Obtain the average price
-            var average = (decimal?)db.SupplierPieces.Where(sp => sp.pieceId == supplierpiece.pieceId && sp.supplierId != 4).Average(sp => (decimal?)sp.price);
+            var average = (decimal?)db.SupplierPieces.Where(sp => sp.pieceId == supplierpiece.pieceId && sp.supplierId != CarPartReconstructionId).Average(sp => (decimal?)sp.price);
             if (average != null)
             {
                 //Verify if the difference between reference price and the average of the suppliers prices exceed the five percent

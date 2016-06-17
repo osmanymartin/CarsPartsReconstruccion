@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Parts List";
+    int CarPartReconstructionId = Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["CarPartReconstructionId"]);
 }
 
 <h2>@ViewBag.Title in "@ViewBag.SupplierName"</h2>
@@ -20,7 +21,7 @@
         <th>
             @Html.DisplayNameFor(model => model.AverageSuppliersPrice)
         </th>
-        @if (ViewBag.SupplierId == 4)
+        @if (ViewBag.SupplierId == CarPartReconstructionId)
         {
             <th>
                 @Html.DisplayNameFor(model => model.Part.partPrice)
@@ -59,7 +60,7 @@
                     @Html.DisplayFor(modelItem => item.AverageSuppliersPrice)
                 </td>
             }
-            @if (ViewBag.SupplierId == 4)
+            @if (ViewBag.SupplierId == CarPartReconstructionId)
             {
                 if (item.price > item.Part.partPrice)
                 {

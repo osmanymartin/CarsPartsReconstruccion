@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using CarsPartsReconstruccion.Models;
+using System.Configuration;
 
 namespace CarsPartsReconstruccion.Controllers
 {
@@ -61,6 +62,8 @@ namespace CarsPartsReconstruccion.Controllers
 
             var model = new Service();
             model.serviceDate = DateTime.Now;
+            model.statusId = Convert.ToInt32(ConfigurationManager.AppSettings["DefaultCreateReconstructionStatus"]);
+            model.statusObservations = "The reconstructión was created";
             return View(model);
         }
 
