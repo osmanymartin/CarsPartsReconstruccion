@@ -12,6 +12,10 @@
             <li>@Html.ActionLink("Suppliers", "Index", "Supplier")</li>
             <li>@Html.ActionLink("Customers", "Index", "Customer")</li>
             <li>@Html.ActionLink("Employees", "Index", "Employee")</li>
+            @if (User.IsInRole("Admin"))
+            {
+                <li>@Html.ActionLink("Users", "Index", "Users")</li>
+            }
         </ul>
     </div>
 </aside>

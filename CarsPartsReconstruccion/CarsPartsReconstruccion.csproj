@@ -194,6 +194,7 @@
     <Compile Include="Controllers\SupplierController.cs" />
     <Compile Include="Controllers\SupplierPartController.cs" />
     <Compile Include="Controllers\SupplierPieceController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Filters\LogAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -492,6 +493,9 @@
     <Content Include="Views\SupplierPart\IndexPart.cshtml" />
     <Content Include="Views\SupplierPiece\_PieceSuppliers.cshtml" />
     <Content Include="Views\SupplierPart\_PartSuppliers.cshtml" />
+    <Content Include="Views\Users\Index.cshtml" />
+    <Content Include="Views\Users\Details.cshtml" />
+    <Content Include="Views\Users\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
