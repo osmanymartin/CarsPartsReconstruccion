@@ -33,8 +33,14 @@
             @* @Html.ValidationMessageFor(model => model.UserName)*@
         </div>
 
+        <div class="editor-label">
+            <label for="Role">Role</label>
+        </div>
+
+        <input id="RoleName" name="RoleName" type="text" />
+
         <p>
-            <input type="submit" value="Save" />
+            <input type="submit" value="Add/Remove" />
         </p>
     </fieldset>
 }

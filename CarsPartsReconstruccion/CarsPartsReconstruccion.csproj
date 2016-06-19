@@ -494,7 +494,6 @@
     <Content Include="Views\SupplierPiece\_PieceSuppliers.cshtml" />
     <Content Include="Views\SupplierPart\_PartSuppliers.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
-    <Content Include="Views\Users\Details.cshtml" />
     <Content Include="Views\Users\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup />

@@ -18,20 +18,8 @@ namespace CarsPartsReconstruccion.Controllers
 
         public ActionResult Index()
         {
-            return View(db.UserProfiles.Include(us => us.webpages_Roles).ToList());
-        }
-
-        //
-        // GET: /Users/Details/5
-
-        public ActionResult Details(int id = 0)
-        {
-            UserProfile userprofile = db.UserProfiles.Find(id);
-            if (userprofile == null)
-            {
-                return HttpNotFound();
-            }
-            return View(userprofile);
+            var model = db.UserProfiles.Include(us => us.webpages_Roles).ToList();
+            return View(model);
         }
 
         //
@@ -52,12 +40,27 @@ namespace CarsPartsReconstruccion.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(UserProfile userprofile)
+        public ActionResult Edit(UserProfile userprofile, string RoleName)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(userprofile).State = EntityState.Modified;
-                db.SaveChanges();
+                webpages_Roles role;
+
+                role = db.webpages_Roles.Where(ro => ro.RoleName == RoleName).FirstOrDefault();
+                if (role != null)
+                {
+                    var user = db.UserProfiles.Single(u => u.UserId == userprofile.UserId);
+
+                    var roleInUser = user.webpages_Roles.Single(ro => ro.RoleId == role.RoleId);
+
+                    if (!user.webpages_Roles.Remove(roleInUser))
+                    {
+                        user.webpages_Roles.Add(role);
+                    }
+
+                    db.SaveChanges();
+                }
+
                 return RedirectToAction("Index");
             }
             return View(userprofile);
