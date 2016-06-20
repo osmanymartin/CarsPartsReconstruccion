@@ -17,7 +17,7 @@ namespace CarsPartsReconstruccion.Controllers
         //
         // GET: /Service/
 
-        public ActionResult Index()
+        public ActionResult Index(string searchValue = null)
         {
             List<Service> services;
 
@@ -32,7 +32,9 @@ namespace CarsPartsReconstruccion.Controllers
             }
             else
             {
-                services = db.Services.Include(s => s.Catalog).Include(s => s.Customer).Include(s => s.Employee).ToList();
+                services = db.Services
+                    .Where(ser => searchValue == null || ser.Customer.customerName.Contains(searchValue))
+                    .Include(s => s.Catalog).Include(s => s.Customer).Include(s => s.Employee).ToList();
             }
 
             return View(services);
@@ -72,7 +74,7 @@ namespace CarsPartsReconstruccion.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Service service)
+        public ActionResult Create([Bind(Exclude = "realPrice,estimatedPrice")] Service service)
         {
             if (ModelState.IsValid)
             {
