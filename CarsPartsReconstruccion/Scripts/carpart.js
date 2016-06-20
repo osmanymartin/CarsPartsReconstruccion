@@ -1,6 +1,6 @@
 ﻿$(function () {
     var ajaxFormSubmit = function () {
-        debugger;
+        //debugger;
         var $form = $(this);
 
         var options = {
