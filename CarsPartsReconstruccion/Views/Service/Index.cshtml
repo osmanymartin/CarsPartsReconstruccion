@@ -6,24 +6,28 @@
 
 <h2>@ViewBag.Title</h2>
 
-@*<form method="get">
-        <input type="search" name="searchValue" />
-        <input type="submit" value="Search By Customer" />
-    </form>*@
-
-@using (Ajax.BeginForm(new AjaxOptions
-{
-    HttpMethod = "get",
-    InsertionMode = InsertionMode.Replace,
-    UpdateTargetId = "restaurantList"
-}))
-{
+<form method="get" action="@Url.Action("Index")" data-carpart-ajax="true" data-carpart-target="#restaurantList">
     <input type="search" name="searchValue" />
     <input type="submit" value="Search By Customer" />
-}
+</form>
+
+@*@using (Ajax.BeginForm(new AjaxOptions
+    {
+        HttpMethod = "get",
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = "restaurantList"
+    }))
+    {
+        <input type="search" name="searchValue" />
+        <input type="submit" value="Search By Customer" />
+    }*@
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
 
 @Html.Partial("_ServiceList", Model)
+
+@section Scripts {
+    @Scripts.Render("~/bundles/all_jquery")
+}

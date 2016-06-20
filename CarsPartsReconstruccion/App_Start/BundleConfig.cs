@@ -12,7 +12,8 @@ namespace CarsPartsReconstruccion
                         "~/Scripts/jquery-{version}.js",
                         "~/Scripts/jquery-ui-{version}.js",
                         "~/Scripts/jquery.unobtrusive*",
-                        "~/Scripts/jquery.validate*"
+                        "~/Scripts/jquery.validate*",
+                        "~/Scripts/carpart.js"
                         ));
 
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
