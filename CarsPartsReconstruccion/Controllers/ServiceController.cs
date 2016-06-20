@@ -37,6 +37,11 @@ namespace CarsPartsReconstruccion.Controllers
                     .Include(s => s.Catalog).Include(s => s.Customer).Include(s => s.Employee).ToList();
             }
 
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("_ServiceList", services);
+            }
+
             return View(services);
         }
 

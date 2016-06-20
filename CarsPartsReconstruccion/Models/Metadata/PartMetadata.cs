@@ -19,7 +19,7 @@
 
         [Display(Name = "Ref Price")]
         [DataType(DataType.Currency)]
-        //[ValidateStockPriceAttribute(100)]
+        ////[ValidateStockPriceAttribute(100)]
         public Nullable<decimal> partPrice { get; set; }
 
     }

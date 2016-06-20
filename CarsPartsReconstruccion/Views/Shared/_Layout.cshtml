@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width" />
     <link href="~/Content/StyleImageDegradation.css" rel="stylesheet" />
     @Styles.Render("~/Content/css")
+    @*@Styles.Render("~/Content/themes/base/css")*@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
@@ -47,7 +48,9 @@
         </div>
     </footer>
 
-    @Scripts.Render("~/bundles/jquery")
+    @*@Scripts.Render("~/bundles/jquery")*@
+    @Scripts.Render("~/bundles/all_jquery")
+
     @RenderSection("scripts", required: false)
 </body>
 </html>

@@ -6,86 +6,24 @@
 
 <h2>@ViewBag.Title</h2>
 
-<form method="get">
+@*<form method="get">
+        <input type="search" name="searchValue" />
+        <input type="submit" value="Search By Customer" />
+    </form>*@
 
+@using (Ajax.BeginForm(new AjaxOptions
+{
+    HttpMethod = "get",
+    InsertionMode = InsertionMode.Replace,
+    UpdateTargetId = "restaurantList"
+}))
+{
     <input type="search" name="searchValue" />
     <input type="submit" value="Search By Customer" />
-
-</form>
+}
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
 
-@if (string.IsNullOrEmpty(ViewBag.NoElementsAdvise))
-{
-    <table>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.customerId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.serviceDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.employeeId)
-            </th>
-            @*<th>
-                    @Html.DisplayNameFor(model => model.estimatedPrice)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.realPrice)
-                </th>*@
-            <th>
-                @Html.DisplayNameFor(model => model.serviceDescription)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.statusId)
-            </th>
-            @*<th>
-                    @Html.DisplayNameFor(model => model.statusObservations)
-                </th>*@
-            <th></th>
-        </tr>
-
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Customer.customerName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.serviceDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Employee.employeeName)
-                </td>
-                @*<td>
-                        @Html.DisplayFor(modelItem => item.estimatedPrice)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.realPrice)
-                    </td>*@
-                <td>
-                    @Html.DisplayFor(modelItem => item.serviceDescription)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Catalog.catalogValue)
-                </td>
-                @*<td>
-                        @Html.DisplayFor(modelItem => item.statusObservations)
-                    </td>*@
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.serviceId }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.serviceId }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.serviceId })
-                </td>
-            </tr>
-        }
-
-    </table>
-}
-else
-{
-    <h2>@ViewBag.NoElementsAdvise</h2>
-}
+@Html.Partial("_ServiceList", Model)
