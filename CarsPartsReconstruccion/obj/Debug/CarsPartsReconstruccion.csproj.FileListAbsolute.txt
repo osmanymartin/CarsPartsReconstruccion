@@ -83,4 +83,3 @@ C:\Users\OSMAN\Documents\Visual Studio 2013\Projects\CarsPartsReconstruccion\Car
 C:\Users\OSMAN\Documents\Visual Studio 2013\Projects\CarsPartsReconstruccion\CarsPartsReconstruccion\bin\zh-Hant\System.Spatial.resources.dll
 C:\Users\OSMAN\Documents\Visual Studio 2013\Projects\CarsPartsReconstruccion\CarsPartsReconstruccion\obj\Debug\CarsPartsReconstruccion.dll
 C:\Users\OSMAN\Documents\Visual Studio 2013\Projects\CarsPartsReconstruccion\CarsPartsReconstruccion\obj\Debug\CarsPartsReconstruccion.pdb
-C:\Users\OSMAN\Documents\Visual Studio 2013\Projects\CarsPartsReconstruccion\CarsPartsReconstruccion\obj\Debug\CarsPartsReconstruccion.csprojResolveAssemblyReference.cache

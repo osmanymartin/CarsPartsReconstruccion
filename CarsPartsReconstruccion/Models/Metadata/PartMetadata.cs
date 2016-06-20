@@ -1,5 +1,6 @@
 ﻿namespace CarsPartsReconstruccion.Models
 {
+    using CarsPartsReconstruccion.ValidationAttributes;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
@@ -18,6 +19,7 @@
 
         [Display(Name = "Ref Price")]
         [DataType(DataType.Currency)]
+        //[ValidateStockPriceAttribute(100)]
         public Nullable<decimal> partPrice { get; set; }
 
     }
