@@ -85,7 +85,7 @@ namespace CarsPartsReconstruccion.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(supplier).State = EntityState.Modified;
+                db.Entry(supplier).State = System.Data.EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

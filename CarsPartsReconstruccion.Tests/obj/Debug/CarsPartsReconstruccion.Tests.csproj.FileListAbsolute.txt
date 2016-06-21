@@ -42,7 +42,6 @@ C:\Users\OSMAN\documents\visual studio 2013\Projects\CarsPartsReconstruccion\Car
 C:\Users\OSMAN\documents\visual studio 2013\Projects\CarsPartsReconstruccion\CarsPartsReconstruccion.Tests\bin\Debug\Microsoft.Data.Edm.xml
 C:\Users\OSMAN\documents\visual studio 2013\Projects\CarsPartsReconstruccion\CarsPartsReconstruccion.Tests\bin\Debug\Microsoft.Data.OData.xml
 C:\Users\OSMAN\documents\visual studio 2013\Projects\CarsPartsReconstruccion\CarsPartsReconstruccion.Tests\bin\Debug\System.Spatial.xml
-C:\Users\OSMAN\documents\visual studio 2013\Projects\CarsPartsReconstruccion\CarsPartsReconstruccion.Tests\bin\Debug\EntityFramework.xml
 C:\Users\OSMAN\documents\visual studio 2013\Projects\CarsPartsReconstruccion\CarsPartsReconstruccion.Tests\bin\Debug\Microsoft.Web.WebPages.OAuth.xml
 C:\Users\OSMAN\documents\visual studio 2013\Projects\CarsPartsReconstruccion\CarsPartsReconstruccion.Tests\bin\Debug\DotNetOpenAuth.AspNet.xml
 C:\Users\OSMAN\documents\visual studio 2013\Projects\CarsPartsReconstruccion\CarsPartsReconstruccion.Tests\bin\Debug\DotNetOpenAuth.Core.xml

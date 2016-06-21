@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using CarsPartsReconstruccion.Models;
 using System.Configuration;
+using PagedList;
 
 namespace CarsPartsReconstruccion.Controllers
 {
