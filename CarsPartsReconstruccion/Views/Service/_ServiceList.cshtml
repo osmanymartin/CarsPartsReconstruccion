@@ -9,26 +9,26 @@
                                     PagedListRenderOptions.MinimalWithItemCountText)
         </div>
         <table>
-            @*<tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.customerId)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.serviceDate)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.employeeId)
-                    </th>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model[0].customerId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model[0].serviceDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model[0].employeeId)
+                </th>
 
-                    <th>
-                        @Html.DisplayNameFor(model => model.serviceDescription)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.statusId)
-                    </th>
+                <th>
+                    @Html.DisplayNameFor(model => model[0].serviceDescription)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model[0].statusId)
+                </th>
 
-                    <th></th>
-                </tr>*@
+                <th></th>
+            </tr>
 
             @foreach (var item in Model)
             {
