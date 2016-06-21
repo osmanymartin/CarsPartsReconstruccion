@@ -28,32 +28,36 @@ namespace CarsPartsReconstruccion.Controllers
         //
         // GET: /Service/
 
-        public ActionResult Index(string searchValue = null)
+        public ActionResult Index(string searchValue = null, int page = 1)
         {
-            List<Service> services;
+            IPagedList<Service> model;
 
             if (!User.IsInRole("Admin") && !User.IsInRole("Employee"))
             {
-                services = db.Services.Where(se => se.Customer.userLogin == User.Identity.Name).
-                    Include(s => s.Catalog).Include(s => s.Customer).Include(s => s.Employee).ToList();
-                if (!services.Any())
+                model = db.Services.Where(se => se.Customer.userLogin == User.Identity.Name).
+                    Include(s => s.Catalog).Include(s => s.Customer).Include(s => s.Employee)
+                    .OrderByDescending(ser => ser.serviceDate)
+                    .ToPagedList(page, 8);
+                if (!model.Any())
                 {
                     ViewBag.NoElementsAdvise = "You don't have any Restaurations avilable.";
                 }
             }
             else
             {
-                services = db.Services
+                model = db.Services
                     .Where(ser => searchValue == null || ser.Customer.customerName.Contains(searchValue))
-                    .Include(s => s.Catalog).Include(s => s.Customer).Include(s => s.Employee).ToList();
+                    .Include(s => s.Catalog).Include(s => s.Customer).Include(s => s.Employee)
+                    .OrderByDescending(ser => ser.serviceDate)
+                    .ToPagedList(page, 8);
             }
 
             if (Request.IsAjaxRequest())
             {
-                return PartialView("_ServiceList", services);
+                return PartialView("_ServiceList", model);
             }
 
-            return View(services);
+            return View(model);
         }
 
         //

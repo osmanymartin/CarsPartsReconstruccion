@@ -79,3 +79,5 @@ C:\Users\OSMAN\documents\visual studio 2013\Projects\CarsPartsReconstruccion\Car
 C:\Users\OSMAN\documents\visual studio 2013\Projects\CarsPartsReconstruccion\CarsPartsReconstruccion.Tests\obj\Debug\CarsPartsReconstruccion.Tests.csprojResolveAssemblyReference.cache
 C:\Users\OSMAN\documents\visual studio 2013\Projects\CarsPartsReconstruccion\CarsPartsReconstruccion.Tests\obj\Debug\CarsPartsReconstruccion.Tests.dll
 C:\Users\OSMAN\documents\visual studio 2013\Projects\CarsPartsReconstruccion\CarsPartsReconstruccion.Tests\obj\Debug\CarsPartsReconstruccion.Tests.pdb
+C:\Users\OSMAN\Documents\Visual Studio 2013\Projects\CarsPartsReconstruccion\CarsPartsReconstruccion.Tests\bin\Debug\PagedList.dll
+C:\Users\OSMAN\Documents\Visual Studio 2013\Projects\CarsPartsReconstruccion\CarsPartsReconstruccion.Tests\bin\Debug\PagedList.xml

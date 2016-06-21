@@ -1,37 +1,37 @@
-﻿@model IEnumerable<CarsPartsReconstruccion.Models.Service>
+﻿@model IPagedList<CarsPartsReconstruccion.Models.Service>
 
 <div id="restaurantList">
 
     @if (string.IsNullOrEmpty(ViewBag.NoElementsAdvise))
     {
+        <div class="pagedList" data-carpart-target="#restaurantList">
+
+            @Html.PagedListPager(Model, page => Url.Action("Index", new { page }),
+                                    PagedListRenderOptions.MinimalWithItemCountText)
+
+        </div>
+
         <table>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.customerId)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.serviceDate)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.employeeId)
-                </th>
-                @*<th>
-                        @Html.DisplayNameFor(model => model.estimatedPrice)
+            @*<tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.customerId)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.realPrice)
-                    </th>*@
-                <th>
-                    @Html.DisplayNameFor(model => model.serviceDescription)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.statusId)
-                </th>
-                @*<th>
-                        @Html.DisplayNameFor(model => model.statusObservations)
-                    </th>*@
-                <th></th>
-            </tr>
+                        @Html.DisplayNameFor(model => model.serviceDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.employeeId)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.serviceDescription)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.statusId)
+                    </th>
+
+                    <th></th>
+                </tr>*@
 
             @foreach (var item in Model)
             {
