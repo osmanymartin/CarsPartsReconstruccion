@@ -49,9 +49,9 @@ namespace CarsPartsReconstruccion.Controllers
                 role = db.webpages_Roles.Where(ro => ro.RoleName == RoleName).FirstOrDefault();
                 if (role != null)
                 {
-                    var user = db.UserProfiles.Single(u => u.UserId == userprofile.UserId);
+                    var user = db.UserProfiles.Where(u => u.UserId == userprofile.UserId).FirstOrDefault();
 
-                    var roleInUser = user.webpages_Roles.Single(ro => ro.RoleId == role.RoleId);
+                    var roleInUser = user.webpages_Roles.Where(ro => ro.RoleId == role.RoleId).FirstOrDefault();
 
                     if (!user.webpages_Roles.Remove(roleInUser))
                     {
