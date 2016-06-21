@@ -1,13 +1,16 @@
 ﻿@model IPagedList<CarsPartsReconstruccion.Models.Service>
 
 <div id="restaurantList">
+
     @if (string.IsNullOrEmpty(ViewBag.NoElementsAdvise))
     {
         <div class="pagedList" data-carpart-target="#restaurantList">
 
             @Html.PagedListPager(Model, page => Url.Action("Index", new { page }),
                                     PagedListRenderOptions.MinimalWithItemCountText)
+
         </div>
+
         <table>
             @*<tr>
                     <th>
@@ -64,6 +67,7 @@
                     </td>
                 </tr>
             }
+
         </table>
     }
     else
