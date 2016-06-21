@@ -18,8 +18,9 @@ namespace CarsPartsReconstruccion.Controllers
         public ActionResult Autocomplete(string term)
         {
             var model = db.Services.Where(ser => ser.Customer.customerName.Contains(term))
-                .Take(10)
-                .Select(r => new { label = r.Customer.customerName });
+                            .Select(r => new { label = r.Customer.customerName })
+                            .Distinct()
+                            .Take(10);
             return Json(model, JsonRequestBehavior.AllowGet);
         }
 

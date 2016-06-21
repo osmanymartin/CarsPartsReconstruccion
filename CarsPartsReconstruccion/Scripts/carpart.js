@@ -11,7 +11,11 @@
 
         $.ajax(options).done(function (data) {
             var $target = $($form.attr("data-carpart-target"));
-            $target.replaceWith(data);
+
+            var $newHtml = $(data);
+            $target.replaceWith($newHtml);
+            $newHtml.effect("highlight");
+
         });
 
         return false;
