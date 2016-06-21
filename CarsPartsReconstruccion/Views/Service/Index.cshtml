@@ -6,8 +6,10 @@
 
 <h2>@ViewBag.Title</h2>
 
-<form method="get" action="@Url.Action("Index")" data-carpart-ajax="true" data-carpart-target="#restaurantList">
-    <input type="search" name="searchValue" />
+<form method="get" action="@Url.Action("Index")"
+      data-carpart-ajax="true" data-carpart-target="#restaurantList">
+
+    <input type="search" name="searchValue" data-carpart-autocomplete="@Url.Action("Autocomplete")" />
     <input type="submit" value="Search By Customer" />
 </form>
 
@@ -29,5 +31,5 @@
 @Html.Partial("_ServiceList", Model)
 
 @section Scripts {
-    @Scripts.Render("~/bundles/all_jquery")
+    @* @Scripts.Render("~/bundles/all_jquery")*@
 }

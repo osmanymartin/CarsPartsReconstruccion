@@ -14,6 +14,15 @@ namespace CarsPartsReconstruccion.Controllers
     {
         private db_cars_parts_reconstructionStrConn db = new db_cars_parts_reconstructionStrConn();
 
+
+        public ActionResult Autocomplete(string term)
+        {
+            var model = db.Services.Where(ser => ser.Customer.customerName.Contains(term))
+                .Take(10)
+                .Select(r => new { label = r.Customer.customerName });
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+
         //
         // GET: /Service/
 

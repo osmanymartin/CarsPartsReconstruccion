@@ -34,6 +34,7 @@ namespace CarsPartsReconstruccion
             bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css", "~/Content/StylePreferences.css"));
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
+                        "~/Content/themes/base/*.css",
                         "~/Content/themes/base/jquery.ui.core.css",
                         "~/Content/themes/base/jquery.ui.resizable.css",
                         "~/Content/themes/base/jquery.ui.selectable.css",
