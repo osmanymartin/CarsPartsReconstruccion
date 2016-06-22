@@ -1,0 +1,86 @@
+﻿@model IEnumerable<CarsPartsReconstruccion.Models.ServiceCar>
+
+@*@{
+        ViewBag.Title = "Index";
+    }
+
+    <h2>Index</h2>
+
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>*@
+
+<table>
+    <tr>
+        @*<th>
+                @Html.DisplayNameFor(model => model.Service.serviceDescription)
+            </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.carBrandId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.carModelId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.year)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.estimatedPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.realPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.serviceCarDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.statusId)
+        </th>
+        @*<th>
+                    @Html.DisplayNameFor(model => model.observations)
+                </th>
+            <th></th>*@
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.Service.serviceDescription)
+                </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.Catalog.catalogValue)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Catalog1.catalogValue)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.year)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.estimatedPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.realPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.serviceCarDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Catalog2.catalogValue)
+            </td>
+            @* <td>
+                    @Html.DisplayFor(modelItem => item.observations)
+                </td>
+                <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.serviceCarId }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.serviceCarId }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.serviceCarId })
+                    </td>*@
+        </tr>
+
+        @Html.Action("ReplacedParts", "ReplacedPart", new { serviceCarId = item.serviceCarId })
+    }
+
+</table>
+

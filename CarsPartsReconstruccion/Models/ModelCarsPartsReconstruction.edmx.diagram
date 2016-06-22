@@ -11,7 +11,6 @@
         <EntityTypeShape EntityType="db_cars_parts_reconstructionModel.ReplacedPartTrack" Width="1.5" PointX="18" PointY="12.875" IsExpanded="true" />
         <EntityTypeShape EntityType="db_cars_parts_reconstructionModel.ReplacedPiece" Width="1.5" PointX="12.75" PointY="15.25" IsExpanded="true" />
         <EntityTypeShape EntityType="db_cars_parts_reconstructionModel.ReplacedPieceTrack" Width="1.5" PointX="15" PointY="17.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="db_cars_parts_reconstructionModel.ServiceCar" Width="1.5" PointX="7.5" PointY="9" IsExpanded="true" />
         <EntityTypeShape EntityType="db_cars_parts_reconstructionModel.ServiceCarMiscellaneousCost" Width="1.5" PointX="9.75" PointY="6.25" IsExpanded="true" />
         <EntityTypeShape EntityType="db_cars_parts_reconstructionModel.ServiceCarTrack" Width="1.5" PointX="12.75" PointY="6.25" IsExpanded="true" />
         <EntityTypeShape EntityType="db_cars_parts_reconstructionModel.ServiceMiscellaneousCost" Width="1.5" PointX="10.5" PointY="9.875" IsExpanded="true" />
@@ -26,8 +25,6 @@
         <AssociationConnector Association="db_cars_parts_reconstructionModel.FK_replaced_piece_service_part" ManuallyRouted="false" />
         <AssociationConnector Association="db_cars_parts_reconstructionModel.FK_replaced_piece_supplier_piece" ManuallyRouted="false" />
         <AssociationConnector Association="db_cars_parts_reconstructionModel.FK_replaced_piece_track_replaced_piece" ManuallyRouted="false" />
-        <AssociationConnector Association="db_cars_parts_reconstructionModel.FK_service_car_miscellaneous_costs_Service_Car" ManuallyRouted="false" />
-        <AssociationConnector Association="db_cars_parts_reconstructionModel.FK_service_car_track_Service_Car" ManuallyRouted="false" />
         <AssociationConnector Association="db_cars_parts_reconstructionModel.FK_service_part_miscellaneous_costs_service_part" ManuallyRouted="false" />
         <AssociationConnector Association="db_cars_parts_reconstructionModel.FK_service_part_track_service_part" ManuallyRouted="false" />
         <AssociationConnector Association="db_cars_parts_reconstructionModel.FK_supplier_piece_supplier" ManuallyRouted="false" />
@@ -39,10 +36,7 @@
         <AssociationConnector Association="db_cars_parts_reconstructionModel.FK_replaced_part_track_status_type" />
         <AssociationConnector Association="db_cars_parts_reconstructionModel.FK_replaced_piece_status_type" />
         <AssociationConnector Association="db_cars_parts_reconstructionModel.FK_replaced_piece_track_status_type" />
-        <AssociationConnector Association="db_cars_parts_reconstructionModel.FK_Service_Car_brand_type" />
         <AssociationConnector Association="db_cars_parts_reconstructionModel.FK_service_car_miscellaneous_costs_type" />
-        <AssociationConnector Association="db_cars_parts_reconstructionModel.FK_Service_Car_model_type" />
-        <AssociationConnector Association="db_cars_parts_reconstructionModel.FK_Service_Car_status_type" />
         <AssociationConnector Association="db_cars_parts_reconstructionModel.FK_service_car_track_status_type" />
         <AssociationConnector Association="db_cars_parts_reconstructionModel.FK_service_miscellaneous_costs_type" />
         <AssociationConnector Association="db_cars_parts_reconstructionModel.FK_service_part_miscellaneous_costs_type" />
@@ -55,7 +49,6 @@
         <AssociationConnector Association="db_cars_parts_reconstructionModel.FK_service_status_type" />
         <AssociationConnector Association="db_cars_parts_reconstructionModel.FK_service_customer" />
         <AssociationConnector Association="db_cars_parts_reconstructionModel.FK_service_employee" />
-        <AssociationConnector Association="db_cars_parts_reconstructionModel.FK_Service_Car_service" />
         <AssociationConnector Association="db_cars_parts_reconstructionModel.FK_service_miscellaneous_costs_service" />
         <AssociationConnector Association="db_cars_parts_reconstructionModel.FK_service_part_service" />
         <AssociationConnector Association="db_cars_parts_reconstructionModel.FK_service_track_service" />
@@ -66,11 +59,18 @@
         <EntityTypeShape EntityType="db_cars_parts_reconstructionModel.SupplierPart" Width="1.5" PointX="7.5" PointY="18.75" />
         <AssociationConnector Association="db_cars_parts_reconstructionModel.FK_replaced_part_status_type" />
         <AssociationConnector Association="db_cars_parts_reconstructionModel.FK_supplier_part_part" />
-        <AssociationConnector Association="db_cars_parts_reconstructionModel.FK_replaced_part_Service_Car" />
         <AssociationConnector Association="db_cars_parts_reconstructionModel.FK_replaced_part_service_part" />
         <AssociationConnector Association="db_cars_parts_reconstructionModel.FK_replaced_part_track_replaced_part" />
         <AssociationConnector Association="db_cars_parts_reconstructionModel.FK_ReplacedPart_SupplierPart" />
         <AssociationConnector Association="db_cars_parts_reconstructionModel.FK_supplier_part_supplier" />
+        <EntityTypeShape EntityType="db_cars_parts_reconstructionModel.ServiceCar" Width="1.5" PointX="7.5" PointY="8" />
+        <AssociationConnector Association="db_cars_parts_reconstructionModel.FK_Service_Car_brand_type" />
+        <AssociationConnector Association="db_cars_parts_reconstructionModel.FK_Service_Car_model_type" />
+        <AssociationConnector Association="db_cars_parts_reconstructionModel.FK_Service_Car_status_type" />
+        <AssociationConnector Association="db_cars_parts_reconstructionModel.FK_replaced_part_Service_Car" />
+        <AssociationConnector Association="db_cars_parts_reconstructionModel.FK_Service_Car_service" />
+        <AssociationConnector Association="db_cars_parts_reconstructionModel.FK_service_car_miscellaneous_costs_Service_Car" />
+        <AssociationConnector Association="db_cars_parts_reconstructionModel.FK_service_car_track_Service_Car" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

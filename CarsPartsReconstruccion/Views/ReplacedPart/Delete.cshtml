@@ -1,0 +1,68 @@
+﻿@model CarsPartsReconstruccion.Models.ReplacedPart
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>ReplacedPart</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ServiceCar.serviceCarDescription)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ServiceCar.serviceCarDescription)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.SupplierPart.supplierId)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.SupplierPart.supplierId)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.partId)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.partId)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ServicePart.servicePartDescription)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ServicePart.servicePartDescription)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.replacedPartPrice)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.replacedPartPrice)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Catalog.catalogValue)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Catalog.catalogValue)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.observations)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.observations)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

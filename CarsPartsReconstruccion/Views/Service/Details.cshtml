@@ -6,66 +6,71 @@
 
 <h2>@ViewBag.Title</h2>
 
-<fieldset>
-    <legend>Service</legend>
+<aside>
+    <fieldset>
+        <legend>Reconstruction</legend>
 
-    <div class="display-label">
-        @Html.DisplayNameFor(model => model.customerId)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Customer.customerName)
-    </div>
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.customerId)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.Customer.customerName)
+        </div>
 
-    <div class="display-label">
-        @Html.DisplayNameFor(model => model.serviceDate)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.serviceDate)
-    </div>
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.serviceDate)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.serviceDate)
+        </div>
 
-    <div class="display-label">
-        @Html.DisplayNameFor(model => model.employeeId)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Employee.employeeName)
-    </div>
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.employeeId)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.Employee.employeeName)
+        </div>
 
-    <div class="display-label">
-        @Html.DisplayNameFor(model => model.estimatedPrice)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.estimatedPrice)
-    </div>
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.estimatedPrice)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.estimatedPrice)
+        </div>
 
-    <div class="display-label">
-        @Html.DisplayNameFor(model => model.realPrice)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.realPrice)
-    </div>
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.realPrice)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.realPrice)
+        </div>
 
-    <div class="display-label">
-        @Html.DisplayNameFor(model => model.serviceDescription)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.serviceDescription)
-    </div>
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.serviceDescription)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.serviceDescription)
+        </div>
 
-    <div class="display-label">
-        @Html.DisplayNameFor(model => model.statusId)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Catalog.catalogValue)
-    </div>
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.statusId)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.Catalog.catalogValue)
+        </div>
 
-    <div class="display-label">
-        @Html.DisplayNameFor(model => model.statusObservations)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.statusObservations)
-    </div>
-</fieldset>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.serviceId }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.statusObservations)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.statusObservations)
+        </div>
+    </fieldset>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.serviceId }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</aside>
+
+@Html.Action("ServiceCars", "ServiceCar", new { serviceId = Model.serviceId })
+

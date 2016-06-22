@@ -11,20 +11,19 @@ namespace CarsPartsReconstruccion.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class SupplierPart
     {
         public SupplierPart()
         {
             this.ReplacedParts = new HashSet<ReplacedPart>();
         }
-
+    
         public int supplierId { get; set; }
         public int partId { get; set; }
         public decimal price { get; set; }
         public int existence { get; set; }
-
+    
         public virtual Part Part { get; set; }
         public virtual ICollection<ReplacedPart> ReplacedParts { get; set; }
         public virtual Supplier Supplier { get; set; }

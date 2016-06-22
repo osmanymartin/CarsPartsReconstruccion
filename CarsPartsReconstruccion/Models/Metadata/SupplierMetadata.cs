@@ -25,7 +25,7 @@
         [StringLength(250)]
         public string description { get; set; }
 
-         [Display(Name = "Representative")]
+        [Display(Name = "Representative")]
         public Nullable<int> idRepresentative { get; set; }
 
     }

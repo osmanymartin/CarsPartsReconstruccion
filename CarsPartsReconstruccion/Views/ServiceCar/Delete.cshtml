@@ -1,0 +1,83 @@
+﻿@model CarsPartsReconstruccion.Models.ServiceCar
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>ServiceCar</legend>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Service.serviceDescription)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Service.serviceDescription)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Catalog.catalogValue)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Catalog.catalogValue)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Catalog1.catalogValue)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Catalog1.catalogValue)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.year)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.year)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.estimatedPrice)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.estimatedPrice)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.realPrice)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.realPrice)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.serviceCarDescription)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.serviceCarDescription)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Catalog2.catalogValue)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Catalog2.catalogValue)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.observations)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.observations)
+    </div>
+</fieldset>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

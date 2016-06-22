@@ -114,6 +114,7 @@
     <Property Name="serviceId" Type="int" Nullable="false" />
     <Property Name="carBrandId" Type="int" Nullable="false" />
     <Property Name="carModelId" Type="int" Nullable="false" />
+    <Property Name="year" Type="int" Nullable="false" />
     <Property Name="estimatedPrice" Type="numeric" Precision="8" Scale="2" />
     <Property Name="realPrice" Type="numeric" Precision="8" Scale="2" />
     <Property Name="serviceCarDescription" Type="nvarchar" MaxLength="250" />

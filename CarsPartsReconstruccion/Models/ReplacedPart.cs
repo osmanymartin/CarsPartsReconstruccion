@@ -29,9 +29,9 @@ namespace CarsPartsReconstruccion.Models
         public string observations { get; set; }
     
         public virtual Catalog Catalog { get; set; }
-        public virtual ServiceCar ServiceCar { get; set; }
         public virtual ServicePart ServicePart { get; set; }
         public virtual ICollection<ReplacedPartTrack> ReplacedPartTracks { get; set; }
         public virtual SupplierPart SupplierPart { get; set; }
+        public virtual ServiceCar ServiceCar { get; set; }
     }
 }

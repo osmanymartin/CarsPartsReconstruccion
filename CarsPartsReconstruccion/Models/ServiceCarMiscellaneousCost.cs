@@ -20,7 +20,7 @@ namespace CarsPartsReconstruccion.Models
         public int costTypeId { get; set; }
         public string description { get; set; }
     
-        public virtual ServiceCar ServiceCar { get; set; }
         public virtual Catalog Catalog { get; set; }
+        public virtual ServiceCar ServiceCar { get; set; }
     }
 }

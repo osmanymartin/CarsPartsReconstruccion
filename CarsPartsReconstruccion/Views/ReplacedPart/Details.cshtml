@@ -1,0 +1,64 @@
+﻿@model CarsPartsReconstruccion.Models.ReplacedPart
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>ReplacedPart</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ServiceCar.serviceCarDescription)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ServiceCar.serviceCarDescription)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.SupplierPart.supplierId)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.SupplierPart.supplierId)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.partId)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.partId)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ServicePart.servicePartDescription)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ServicePart.servicePartDescription)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.replacedPartPrice)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.replacedPartPrice)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Catalog.catalogValue)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Catalog.catalogValue)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.observations)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.observations)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.replacedPartId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

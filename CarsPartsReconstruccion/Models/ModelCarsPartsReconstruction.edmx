@@ -119,6 +119,7 @@
           <Property Name="serviceId" Type="int" Nullable="false" />
           <Property Name="carBrandId" Type="int" Nullable="false" />
           <Property Name="carModelId" Type="int" Nullable="false" />
+          <Property Name="year" Type="int" Nullable="false" />
           <Property Name="estimatedPrice" Type="numeric" Precision="8" Scale="2" />
           <Property Name="realPrice" Type="numeric" Precision="8" Scale="2" />
           <Property Name="serviceCarDescription" Type="nvarchar" MaxLength="250" />
@@ -1055,27 +1056,6 @@
           <NavigationProperty Name="ReplacedPiece" Relationship="Self.FK_replaced_piece_track_replaced_piece" FromRole="ReplacedPieceTrack" ToRole="ReplacedPiece" />
           <NavigationProperty Name="Catalog" Relationship="db_cars_parts_reconstructionModel.FK_replaced_piece_track_status_type" FromRole="ReplacedPieceTrack" ToRole="Catalog" />
         </EntityType>
-        <EntityType Name="ServiceCar">
-          <Key>
-            <PropertyRef Name="serviceCarId" />
-          </Key>
-          <Property Name="serviceCarId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="serviceId" Type="Int32" Nullable="false" />
-          <Property Name="carBrandId" Type="Int32" Nullable="false" />
-          <Property Name="carModelId" Type="Int32" Nullable="false" />
-          <Property Name="estimatedPrice" Type="Decimal" Precision="8" Scale="2" />
-          <Property Name="realPrice" Type="Decimal" Precision="8" Scale="2" />
-          <Property Name="serviceCarDescription" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="statusId" Type="Int32" Nullable="false" />
-          <Property Name="observations" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="ServiceCarMiscellaneousCosts" Relationship="Self.FK_service_car_miscellaneous_costs_Service_Car" FromRole="ServiceCar" ToRole="ServiceCarMiscellaneousCosts" />
-          <NavigationProperty Name="ServiceCarTracks" Relationship="Self.FK_service_car_track_Service_Car" FromRole="ServiceCar" ToRole="ServiceCarTrack" />
-          <NavigationProperty Name="Catalog" Relationship="db_cars_parts_reconstructionModel.FK_Service_Car_brand_type" FromRole="ServiceCar" ToRole="Catalog" />
-          <NavigationProperty Name="Catalog1" Relationship="db_cars_parts_reconstructionModel.FK_Service_Car_model_type" FromRole="ServiceCar" ToRole="Catalog" />
-          <NavigationProperty Name="Catalog2" Relationship="db_cars_parts_reconstructionModel.FK_Service_Car_status_type" FromRole="ServiceCar" ToRole="Catalog" />
-          <NavigationProperty Name="Service" Relationship="db_cars_parts_reconstructionModel.FK_Service_Car_service" FromRole="ServiceCar" ToRole="Service" />
-          <NavigationProperty Name="ReplacedParts" Relationship="db_cars_parts_reconstructionModel.FK_replaced_part_Service_Car" FromRole="ServiceCar" ToRole="ReplacedPart" />
-          </EntityType>
         <EntityType Name="ServiceCarMiscellaneousCost">
           <Key>
             <PropertyRef Name="serviceCarMiscellaneousCostsId" />
@@ -1085,8 +1065,8 @@
           <Property Name="cost" Type="Decimal" Precision="8" Scale="2" Nullable="false" />
           <Property Name="costTypeId" Type="Int32" Nullable="false" />
           <Property Name="description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="ServiceCar" Relationship="Self.FK_service_car_miscellaneous_costs_Service_Car" FromRole="ServiceCarMiscellaneousCosts" ToRole="ServiceCar" />
           <NavigationProperty Name="Catalog" Relationship="db_cars_parts_reconstructionModel.FK_service_car_miscellaneous_costs_type" FromRole="ServiceCarMiscellaneousCost" ToRole="Catalog" />
+          <NavigationProperty Name="ServiceCar" Relationship="db_cars_parts_reconstructionModel.FK_service_car_miscellaneous_costs_Service_Car" FromRole="ServiceCarMiscellaneousCost" ToRole="ServiceCar" />
         </EntityType>
         <EntityType Name="ServiceCarTrack">
           <Key>
@@ -1097,8 +1077,8 @@
           <Property Name="serviceCarId" Type="Int32" Nullable="false" />
           <Property Name="statusId" Type="Int32" Nullable="false" />
           <Property Name="observations" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="ServiceCar" Relationship="Self.FK_service_car_track_Service_Car" FromRole="ServiceCarTrack" ToRole="ServiceCar" />
           <NavigationProperty Name="Catalog" Relationship="db_cars_parts_reconstructionModel.FK_service_car_track_status_type" FromRole="ServiceCarTrack" ToRole="Catalog" />
+          <NavigationProperty Name="ServiceCar" Relationship="db_cars_parts_reconstructionModel.FK_service_car_track_Service_Car" FromRole="ServiceCarTrack" ToRole="ServiceCar" />
         </EntityType>
         <EntityType Name="ServiceMiscellaneousCost">
           <Key>
@@ -1255,30 +1235,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_service_car_miscellaneous_costs_Service_Car">
-          <End Role="ServiceCar" Type="Self.ServiceCar" Multiplicity="1" />
-          <End Role="ServiceCarMiscellaneousCosts" Type="Self.ServiceCarMiscellaneousCost" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ServiceCar">
-              <PropertyRef Name="serviceCarId" />
-            </Principal>
-            <Dependent Role="ServiceCarMiscellaneousCosts">
-              <PropertyRef Name="serviceCarId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_service_car_track_Service_Car">
-          <End Role="ServiceCar" Type="Self.ServiceCar" Multiplicity="1" />
-          <End Role="ServiceCarTrack" Type="Self.ServiceCarTrack" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ServiceCar">
-              <PropertyRef Name="serviceCarId" />
-            </Principal>
-            <Dependent Role="ServiceCarTrack">
-              <PropertyRef Name="serviceCarId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_service_part_miscellaneous_costs_service_part">
           <End Role="ServicePart" Type="Self.ServicePart" Multiplicity="1" />
           <End Role="ServicePartMiscellaneousCosts" Type="Self.ServicePartMiscellaneousCost" Multiplicity="*" />
@@ -1322,7 +1278,6 @@
           <EntitySet Name="ReplacedPartTracks" EntityType="Self.ReplacedPartTrack" />
           <EntitySet Name="ReplacedPieces" EntityType="Self.ReplacedPiece" />
           <EntitySet Name="ReplacedPieceTracks" EntityType="Self.ReplacedPieceTrack" />
-          <EntitySet Name="ServiceCars" EntityType="Self.ServiceCar" />
           <EntitySet Name="ServiceCarMiscellaneousCosts" EntityType="Self.ServiceCarMiscellaneousCost" />
           <EntitySet Name="ServiceCarTracks" EntityType="Self.ServiceCarTrack" />
           <EntitySet Name="ServiceMiscellaneousCosts" EntityType="Self.ServiceMiscellaneousCost" />
@@ -1351,14 +1306,6 @@
           <AssociationSet Name="FK_replaced_piece_track_replaced_piece" Association="Self.FK_replaced_piece_track_replaced_piece">
             <End Role="ReplacedPiece" EntitySet="ReplacedPieces" />
             <End Role="ReplacedPieceTrack" EntitySet="ReplacedPieceTracks" />
-          </AssociationSet>
-          <AssociationSet Name="FK_service_car_miscellaneous_costs_Service_Car" Association="Self.FK_service_car_miscellaneous_costs_Service_Car">
-            <End Role="ServiceCar" EntitySet="ServiceCars" />
-            <End Role="ServiceCarMiscellaneousCosts" EntitySet="ServiceCarMiscellaneousCosts" />
-          </AssociationSet>
-          <AssociationSet Name="FK_service_car_track_Service_Car" Association="Self.FK_service_car_track_Service_Car">
-            <End Role="ServiceCar" EntitySet="ServiceCars" />
-            <End Role="ServiceCarTrack" EntitySet="ServiceCarTracks" />
           </AssociationSet>
           <AssociationSet Name="FK_service_part_miscellaneous_costs_service_part" Association="Self.FK_service_part_miscellaneous_costs_service_part">
             <End Role="ServicePart" EntitySet="ServiceParts" />
@@ -1398,21 +1345,9 @@
             <End Role="Catalog" EntitySet="Catalogs" />
             <End Role="ReplacedPieceTrack" EntitySet="ReplacedPieceTracks" />
           </AssociationSet>
-          <AssociationSet Name="FK_Service_Car_brand_type" Association="db_cars_parts_reconstructionModel.FK_Service_Car_brand_type">
-            <End Role="Catalog" EntitySet="Catalogs" />
-            <End Role="ServiceCar" EntitySet="ServiceCars" />
-          </AssociationSet>
           <AssociationSet Name="FK_service_car_miscellaneous_costs_type" Association="db_cars_parts_reconstructionModel.FK_service_car_miscellaneous_costs_type">
             <End Role="Catalog" EntitySet="Catalogs" />
             <End Role="ServiceCarMiscellaneousCost" EntitySet="ServiceCarMiscellaneousCosts" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Service_Car_model_type" Association="db_cars_parts_reconstructionModel.FK_Service_Car_model_type">
-            <End Role="Catalog" EntitySet="Catalogs" />
-            <End Role="ServiceCar" EntitySet="ServiceCars" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Service_Car_status_type" Association="db_cars_parts_reconstructionModel.FK_Service_Car_status_type">
-            <End Role="Catalog" EntitySet="Catalogs" />
-            <End Role="ServiceCar" EntitySet="ServiceCars" />
           </AssociationSet>
           <AssociationSet Name="FK_service_car_track_status_type" Association="db_cars_parts_reconstructionModel.FK_service_car_track_status_type">
             <End Role="Catalog" EntitySet="Catalogs" />
@@ -1453,10 +1388,6 @@
             <End Role="Employee" EntitySet="Employees" />
             <End Role="Service" EntitySet="Services" />
           </AssociationSet>
-          <AssociationSet Name="FK_Service_Car_service" Association="db_cars_parts_reconstructionModel.FK_Service_Car_service">
-            <End Role="Service" EntitySet="Services" />
-            <End Role="ServiceCar" EntitySet="ServiceCars" />
-          </AssociationSet>
           <AssociationSet Name="FK_service_miscellaneous_costs_service" Association="db_cars_parts_reconstructionModel.FK_service_miscellaneous_costs_service">
             <End Role="Service" EntitySet="Services" />
             <End Role="ServiceMiscellaneousCost" EntitySet="ServiceMiscellaneousCosts" />
@@ -1485,10 +1416,6 @@
             <End Role="Part" EntitySet="Parts" />
             <End Role="SupplierPart" EntitySet="SupplierParts" />
           </AssociationSet>
-          <AssociationSet Name="FK_replaced_part_Service_Car" Association="db_cars_parts_reconstructionModel.FK_replaced_part_Service_Car">
-            <End Role="ServiceCar" EntitySet="ServiceCars" />
-            <End Role="ReplacedPart" EntitySet="ReplacedParts" />
-          </AssociationSet>
           <AssociationSet Name="FK_replaced_part_service_part" Association="db_cars_parts_reconstructionModel.FK_replaced_part_service_part">
             <End Role="ServicePart" EntitySet="ServiceParts" />
             <End Role="ReplacedPart" EntitySet="ReplacedParts" />
@@ -1504,6 +1431,35 @@
           <AssociationSet Name="FK_supplier_part_supplier" Association="db_cars_parts_reconstructionModel.FK_supplier_part_supplier">
             <End Role="Supplier" EntitySet="Suppliers" />
             <End Role="SupplierPart" EntitySet="SupplierParts" />
+          </AssociationSet>
+          <EntitySet Name="ServiceCars" EntityType="db_cars_parts_reconstructionModel.ServiceCar" />
+          <AssociationSet Name="FK_Service_Car_brand_type" Association="db_cars_parts_reconstructionModel.FK_Service_Car_brand_type">
+            <End Role="Catalog" EntitySet="Catalogs" />
+            <End Role="ServiceCar" EntitySet="ServiceCars" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Service_Car_model_type" Association="db_cars_parts_reconstructionModel.FK_Service_Car_model_type">
+            <End Role="Catalog" EntitySet="Catalogs" />
+            <End Role="ServiceCar" EntitySet="ServiceCars" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Service_Car_status_type" Association="db_cars_parts_reconstructionModel.FK_Service_Car_status_type">
+            <End Role="Catalog" EntitySet="Catalogs" />
+            <End Role="ServiceCar" EntitySet="ServiceCars" />
+          </AssociationSet>
+          <AssociationSet Name="FK_replaced_part_Service_Car" Association="db_cars_parts_reconstructionModel.FK_replaced_part_Service_Car">
+            <End Role="ServiceCar" EntitySet="ServiceCars" />
+            <End Role="ReplacedPart" EntitySet="ReplacedParts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Service_Car_service" Association="db_cars_parts_reconstructionModel.FK_Service_Car_service">
+            <End Role="Service" EntitySet="Services" />
+            <End Role="ServiceCar" EntitySet="ServiceCars" />
+          </AssociationSet>
+          <AssociationSet Name="FK_service_car_miscellaneous_costs_Service_Car" Association="db_cars_parts_reconstructionModel.FK_service_car_miscellaneous_costs_Service_Car">
+            <End Role="ServiceCar" EntitySet="ServiceCars" />
+            <End Role="ServiceCarMiscellaneousCost" EntitySet="ServiceCarMiscellaneousCosts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_service_car_track_Service_Car" Association="db_cars_parts_reconstructionModel.FK_service_car_track_Service_Car">
+            <End Role="ServiceCar" EntitySet="ServiceCars" />
+            <End Role="ServiceCarTrack" EntitySet="ServiceCarTracks" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="Part">
@@ -1544,10 +1500,7 @@
           <NavigationProperty Name="ReplacedPartTracks" Relationship="db_cars_parts_reconstructionModel.FK_replaced_part_track_status_type" FromRole="Catalog" ToRole="ReplacedPartTrack" />
           <NavigationProperty Name="ReplacedPieces" Relationship="db_cars_parts_reconstructionModel.FK_replaced_piece_status_type" FromRole="Catalog" ToRole="ReplacedPiece" />
           <NavigationProperty Name="ReplacedPieceTracks" Relationship="db_cars_parts_reconstructionModel.FK_replaced_piece_track_status_type" FromRole="Catalog" ToRole="ReplacedPieceTrack" />
-          <NavigationProperty Name="ServiceCars" Relationship="db_cars_parts_reconstructionModel.FK_Service_Car_brand_type" FromRole="Catalog" ToRole="ServiceCar" />
           <NavigationProperty Name="ServiceCarMiscellaneousCosts" Relationship="db_cars_parts_reconstructionModel.FK_service_car_miscellaneous_costs_type" FromRole="Catalog" ToRole="ServiceCarMiscellaneousCost" />
-          <NavigationProperty Name="ServiceCars1" Relationship="db_cars_parts_reconstructionModel.FK_Service_Car_model_type" FromRole="Catalog" ToRole="ServiceCar" />
-          <NavigationProperty Name="ServiceCars2" Relationship="db_cars_parts_reconstructionModel.FK_Service_Car_status_type" FromRole="Catalog" ToRole="ServiceCar" />
           <NavigationProperty Name="ServiceCarTracks" Relationship="db_cars_parts_reconstructionModel.FK_service_car_track_status_type" FromRole="Catalog" ToRole="ServiceCarTrack" />
           <NavigationProperty Name="ServiceMiscellaneousCosts" Relationship="db_cars_parts_reconstructionModel.FK_service_miscellaneous_costs_type" FromRole="Catalog" ToRole="ServiceMiscellaneousCost" />
           <NavigationProperty Name="ServicePartMiscellaneousCosts" Relationship="db_cars_parts_reconstructionModel.FK_service_part_miscellaneous_costs_type" FromRole="Catalog" ToRole="ServicePartMiscellaneousCost" />
@@ -1556,6 +1509,9 @@
           <NavigationProperty Name="ServiceTracks" Relationship="db_cars_parts_reconstructionModel.FK_service_track_status_type" FromRole="Catalog" ToRole="ServiceTrack" />
           <NavigationProperty Name="Services" Relationship="db_cars_parts_reconstructionModel.FK_service_status_type" FromRole="Catalog" ToRole="Service" />
           <NavigationProperty Name="ReplacedParts" Relationship="db_cars_parts_reconstructionModel.FK_replaced_part_status_type" FromRole="Catalog" ToRole="ReplacedPart" />
+          <NavigationProperty Name="ServiceCars" Relationship="db_cars_parts_reconstructionModel.FK_Service_Car_brand_type" FromRole="Catalog" ToRole="ServiceCar" />
+          <NavigationProperty Name="ServiceCars1" Relationship="db_cars_parts_reconstructionModel.FK_Service_Car_model_type" FromRole="Catalog" ToRole="ServiceCar" />
+          <NavigationProperty Name="ServiceCars2" Relationship="db_cars_parts_reconstructionModel.FK_Service_Car_status_type" FromRole="Catalog" ToRole="ServiceCar" />
         </EntityType>
         <Association Name="FK_Catalog_Catalog">
           <End Type="db_cars_parts_reconstructionModel.Catalog" Role="Catalog" Multiplicity="0..1" />
@@ -1617,18 +1573,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Service_Car_brand_type">
-          <End Type="db_cars_parts_reconstructionModel.Catalog" Role="Catalog" Multiplicity="1" />
-          <End Type="db_cars_parts_reconstructionModel.ServiceCar" Role="ServiceCar" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Catalog">
-              <PropertyRef Name="catalogId" />
-            </Principal>
-            <Dependent Role="ServiceCar">
-              <PropertyRef Name="carBrandId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_service_car_miscellaneous_costs_type">
           <End Type="db_cars_parts_reconstructionModel.Catalog" Role="Catalog" Multiplicity="1" />
           <End Type="db_cars_parts_reconstructionModel.ServiceCarMiscellaneousCost" Role="ServiceCarMiscellaneousCost" Multiplicity="*" />
@@ -1638,30 +1582,6 @@
             </Principal>
             <Dependent Role="ServiceCarMiscellaneousCost">
               <PropertyRef Name="costTypeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Service_Car_model_type">
-          <End Type="db_cars_parts_reconstructionModel.Catalog" Role="Catalog" Multiplicity="1" />
-          <End Type="db_cars_parts_reconstructionModel.ServiceCar" Role="ServiceCar" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Catalog">
-              <PropertyRef Name="catalogId" />
-            </Principal>
-            <Dependent Role="ServiceCar">
-              <PropertyRef Name="carModelId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Service_Car_status_type">
-          <End Type="db_cars_parts_reconstructionModel.Catalog" Role="Catalog" Multiplicity="1" />
-          <End Type="db_cars_parts_reconstructionModel.ServiceCar" Role="ServiceCar" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Catalog">
-              <PropertyRef Name="catalogId" />
-            </Principal>
-            <Dependent Role="ServiceCar">
-              <PropertyRef Name="statusId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1778,10 +1698,10 @@
           <NavigationProperty Name="Catalog" Relationship="db_cars_parts_reconstructionModel.FK_service_status_type" FromRole="Service" ToRole="Catalog" />
           <NavigationProperty Name="Customer" Relationship="db_cars_parts_reconstructionModel.FK_service_customer" FromRole="Service" ToRole="Customer" />
           <NavigationProperty Name="Employee" Relationship="db_cars_parts_reconstructionModel.FK_service_employee" FromRole="Service" ToRole="Employee" />
-          <NavigationProperty Name="ServiceCars" Relationship="db_cars_parts_reconstructionModel.FK_Service_Car_service" FromRole="Service" ToRole="ServiceCar" />
           <NavigationProperty Name="ServiceMiscellaneousCosts" Relationship="db_cars_parts_reconstructionModel.FK_service_miscellaneous_costs_service" FromRole="Service" ToRole="ServiceMiscellaneousCost" />
           <NavigationProperty Name="ServiceParts" Relationship="db_cars_parts_reconstructionModel.FK_service_part_service" FromRole="Service" ToRole="ServicePart" />
           <NavigationProperty Name="ServiceTracks" Relationship="db_cars_parts_reconstructionModel.FK_service_track_service" FromRole="Service" ToRole="ServiceTrack" />
+          <NavigationProperty Name="ServiceCars" Relationship="db_cars_parts_reconstructionModel.FK_Service_Car_service" FromRole="Service" ToRole="ServiceCar" />
         </EntityType>
         <Association Name="FK_service_status_type">
           <End Type="db_cars_parts_reconstructionModel.Catalog" Role="Catalog" Multiplicity="1" />
@@ -1816,18 +1736,6 @@
             </Principal>
             <Dependent Role="Service">
               <PropertyRef Name="employeeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Service_Car_service">
-          <End Type="db_cars_parts_reconstructionModel.Service" Role="Service" Multiplicity="1" />
-          <End Type="db_cars_parts_reconstructionModel.ServiceCar" Role="ServiceCar" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Service">
-              <PropertyRef Name="serviceId" />
-            </Principal>
-            <Dependent Role="ServiceCar">
-              <PropertyRef Name="serviceId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1900,10 +1808,10 @@
           <Property Name="statusId" Type="Int32" Nullable="false" />
           <Property Name="observations" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Catalog" Relationship="db_cars_parts_reconstructionModel.FK_replaced_part_status_type" FromRole="ReplacedPart" ToRole="Catalog" />
-          <NavigationProperty Name="ServiceCar" Relationship="db_cars_parts_reconstructionModel.FK_replaced_part_Service_Car" FromRole="ReplacedPart" ToRole="ServiceCar" />
           <NavigationProperty Name="ServicePart" Relationship="db_cars_parts_reconstructionModel.FK_replaced_part_service_part" FromRole="ReplacedPart" ToRole="ServicePart" />
           <NavigationProperty Name="ReplacedPartTracks" Relationship="db_cars_parts_reconstructionModel.FK_replaced_part_track_replaced_part" FromRole="ReplacedPart" ToRole="ReplacedPartTrack" />
           <NavigationProperty Name="SupplierPart" Relationship="db_cars_parts_reconstructionModel.FK_ReplacedPart_SupplierPart" FromRole="ReplacedPart" ToRole="SupplierPart" />
+          <NavigationProperty Name="ServiceCar" Relationship="db_cars_parts_reconstructionModel.FK_replaced_part_Service_Car" FromRole="ReplacedPart" ToRole="ServiceCar" />
         </EntityType>
         <EntityType Name="SupplierPart">
           <Key>
@@ -1939,18 +1847,6 @@
             </Principal>
             <Dependent Role="SupplierPart">
               <PropertyRef Name="partId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_replaced_part_Service_Car">
-          <End Type="db_cars_parts_reconstructionModel.ServiceCar" Role="ServiceCar" Multiplicity="1" />
-          <End Type="db_cars_parts_reconstructionModel.ReplacedPart" Role="ReplacedPart" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ServiceCar">
-              <PropertyRef Name="serviceCarId" />
-            </Principal>
-            <Dependent Role="ReplacedPart">
-              <PropertyRef Name="serviceCarId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2001,6 +1897,112 @@
             </Principal>
             <Dependent Role="SupplierPart">
               <PropertyRef Name="supplierId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ServiceCar">
+          <Key>
+            <PropertyRef Name="serviceCarId" />
+          </Key>
+          <Property Name="serviceCarId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="serviceId" Type="Int32" Nullable="false" />
+          <Property Name="carBrandId" Type="Int32" Nullable="false" />
+          <Property Name="carModelId" Type="Int32" Nullable="false" />
+          <Property Name="year" Type="Int32" Nullable="false" />
+          <Property Name="estimatedPrice" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="realPrice" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="serviceCarDescription" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="statusId" Type="Int32" Nullable="false" />
+          <Property Name="observations" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Catalog" Relationship="db_cars_parts_reconstructionModel.FK_Service_Car_brand_type" FromRole="ServiceCar" ToRole="Catalog" />
+          <NavigationProperty Name="Catalog1" Relationship="db_cars_parts_reconstructionModel.FK_Service_Car_model_type" FromRole="ServiceCar" ToRole="Catalog" />
+          <NavigationProperty Name="Catalog2" Relationship="db_cars_parts_reconstructionModel.FK_Service_Car_status_type" FromRole="ServiceCar" ToRole="Catalog" />
+          <NavigationProperty Name="ReplacedParts" Relationship="db_cars_parts_reconstructionModel.FK_replaced_part_Service_Car" FromRole="ServiceCar" ToRole="ReplacedPart" />
+          <NavigationProperty Name="Service" Relationship="db_cars_parts_reconstructionModel.FK_Service_Car_service" FromRole="ServiceCar" ToRole="Service" />
+          <NavigationProperty Name="ServiceCarMiscellaneousCosts" Relationship="db_cars_parts_reconstructionModel.FK_service_car_miscellaneous_costs_Service_Car" FromRole="ServiceCar" ToRole="ServiceCarMiscellaneousCost" />
+          <NavigationProperty Name="ServiceCarTracks" Relationship="db_cars_parts_reconstructionModel.FK_service_car_track_Service_Car" FromRole="ServiceCar" ToRole="ServiceCarTrack" />
+        </EntityType>
+        <Association Name="FK_Service_Car_brand_type">
+          <End Type="db_cars_parts_reconstructionModel.Catalog" Role="Catalog" Multiplicity="1" />
+          <End Type="db_cars_parts_reconstructionModel.ServiceCar" Role="ServiceCar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Catalog">
+              <PropertyRef Name="catalogId" />
+            </Principal>
+            <Dependent Role="ServiceCar">
+              <PropertyRef Name="carBrandId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Service_Car_model_type">
+          <End Type="db_cars_parts_reconstructionModel.Catalog" Role="Catalog" Multiplicity="1" />
+          <End Type="db_cars_parts_reconstructionModel.ServiceCar" Role="ServiceCar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Catalog">
+              <PropertyRef Name="catalogId" />
+            </Principal>
+            <Dependent Role="ServiceCar">
+              <PropertyRef Name="carModelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Service_Car_status_type">
+          <End Type="db_cars_parts_reconstructionModel.Catalog" Role="Catalog" Multiplicity="1" />
+          <End Type="db_cars_parts_reconstructionModel.ServiceCar" Role="ServiceCar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Catalog">
+              <PropertyRef Name="catalogId" />
+            </Principal>
+            <Dependent Role="ServiceCar">
+              <PropertyRef Name="statusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_replaced_part_Service_Car">
+          <End Type="db_cars_parts_reconstructionModel.ServiceCar" Role="ServiceCar" Multiplicity="1" />
+          <End Type="db_cars_parts_reconstructionModel.ReplacedPart" Role="ReplacedPart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceCar">
+              <PropertyRef Name="serviceCarId" />
+            </Principal>
+            <Dependent Role="ReplacedPart">
+              <PropertyRef Name="serviceCarId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Service_Car_service">
+          <End Type="db_cars_parts_reconstructionModel.Service" Role="Service" Multiplicity="1" />
+          <End Type="db_cars_parts_reconstructionModel.ServiceCar" Role="ServiceCar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="serviceId" />
+            </Principal>
+            <Dependent Role="ServiceCar">
+              <PropertyRef Name="serviceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_service_car_miscellaneous_costs_Service_Car">
+          <End Type="db_cars_parts_reconstructionModel.ServiceCar" Role="ServiceCar" Multiplicity="1" />
+          <End Type="db_cars_parts_reconstructionModel.ServiceCarMiscellaneousCost" Role="ServiceCarMiscellaneousCost" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceCar">
+              <PropertyRef Name="serviceCarId" />
+            </Principal>
+            <Dependent Role="ServiceCarMiscellaneousCost">
+              <PropertyRef Name="serviceCarId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_service_car_track_Service_Car">
+          <End Type="db_cars_parts_reconstructionModel.ServiceCar" Role="ServiceCar" Multiplicity="1" />
+          <End Type="db_cars_parts_reconstructionModel.ServiceCarTrack" Role="ServiceCarTrack" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceCar">
+              <PropertyRef Name="serviceCarId" />
+            </Principal>
+            <Dependent Role="ServiceCarTrack">
+              <PropertyRef Name="serviceCarId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2071,21 +2073,6 @@
                 <ScalarProperty Name="replacedPieceTrackId" ColumnName="replacedPieceTrackId" />
                 <ScalarProperty Name="date" ColumnName="date" />
                 <ScalarProperty Name="replacedPieceId" ColumnName="replacedPieceId" />
-                <ScalarProperty Name="statusId" ColumnName="statusId" />
-                <ScalarProperty Name="observations" ColumnName="observations" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ServiceCars">
-            <EntityTypeMapping TypeName="db_cars_parts_reconstructionModel.ServiceCar">
-              <MappingFragment StoreEntitySet="ServiceCar">
-                <ScalarProperty Name="serviceCarId" ColumnName="serviceCarId" />
-                <ScalarProperty Name="serviceId" ColumnName="serviceId" />
-                <ScalarProperty Name="carBrandId" ColumnName="carBrandId" />
-                <ScalarProperty Name="carModelId" ColumnName="carModelId" />
-                <ScalarProperty Name="estimatedPrice" ColumnName="estimatedPrice" />
-                <ScalarProperty Name="realPrice" ColumnName="realPrice" />
-                <ScalarProperty Name="serviceCarDescription" ColumnName="serviceCarDescription" />
                 <ScalarProperty Name="statusId" ColumnName="statusId" />
                 <ScalarProperty Name="observations" ColumnName="observations" />
               </MappingFragment>
@@ -2301,6 +2288,22 @@
                 <ScalarProperty Name="price" ColumnName="price" />
                 <ScalarProperty Name="partId" ColumnName="partId" />
                 <ScalarProperty Name="supplierId" ColumnName="supplierId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ServiceCars">
+            <EntityTypeMapping TypeName="db_cars_parts_reconstructionModel.ServiceCar">
+              <MappingFragment StoreEntitySet="ServiceCar">
+                <ScalarProperty Name="observations" ColumnName="observations" />
+                <ScalarProperty Name="statusId" ColumnName="statusId" />
+                <ScalarProperty Name="serviceCarDescription" ColumnName="serviceCarDescription" />
+                <ScalarProperty Name="realPrice" ColumnName="realPrice" />
+                <ScalarProperty Name="estimatedPrice" ColumnName="estimatedPrice" />
+                <ScalarProperty Name="year" ColumnName="year" />
+                <ScalarProperty Name="carModelId" ColumnName="carModelId" />
+                <ScalarProperty Name="carBrandId" ColumnName="carBrandId" />
+                <ScalarProperty Name="serviceId" ColumnName="serviceId" />
+                <ScalarProperty Name="serviceCarId" ColumnName="serviceCarId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

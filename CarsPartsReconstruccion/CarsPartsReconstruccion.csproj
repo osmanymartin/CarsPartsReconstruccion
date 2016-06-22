@@ -198,12 +198,16 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PartController.cs" />
     <Compile Include="Controllers\PieceController.cs" />
+    <Compile Include="Controllers\ReplacedPartController.cs" />
+    <Compile Include="Controllers\ServiceCarController.cs" />
     <Compile Include="Controllers\ServiceController.cs" />
     <Compile Include="Controllers\SupplierController.cs" />
     <Compile Include="Controllers\SupplierPartController.cs" />
     <Compile Include="Controllers\SupplierPieceController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Filters\LogAttribute.cs" />
+    <Compile Include="Models\Metadata\ServiceCarMetadata.cs" />
+    <Compile Include="Models\Metadata\ReplacedPartMetadata.cs" />
     <Compile Include="ValidationAttributes\ValidateStockPriceAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -486,6 +490,18 @@
     <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\Users\Edit.cshtml" />
     <Content Include="Views\Service\_ServiceList.cshtml" />
+    <Content Include="Views\ServiceCar\Index.cshtml" />
+    <Content Include="Views\ServiceCar\Details.cshtml" />
+    <Content Include="Views\ServiceCar\Create.cshtml" />
+    <Content Include="Views\ServiceCar\Edit.cshtml" />
+    <Content Include="Views\ServiceCar\Delete.cshtml" />
+    <Content Include="Views\ServiceCar\_ServiceCar.cshtml" />
+    <Content Include="Views\ReplacedPart\Index.cshtml" />
+    <Content Include="Views\ReplacedPart\Details.cshtml" />
+    <Content Include="Views\ReplacedPart\Create.cshtml" />
+    <Content Include="Views\ReplacedPart\Edit.cshtml" />
+    <Content Include="Views\ReplacedPart\Delete.cshtml" />
+    <Content Include="Views\ReplacedPart\_ReplacedPart.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

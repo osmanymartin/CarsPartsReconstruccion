@@ -67,21 +67,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="ServiceCars">
-      <EntityTypeMapping TypeName="db_cars_parts_reconstructionModel.ServiceCar">
-        <MappingFragment StoreEntitySet="ServiceCar">
-          <ScalarProperty Name="serviceCarId" ColumnName="serviceCarId" />
-          <ScalarProperty Name="serviceId" ColumnName="serviceId" />
-          <ScalarProperty Name="carBrandId" ColumnName="carBrandId" />
-          <ScalarProperty Name="carModelId" ColumnName="carModelId" />
-          <ScalarProperty Name="estimatedPrice" ColumnName="estimatedPrice" />
-          <ScalarProperty Name="realPrice" ColumnName="realPrice" />
-          <ScalarProperty Name="serviceCarDescription" ColumnName="serviceCarDescription" />
-          <ScalarProperty Name="statusId" ColumnName="statusId" />
-          <ScalarProperty Name="observations" ColumnName="observations" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="ServiceCarMiscellaneousCosts">
       <EntityTypeMapping TypeName="db_cars_parts_reconstructionModel.ServiceCarMiscellaneousCost">
         <MappingFragment StoreEntitySet="ServiceCarMiscellaneousCosts">
@@ -292,6 +277,22 @@
           <ScalarProperty Name="price" ColumnName="price" />
           <ScalarProperty Name="partId" ColumnName="partId" />
           <ScalarProperty Name="supplierId" ColumnName="supplierId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ServiceCars">
+      <EntityTypeMapping TypeName="db_cars_parts_reconstructionModel.ServiceCar">
+        <MappingFragment StoreEntitySet="ServiceCar">
+          <ScalarProperty Name="observations" ColumnName="observations" />
+          <ScalarProperty Name="statusId" ColumnName="statusId" />
+          <ScalarProperty Name="serviceCarDescription" ColumnName="serviceCarDescription" />
+          <ScalarProperty Name="realPrice" ColumnName="realPrice" />
+          <ScalarProperty Name="estimatedPrice" ColumnName="estimatedPrice" />
+          <ScalarProperty Name="year" ColumnName="year" />
+          <ScalarProperty Name="carModelId" ColumnName="carModelId" />
+          <ScalarProperty Name="carBrandId" ColumnName="carBrandId" />
+          <ScalarProperty Name="serviceId" ColumnName="serviceId" />
+          <ScalarProperty Name="serviceCarId" ColumnName="serviceCarId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

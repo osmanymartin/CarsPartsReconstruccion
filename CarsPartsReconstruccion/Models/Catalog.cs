@@ -21,10 +21,7 @@ namespace CarsPartsReconstruccion.Models
             this.ReplacedPartTracks = new HashSet<ReplacedPartTrack>();
             this.ReplacedPieces = new HashSet<ReplacedPiece>();
             this.ReplacedPieceTracks = new HashSet<ReplacedPieceTrack>();
-            this.ServiceCars = new HashSet<ServiceCar>();
             this.ServiceCarMiscellaneousCosts = new HashSet<ServiceCarMiscellaneousCost>();
-            this.ServiceCars1 = new HashSet<ServiceCar>();
-            this.ServiceCars2 = new HashSet<ServiceCar>();
             this.ServiceCarTracks = new HashSet<ServiceCarTrack>();
             this.ServiceMiscellaneousCosts = new HashSet<ServiceMiscellaneousCost>();
             this.ServicePartMiscellaneousCosts = new HashSet<ServicePartMiscellaneousCost>();
@@ -33,6 +30,9 @@ namespace CarsPartsReconstruccion.Models
             this.ServiceTracks = new HashSet<ServiceTrack>();
             this.Services = new HashSet<Service>();
             this.ReplacedParts = new HashSet<ReplacedPart>();
+            this.ServiceCars = new HashSet<ServiceCar>();
+            this.ServiceCars1 = new HashSet<ServiceCar>();
+            this.ServiceCars2 = new HashSet<ServiceCar>();
         }
     
         public int catalogId { get; set; }
@@ -47,10 +47,7 @@ namespace CarsPartsReconstruccion.Models
         public virtual ICollection<ReplacedPartTrack> ReplacedPartTracks { get; set; }
         public virtual ICollection<ReplacedPiece> ReplacedPieces { get; set; }
         public virtual ICollection<ReplacedPieceTrack> ReplacedPieceTracks { get; set; }
-        public virtual ICollection<ServiceCar> ServiceCars { get; set; }
         public virtual ICollection<ServiceCarMiscellaneousCost> ServiceCarMiscellaneousCosts { get; set; }
-        public virtual ICollection<ServiceCar> ServiceCars1 { get; set; }
-        public virtual ICollection<ServiceCar> ServiceCars2 { get; set; }
         public virtual ICollection<ServiceCarTrack> ServiceCarTracks { get; set; }
         public virtual ICollection<ServiceMiscellaneousCost> ServiceMiscellaneousCosts { get; set; }
         public virtual ICollection<ServicePartMiscellaneousCost> ServicePartMiscellaneousCosts { get; set; }
@@ -59,5 +56,8 @@ namespace CarsPartsReconstruccion.Models
         public virtual ICollection<ServiceTrack> ServiceTracks { get; set; }
         public virtual ICollection<Service> Services { get; set; }
         public virtual ICollection<ReplacedPart> ReplacedParts { get; set; }
+        public virtual ICollection<ServiceCar> ServiceCars { get; set; }
+        public virtual ICollection<ServiceCar> ServiceCars1 { get; set; }
+        public virtual ICollection<ServiceCar> ServiceCars2 { get; set; }
     }
 }
