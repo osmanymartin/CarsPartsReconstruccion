@@ -201,11 +201,13 @@
     <Compile Include="Controllers\ReplacedPartController.cs" />
     <Compile Include="Controllers\ServiceCarController.cs" />
     <Compile Include="Controllers\ServiceController.cs" />
+    <Compile Include="Controllers\ServicePartController.cs" />
     <Compile Include="Controllers\SupplierController.cs" />
     <Compile Include="Controllers\SupplierPartController.cs" />
     <Compile Include="Controllers\SupplierPieceController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Filters\LogAttribute.cs" />
+    <Compile Include="Models\Metadata\ServicePartMetadata.cs" />
     <Compile Include="Models\Metadata\ServiceCarMetadata.cs" />
     <Compile Include="Models\Metadata\ReplacedPartMetadata.cs" />
     <Compile Include="ValidationAttributes\ValidateStockPriceAttribute.cs" />
@@ -502,6 +504,12 @@
     <Content Include="Views\ReplacedPart\Edit.cshtml" />
     <Content Include="Views\ReplacedPart\Delete.cshtml" />
     <Content Include="Views\ReplacedPart\_ReplacedPart.cshtml" />
+    <Content Include="Views\ServicePart\Index.cshtml" />
+    <Content Include="Views\ServicePart\Details.cshtml" />
+    <Content Include="Views\ServicePart\Create.cshtml" />
+    <Content Include="Views\ServicePart\Edit.cshtml" />
+    <Content Include="Views\ServicePart\Delete.cshtml" />
+    <Content Include="Views\ServicePart\_ServicePart.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

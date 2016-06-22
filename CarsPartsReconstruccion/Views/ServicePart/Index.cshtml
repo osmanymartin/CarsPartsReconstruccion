@@ -1,0 +1,69 @@
+﻿@model IEnumerable<CarsPartsReconstruccion.Models.ServicePart>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Service.serviceDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Part.partName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.estimatedPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.realPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.servicePartDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Catalog.catalogValue)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.observations)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Service.serviceDescription)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Part.partName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.estimatedPrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.realPrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.servicePartDescription)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Catalog.catalogValue)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.observations)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.servicePartId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.servicePartId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.servicePartId })
+        </td>
+    </tr>
+}
+
+</table>

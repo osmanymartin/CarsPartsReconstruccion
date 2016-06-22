@@ -1,0 +1,86 @@
+﻿@model CarsPartsReconstruccion.Models.ServicePart
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>ServicePart</legend>
+
+        @Html.HiddenFor(model => model.servicePartId)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.serviceId, "Service")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("serviceId", String.Empty)
+            @Html.ValidationMessageFor(model => model.serviceId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.partId, "Part")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("partId", String.Empty)
+            @Html.ValidationMessageFor(model => model.partId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.estimatedPrice)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.estimatedPrice)
+            @Html.ValidationMessageFor(model => model.estimatedPrice)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.realPrice)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.realPrice)
+            @Html.ValidationMessageFor(model => model.realPrice)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.servicePartDescription)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.servicePartDescription)
+            @Html.ValidationMessageFor(model => model.servicePartDescription)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.statusId, "Catalog")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("statusId", String.Empty)
+            @Html.ValidationMessageFor(model => model.statusId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.observations)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.observations)
+            @Html.ValidationMessageFor(model => model.observations)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

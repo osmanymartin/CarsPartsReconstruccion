@@ -1,0 +1,64 @@
+﻿@model CarsPartsReconstruccion.Models.ServicePart
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>ServicePart</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Service.serviceDescription)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Service.serviceDescription)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Part.partName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Part.partName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.estimatedPrice)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.estimatedPrice)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.realPrice)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.realPrice)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.servicePartDescription)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.servicePartDescription)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Catalog.catalogValue)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Catalog.catalogValue)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.observations)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.observations)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.servicePartId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
