@@ -27,9 +27,10 @@ namespace CarsPartsReconstruccion.Controllers
         {
             var serviceparts = db.ServiceParts
                 .Where(sercar => sercar.serviceId == serviceId)
-                .Include(s => s.Part).Include(s => s.Catalog).Include(s => s.Service);
+                .Include(s => s.Part).Include(s => s.Catalog).Include(s => s.Service)
+                .ToList();
 
-            return PartialView("_ServicePart", serviceparts.ToList());
+            return PartialView("_ServicePart", serviceparts);
         }
 
         //

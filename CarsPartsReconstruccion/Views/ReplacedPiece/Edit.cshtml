@@ -1,0 +1,70 @@
+﻿@model CarsPartsReconstruccion.Models.ReplacedPiece
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>ReplacedPiece</legend>
+
+        @Html.HiddenFor(model => model.replacedPieceId)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.servicePartId, "ServicePart")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("servicePartId", String.Empty)
+            @Html.ValidationMessageFor(model => model.servicePartId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.supplierPieceId, "SupplierPiece")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("supplierPieceId", String.Empty)
+            @Html.ValidationMessageFor(model => model.supplierPieceId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.replacedPiecePrice)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.replacedPiecePrice)
+            @Html.ValidationMessageFor(model => model.replacedPiecePrice)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.statusId, "Catalog")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("statusId", String.Empty)
+            @Html.ValidationMessageFor(model => model.statusId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.observations)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.observations)
+            @Html.ValidationMessageFor(model => model.observations)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -66,6 +66,8 @@
                     @Html.ActionLink("Delete", "Delete", new { id = item.servicePartId })
                 </td>*@
         </tr>
+
+        @Html.Action("ReplacedPieces", "ReplacedPiece", new { servicePartId = item.servicePartId })
     }
 
 </table>

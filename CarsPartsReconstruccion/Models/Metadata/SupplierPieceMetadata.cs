@@ -24,6 +24,7 @@
         [Display(Name = "Existence")]
         [Range(0, int.MaxValue, ErrorMessage = "Existence must be a positive number")]
         public int existence { get; set; }
+
     }
 
     [MetadataType(typeof(SupplierPieceMetadata))]

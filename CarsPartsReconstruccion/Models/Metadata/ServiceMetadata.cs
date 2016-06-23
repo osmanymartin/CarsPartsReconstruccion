@@ -20,11 +20,11 @@ namespace CarsPartsReconstruccion.Models
         [Display(Name = "Employee")]
         public Nullable<int> employeeId { get; set; }
 
-        [Display(Name = "Estimated Price")]
+        [Display(Name = "EstimatedPrice")]
         [DataType(DataType.Currency)]
         public Nullable<decimal> estimatedPrice { get; set; }
 
-        [Display(Name = "Price")]
+        [Display(Name = "RealPrice")]
         [DataType(DataType.Currency)]
         public Nullable<decimal> realPrice { get; set; }
 

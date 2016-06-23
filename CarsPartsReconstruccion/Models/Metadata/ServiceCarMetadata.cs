@@ -26,11 +26,11 @@
         [Display(Name = "Model")]
         public int carModelId { get; set; }
 
-        [Display(Name = "Estimated Price")]
+        [Display(Name = "EstimatedPrice")]
         [DataType(DataType.Currency)]
         public Nullable<decimal> estimatedPrice { get; set; }
 
-        [Display(Name = "Real Price")]
+        [Display(Name = "RealPrice")]
         [DataType(DataType.Currency)]
         public Nullable<decimal> realPrice { get; set; }
 
